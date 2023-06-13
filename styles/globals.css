@@ -34,6 +34,8 @@
     --ring: 215 20.2% 65.1%;
 
     --radius: 0.5rem;
+
+    --transparent: 0 0% 0%;
   }
 
   .dark {
@@ -78,4 +80,8 @@
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
+}
+
+.noise {
+  background: url(https://grainy-gradients.vercel.app/noise.svg);
 }

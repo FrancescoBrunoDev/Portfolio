@@ -22,8 +22,11 @@ export default function TimelineWork() {
 
           return (
             <li className="grid grid-cols-1 text-start md:grid-cols-9">
-              <div className="col-span-9 border-l-2 border-black pr-2 text-xl font-black uppercase md:col-span-2 md:border-l-0 md:border-none">
-                {!isSequentialExperience ? work.organization : null}
+              <div className="col-span-7 grid grid-cols-12 border-l-2 border-black md:col-span-2 md:border-l-0 md:border-none">
+                <div className="col-span-1 md:col-span-3" />
+                <div className="col-span-11 translate-x-[-1rem] pr-2 text-xl font-black uppercase md:translate-x-0 ">
+                  {!isSequentialExperience ? work.organization : null}
+                </div>
               </div>
 
               <div className="col-span-7 grid grid-cols-12 border-l-2 border-black">

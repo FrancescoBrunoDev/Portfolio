@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import education from "@/components/timeline/education.json";
 import { GraduationCap } from "lucide-react";
 
@@ -13,14 +12,17 @@ export default function TimelineEdu() {
         {education.map((degree) => {
           return (
             <li className="grid grid-cols-1 text-start md:grid-cols-9">
-              <div className="col-span-3 grid h-fit grid-cols-1 border-l-2 border-black pr-2 md:border-none">
-                <span className="text-xl font-black uppercase">
-                  {degree.university}
-                </span>
-                <span className="text-xs">
-                  {degree.start_date}
-                  {degree.end_date && ` - ${degree.end_date}`}
-                </span>
+              <div className="col-span-7 grid grid-cols-12 border-l-2 border-black md:col-span-2 md:border-l-0 md:border-none">
+                <div className="col-span-1 md:col-span-3"/>
+                <div className="col-span-11 translate-x-[-1rem] pr-2 text-xl font-black uppercase md:translate-x-0 flex flex-col">
+                  <span className="text-xl font-black uppercase">
+                    {degree.university}
+                  </span>
+                  <span className="text-xs font-normal">
+                    {degree.start_date}
+                    {degree.end_date && ` - ${degree.end_date}`}
+                  </span>
+                </div>
               </div>
 
               <div className="col-span-6 grid grid-cols-12 border-l-2 border-black">

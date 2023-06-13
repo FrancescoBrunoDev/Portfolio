@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Nav() {
   return (
-    <div className="fixed w-full pt-3">
+    <div className="fixed z-20 w-full py-3 bg-background">
       <div className="container">
         <div className="flex justify-between">
           <Link href={"/"}>
