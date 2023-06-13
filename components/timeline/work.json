@@ -1,0 +1,81 @@
+[
+  {
+    "position": "Italian Language Teacher",
+    "organization": "University of Münster",
+    "employment_type": "Contract",
+    "start_date": "Oct 2022",
+    "end_date": "Feb. 2023",
+    "location": "Münster, North Rhine-Westphalia, Germany",
+    "description": "I teach Italian language and culture to students of the University of Münster.",
+    "link": null
+  },
+  {
+    "position": "Social Media Manager",
+    "organization": "University of Münster",
+    "employment_type": "Part-time",
+    "start_date": "Jun 2022",
+    "end_date": "Present",
+    "location": "Münster, North Rhine-Westphalia, Germany",
+    "description": "For the international project \"Indoctrination, Resistance, Conciliation,\" I am responsible for:\n- managing digital communication\n- creating content for social networks\n- providing IT support",
+    "link": null
+  },
+  {
+    "position": "Developer",
+    "organization": "University of Münster",
+    "employment_type": "self-employed",
+    "start_date": "Jun 2022",
+    "end_date": "Sep 2022",
+    "location": "Münster, North Rhine-Westphalia, Germany",
+    "description": "Online Exhibition on Julius Otto Grimm, University of Münster | ",
+    "link": "https://julius-otto-grimm.uni-muenster.de/"
+  },
+  {
+    "position": "Music engraver",
+    "organization": "Self-employed",
+    "employment_type": null,
+    "start_date": "Feb 2021",
+    "end_date": "Present",
+    "location": null,
+    "description": "I specialize in creating musical scores for composers, universities, and music publishers.",
+    "link": null
+  },
+  {
+    "position": "Tutor",
+    "organization": "University of Pavia",
+    "employment_type": "Part-time",
+    "start_date": "Oct 2020",
+    "end_date": "Sep 2021",
+    "location": "Cremona, Lombardy, Italy",
+    "description": "At the University of Pavia, I serve as a tutor for the course \"Introduction to Western Musical Repertoire.\"",
+    "link": null
+  },
+  {
+    "position": "Social Media Manager",
+    "organization": "Quartetto di Cremona",
+    "employment_type": "Part-time",
+    "start_date": "Feb 2020",
+    "end_date": "Apr 2021",
+    "location": null,
+    "description": "For the \"Quartetto di Cremona,\" I was responsible for creating digital content and managing social media.",
+    "link": null
+  },
+  {
+    "position": "Secretary",
+    "organization": "University of Trento",
+    "employment_type": "Part-time",
+    "start_date": "Apr 2018",
+    "end_date": "Sep 2018",
+    "location": "Trento, Italy",
+    "description": "At the university's nautical center, I was involved in secretarial and administrative tasks.",
+    "link": null
+  },
+  {
+    "position": "Student Librarian",
+    "organization": "University of Trento",
+    "employment_type": "Part-time",
+    "start_date": "Aug 2017",
+    "end_date": "Mar 2018",
+    "location": "Trento, Italy",
+    "description": "At the university library, I was responsible for inventory operations and catalog updates."
+  }
+]

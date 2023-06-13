@@ -1,0 +1,31 @@
+[
+  {
+    "position": "Proofreading Intern",
+    "organization": "AMA Verlag",
+    "employment_type": "Internship",
+    "start_date": "Mar 2021",
+    "end_date": "Sep 2021",
+    "location": "Berlin, Germany",
+    "description": "At Verlag Neue Musik, a subsidiary of AMA Verlag, I performed various tasks related to the publication process of musical scores.\nThe internship was supported by the Erasmus plus traineeship program.",
+    "link": null
+  },
+  {
+    "position": "Communication Intern for Cremona Musica",
+    "organization": "CremonaFiere",
+    "employment_type": "Internship",
+    "start_date": "Aug 2019",
+    "end_date": "Sep 2019",
+    "location": null,
+    "description": "I handled communication activities at the international fair \"Cremona Musica.\" Specifically, I worked on managing the official social media profiles of the fair.",
+    "link": null
+  },
+  {
+    "position": "Production Intern",
+    "organization": "Haydn Foundation of Bolzano and Trento",
+    "employment_type": "Internship",
+    "start_date": "Jan 2018",
+    "end_date": "Feb 2018",
+    "location": "Bolzano, Italy",
+    "description": "As a production intern at the Haydn Foundation of Bolzano and Trento, I gained experience in the production department."
+  }
+]
