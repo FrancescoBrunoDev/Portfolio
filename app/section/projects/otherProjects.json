@@ -1,0 +1,35 @@
+[
+  {
+    "title": "Claiming Beethoven Podcast",
+    "description": "I had the opportunity to work on an intriguing podcast series that delved into the complex topics of propaganda, collaboration, resistance, persecution, and exile during the Nazi occupation of many European countries. Collaborating with international musicologists and historians, my role involved editing and curating the episodes to ensure a seamless and engaging experience. I also focused on developing a visually appealing brand identity and incorporating immersive sound design. Additionally, I implemented a social media strategy to actively engage with listeners and encourage meaningful discussions. It was a rewarding experience to be a part of this thought-provoking project.",
+    "image": "/projectImg/img/ClaimingBeethoven.png",
+    "video": { "src": "", "dark": null },
+    "scoreImg": null,
+    "id": 1001,
+    "type": "podcast",
+    "link": "https://podcasters.spotify.com/pod/show/claiming-beethoven",
+    "secondaryLink": "https://embed.podcasts.apple.com/us/podcast/claiming-beethoven/id1649374199?itsct=podcast_box_player&amp;itscg=30200&amp;ls=1&amp;theme=auto"
+  },
+  {
+    "title": "Beato il giovane",
+    "description": "'Beato il giovane' is a composition in memoriam of Francesco Attanasi. Francesco was a musicology student in Cremona who tragically passed away in 2005 at the age of twenty-seven. In this piece the musical material comes directly from his music but it is like it's not really in the piece. You could say that this compostion is like memories.",
+    "image": "/projectImg/img/Beato.png",
+    "video": { "src": "", "dark": null },
+    "scoreImg": null,
+    "id": 1002,
+    "type": "composition",
+    "link": null,
+    "secondaryLink": null
+  },
+  {
+    "title": "Giuseppe Tartini Edition",
+    "description": "'Beato il giovane' is a composition in memoriam of Francesco Attanasi. Francesco was a musicology student in Cremona who tragically passed away in 2005 at the age of twenty-seven. In this piece the musical material comes directly from his music but it is like it's not really in the piece. You could say that this compostion is like memories.",
+    "image": "/projectImg/img/Beato.png",
+    "video": { "src": "", "dark": null },
+    "scoreImg": null,
+    "id": 1003,
+    "type": "music editing",
+    "link": null,
+    "secondaryLink": null
+  }
+]

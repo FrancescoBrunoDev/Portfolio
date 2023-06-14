@@ -3,16 +3,22 @@
     "title": "Where did s.he performed",
     "description": "Where did s.he performed? Is a webapp that allows you to discover the spatial locations where well-known musicians or hidden gems have left their musical mark. With a user-friendly interface and comprehensive data, this platform is your gateway to a captivating journey through the performances of talented musicians.",
     "image": "/projectImg/img/whereDid.png",
-    "video": "",
+    "video": { "src": "", "dark": null },
     "id": 1,
-    "link": "https://www.wheredidsheperformed.app/"
+    "scoreImg": null,
+    "type": "website",
+    "link": "https://www.wheredidsheperformed.app/",
+    "secondaryLink": null
   },
   {
     "title": "julius otto grimm austellung",
     "description": "The online exhibition is part of a larger research and teaching project on Julius Otto Grimm at the Institute of Musicology at the University of Münster. The project is led by PD Dr. Peter Schmitz and Anna Maria Plischka, M.A., M.A. Following courses on the Grimm estate at the Münster City Archives (WS 2019/20 and WS 2021/22), a student workshop and several Grimm concerts took place in spring and summer 2022. In 2023, editions of previously unpublished compositions and a collected volume on Grimm's life and work will be published by Waxmann Verlag.",
     "image": "/projectImg/img/grimm.png",
-    "video": "/projectImg/video/grimm.mp4",
+    "video": { "src": "/projectImg/video/grimm.mp4", "dark": true },
     "id": 2,
-    "link": "https://julius-otto-grimm.uni-muenster.de/"
+    "scoreImg": null,
+    "type": "website",
+    "link": "https://julius-otto-grimm.uni-muenster.de/",
+    "secondaryLink": null
   }
 ]

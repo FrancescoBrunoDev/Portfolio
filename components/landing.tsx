@@ -5,7 +5,7 @@ import { Github } from "lucide-react";
 
 export default function Landing() {
   return (
-    <div className="flex h-screen w-screen items-center">
+    <div className="flex h-screen w-screen items-center text-primary">
       <div className="container">
         <div className="w-full">
           <div className="flex flex-col items-center justify-start lg:flex-row lg:justify-between">
@@ -26,22 +26,22 @@ export default function Landing() {
                   <AtSign className="block h-10 w-10 rounded-lg p-2 hover:bg-secondary lg:hidden" />
                 </div>
                 <Link
-                  href="https://linkedin.com/in/francesco—bruno"
-                  className="transition-all duration-100 ease-in-out hover:font-semibold"
-                >
-                  <span className="hidden lg:block">
-                    linkedin.com/in/francesco—bruno
-                  </span>
-                  <Linkedin className="block h-10 w-10 rounded-lg p-2 hover:bg-secondary lg:hidden" />
-                </Link>
-                <Link
                   href="https://github.com/FrancescoBrunoDev"
                   className="transition-all duration-100 ease-in-out hover:font-semibold"
                 >
                   <span className="hidden lg:block">
-                    https://github.com/FrancescoBrunoDev
+                    github.com/FrancescoBrunoDev
                   </span>
                   <Github className="block h-10 w-10 rounded-lg p-2 hover:bg-secondary lg:hidden" />
+                </Link>
+                <Link
+                  href="https://www.linkedin.com/in/francesco--bruno/"
+                  className="transition-all duration-100 ease-in-out hover:font-semibold"
+                >
+                  <span className="hidden lg:block">
+                    linkedin.com/in/francesco--bruno/
+                  </span>
+                  <Linkedin className="block h-10 w-10 rounded-lg p-2 hover:bg-secondary lg:hidden" />
                 </Link>
               </div>
             </div>
@@ -49,13 +49,13 @@ export default function Landing() {
           <div className="flex flex-col pt-10 text-8xl font-normal uppercase">
             <Link
               href="/section/about/"
-              className="transition-all duration-100 ease-in-out hover:font-semibold"
+              className="tracking-wider transition-all duration-100 ease-in-out hover:font-semibold"
             >
               About /
             </Link>
             <Link
               href="/section/projects/"
-              className="transition-all duration-100 ease-in-out hover:font-semibold"
+              className="tracking-wider transition-all duration-100 ease-in-out hover:font-semibold"
             >
               Projects
             </Link>

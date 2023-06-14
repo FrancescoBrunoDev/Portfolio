@@ -3,8 +3,8 @@ import { GraduationCap } from "lucide-react";
 
 export default function TimelineEdu() {
   return (
-    <div className="rounded-xl p-4">
-      <div className="mb-2 flex justify-between border-b-2 border-black">
+    <div className="rounded-xl p-4 text-primary">
+      <div className="mb-2 flex justify-between border-b-2 border-primary">
         <h1 className="text-2xl font-black uppercase">Education</h1>
         <GraduationCap className="h-8 w-8" />
       </div>
@@ -12,10 +12,10 @@ export default function TimelineEdu() {
         {education.map((degree) => {
           return (
             <li className="grid grid-cols-1 text-start md:grid-cols-9">
-              <div className="col-span-7 grid grid-cols-12 border-l-2 border-black md:col-span-2 md:border-l-0 md:border-none">
-                <div className="col-span-1 md:col-span-3"/>
-                <div className="col-span-11 translate-x-[-1rem] pr-2 text-xl font-black uppercase md:translate-x-0 flex flex-col">
-                  <span className="text-xl font-black uppercase">
+              <div className="col-span-7 grid grid-cols-12 border-l-2 border-primary pt-1 md:col-span-3 md:border-l-0 md:border-none">
+                <div className="col-span-1 block md:hidden" />
+                <div className="col-span-11 flex translate-x-[-1rem] flex-col pr-2 text-xl font-black uppercase md:translate-x-0">
+                  <span className="break-words text-xl font-black uppercase leading-5">
                     {degree.university}
                   </span>
                   <span className="text-xs font-normal">
@@ -25,19 +25,21 @@ export default function TimelineEdu() {
                 </div>
               </div>
 
-              <div className="col-span-6 grid grid-cols-12 border-l-2 border-black">
-                <svg className="col-span-1 mt-[6px] h-5 w-5 translate-x-[-8px]">
+              <div className="col-span-6 grid grid-cols-12 border-l-2 border-primary pt-1">
+                <svg className="col-span-1 mt-[6px] h-5 w-5 translate-x-[-8px] translate-y-[2px]">
                   <circle
                     cx="7"
                     cy="7"
                     r="6"
-                    stroke="black"
+                    stroke="currentColor"
                     strokeWidth="2"
-                    fill="white"
+                    fill="currentColor"
                   />
                 </svg>
-                <div className="col-span-11 flex translate-x-[-1rem] flex-col">
-                  <p className="text-lg font-bold uppercase">{degree.degree}</p>
+                <div className="col-span-11 flex translate-x-[-1rem] flex-col pt-1">
+                  <p className="text-lg font-bold uppercase leading-5">
+                    {degree.degree}
+                  </p>
                   <p className="text-xs font-light ">{degree.rate}</p>
                 </div>
               </div>
