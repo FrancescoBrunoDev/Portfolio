@@ -8,7 +8,9 @@ export default function RootLayout({
   return (
     <>
       <Nav />
-      <div>{children}</div>
+      <div>
+        {children}
+      </div>
     </>
   );
 }

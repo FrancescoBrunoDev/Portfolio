@@ -18,13 +18,16 @@ export default function Landing() {
               <div className="flex items-center space-x-4 text-base md:text-lg lg:flex-col lg:items-end lg:space-x-0 lg:text-right">
                 <span>Münster. DE</span>
                 <span className="hidden lg:block">Tel. +39 3485796611</span>
-                <div className="transition-all duration-100 ease-in-out hover:font-semibold">
+                <Link
+                  href="mailto:francesco.bruno001@gmail.com"
+                  className="transition-all duration-100 ease-in-out hover:font-semibold"
+                >
                   <span className="hidden lg:block">
                     {" "}
                     francesco.bruno001@gmail.com
                   </span>
-                  <AtSign className="block h-8 w-8 rounded-lg p-2 hover:bg-secondary md:h-10 md:w-10 lg:hidden" />
-                </div>
+                  <AtSign className="block h-5 w-5 hover:bg-secondary md:h-6 md:w-6 lg:hidden" />
+                </Link>
                 <Link
                   href="https://github.com/FrancescoBrunoDev"
                   className="transition-all duration-100 ease-in-out hover:font-semibold"
@@ -32,7 +35,7 @@ export default function Landing() {
                   <span className="hidden lg:block">
                     github.com/FrancescoBrunoDev
                   </span>
-                  <Github className="block h-8 w-8 rounded-lg p-2  hover:bg-secondary md:h-10 md:w-10 lg:hidden" />
+                  <Github className="block h-5 w-5 hover:bg-secondary md:h-6 md:w-6 lg:hidden" />
                 </Link>
                 <Link
                   href="https://www.linkedin.com/in/francesco--bruno/"
@@ -41,7 +44,7 @@ export default function Landing() {
                   <span className="hidden lg:block">
                     linkedin.com/in/francesco--bruno/
                   </span>
-                  <Linkedin className="block h-8 w-8 rounded-lg p-2  hover:bg-secondary md:h-10 md:w-10 lg:hidden" />
+                  <Linkedin className="block h-5 w-5 hover:bg-secondary md:h-6 md:w-6 lg:hidden" />
                 </Link>
               </div>
             </div>
