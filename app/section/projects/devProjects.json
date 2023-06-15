@@ -3,7 +3,7 @@
     "title": "Where did s.he performed",
     "description": "Where did s.he performed? Is a webapp that allows you to discover the spatial locations where well-known musicians or hidden gems have left their musical mark. With a user-friendly interface and comprehensive data, this platform is your gateway to a captivating journey through the performances of talented musicians.",
     "image": "/projectImg/img/whereDid.png",
-    "video": { "src": "", "dark": null },
+    "video": { "src": "/projectImg/video/map.mp4", "dark": true },
     "id": 1,
     "scoreImg": null,
     "type": "website",

@@ -5,6 +5,8 @@ import otherProjects from "@/app/section/projects/otherProjects.json";
 import SpecialContetent from "@/components/projects/project/specialContent";
 import Frame from "@/components/projects/project/frame";
 import { useState } from "react";
+import parse from "html-react-parser";
+import { Fingerprint } from "lucide-react";
 
 interface ProjectProps {
   params: {
@@ -70,13 +72,12 @@ export default function Project({ params }: ProjectProps) {
 
       <div className="container flex min-h-screen items-center px-10 pb-10 pt-14 text-primary">
         <div className="px-2 lg:px-10">
-          <p>
-            {" "}
-            {isDev ? "dev/" : "other/"}
+          <p className="flex items-baseline">
+          <Fingerprint className="w-3 h-3 mr-0.5 stroke-[3]" />{projectId} • {isDev ? "dev/" : "other/"}
             {type}
           </p>
           <h1 className="text-6xl font-bold uppercase lg:text-8xl">{title}</h1>
-          <p className="text-lg font-normal lg:w-3/4">{description}</p>
+          <p className="text-lg font-normal lg:w-3/4">{parse(description)}</p>
           <SpecialContetent
             type={type}
             secondaryLink={secondaryLink}

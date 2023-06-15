@@ -29,7 +29,7 @@ export default function Frame({
               }`
         }
       >
-        <div className="relative flex h-full w-64 items-center text-clip">
+        <div className="relative flex h-full w-20 items-center text-clip">
           <div className="vertical-text fixed left-2 text-center text-lg text-primary">
             {!thereIsNext
               ? "next"
@@ -51,7 +51,7 @@ export default function Frame({
               }`
         }
       >
-        <div className="flex h-full w-64 items-center text-clip">
+        <div className="flex h-full w-20 items-center text-clip">
           <div className="vertical-text fixed right-2 rotate-180 text-center text-lg text-primary">
             {thereIsPrev
               ? "prev"
