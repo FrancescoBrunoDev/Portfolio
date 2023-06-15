@@ -67,17 +67,20 @@ export default function Project({ params }: ProjectProps) {
         autoPlay
         loop
         muted
-        className="absolute -z-30 min-h-screen overflow-hidden object-cover"
+        className="fixed -z-30 min-h-screen overflow-hidden object-cover"
       />
 
       <div className="container flex min-h-screen items-center px-10 pb-10 pt-14 text-primary">
-        <div className="px-2 lg:px-10">
+        <div className="w-full px-2 lg:px-10">
           <p className="flex items-baseline">
-          <Fingerprint className="w-3 h-3 mr-0.5 stroke-[3]" />{projectId} • {isDev ? "dev/" : "other/"}
+            <Fingerprint className="mr-0.5 h-3 w-3 stroke-[3]" />
+            {projectId} • {isDev ? "dev/" : "other/"}
             {type}
           </p>
-          <h1 className="text-6xl font-bold uppercase lg:text-8xl">{title}</h1>
-          <p className="text-lg font-normal lg:w-3/4">{parse(description)}</p>
+          <h1 className="text-4xl font-bold uppercase lg:text-8xl">{title}</h1>
+          <p className="hyphens-none text-lg font-normal sm:hyphens-auto md:hyphens-auto lg:w-3/4">
+            {parse(description)}
+          </p>
           <SpecialContetent
             type={type}
             secondaryLink={secondaryLink}

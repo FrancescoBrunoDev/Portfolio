@@ -8,14 +8,14 @@ export default function Landing() {
     <div className="flex h-screen w-screen items-center text-primary">
       <div className="container">
         <div className="w-full">
-          <div className="flex flex-col items-center justify-start lg:flex-row lg:justify-between">
-            <h1 className="text-6xl font-bold uppercase sm:text-8xl md:text-9xl">
+          <div className="flex flex-col-reverse lg:flex-row lg:justify-between">
+            <h1 className="text-5xl font-bold uppercase sm:text-8xl md:text-9xl">
               Francesco
               <br />
               Bruno
             </h1>
-            <div>
-              <div className="flex items-center space-x-4 text-lg lg:flex-col lg:items-end lg:space-x-0 lg:text-right">
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-4 text-base md:text-lg lg:flex-col lg:items-end lg:space-x-0 lg:text-right">
                 <span>Münster. DE</span>
                 <span className="hidden lg:block">Tel. +39 3485796611</span>
                 <div className="transition-all duration-100 ease-in-out hover:font-semibold">
@@ -23,7 +23,7 @@ export default function Landing() {
                     {" "}
                     francesco.bruno001@gmail.com
                   </span>
-                  <AtSign className="block h-10 w-10 rounded-lg p-2 hover:bg-secondary lg:hidden" />
+                  <AtSign className="block h-8 w-8 rounded-lg p-2 hover:bg-secondary md:h-10 md:w-10 lg:hidden" />
                 </div>
                 <Link
                   href="https://github.com/FrancescoBrunoDev"
@@ -32,7 +32,7 @@ export default function Landing() {
                   <span className="hidden lg:block">
                     github.com/FrancescoBrunoDev
                   </span>
-                  <Github className="block h-10 w-10 rounded-lg p-2 hover:bg-secondary lg:hidden" />
+                  <Github className="block h-8 w-8 rounded-lg p-2  hover:bg-secondary md:h-10 md:w-10 lg:hidden" />
                 </Link>
                 <Link
                   href="https://www.linkedin.com/in/francesco--bruno/"
@@ -41,12 +41,12 @@ export default function Landing() {
                   <span className="hidden lg:block">
                     linkedin.com/in/francesco--bruno/
                   </span>
-                  <Linkedin className="block h-10 w-10 rounded-lg p-2 hover:bg-secondary lg:hidden" />
+                  <Linkedin className="block h-8 w-8 rounded-lg p-2  hover:bg-secondary md:h-10 md:w-10 lg:hidden" />
                 </Link>
               </div>
             </div>
           </div>
-          <div className="flex flex-col pt-10 text-8xl font-normal uppercase">
+          <div className="flex flex-col justify-center pt-10 text-5xl font-normal uppercase sm:text-7xl md:text-8xl lg:justify-normal">
             <Link
               href="/section/about/"
               className="tracking-wider transition-all duration-100 ease-in-out hover:font-semibold"
