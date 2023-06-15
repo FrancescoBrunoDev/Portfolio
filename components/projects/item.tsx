@@ -26,7 +26,7 @@ export default function ProjectItem(project: Project) {
     >
       <Link
         href={`/section/projects/${project.item.id}`}
-        className="absolute h-full w-full bg-primary opacity-100 transition-opacity duration-300 hover:opacity-40"
+        className="absolute h-full w-full bg-primary opacity-100 transition-opacity duration-300 hover:opacity-0"
       />
 
       <Image
