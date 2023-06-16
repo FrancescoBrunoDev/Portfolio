@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Suspense } from "react";
 interface Props {
   type: string;
   secondaryLink: string | null;
@@ -28,7 +29,9 @@ export default function SpecialContent({
       )}
       {type === "composition" && (
         <div className="w-full pt-2">
-          {scoreImg && <Image width={1000} height={500} alt={title} src={scoreImg}></Image>}
+          {scoreImg && (
+            <Image width={1000} height={500} alt={title} src={scoreImg}></Image>
+          )}
         </div>
       )}
     </>
