@@ -4,7 +4,7 @@ import { PocketKnife } from "lucide-react";
 
 export default function TimelineEdu() {
   return (
-    <div className="rounded-xl p-4 text-primary">
+    <div className="rounded-xl px-4 text-primary">
       <div className="mb-2 flex justify-between border-b-2 border-primary">
         <h1 className="text-2xl font-black uppercase">TRAINEESHIPS</h1>
         <PocketKnife className="h-7 w-7" />
@@ -16,7 +16,7 @@ export default function TimelineEdu() {
               <div className="col-span-7 grid grid-cols-12 border-l-2 border-primary pt-1 md:col-span-3 md:border-l-0 md:border-none">
                 <div className="col-span-1 block md:hidden" />
                 <div className="col-span-11 flex translate-x-[-1rem] flex-col pr-2 text-xl font-black uppercase md:translate-x-0">
-                  <span className="text-xl font-black uppercase leading-5 break-words">
+                  <span className="break-words text-xl font-black uppercase leading-5">
                     {work.organization}
                   </span>
                   <span className="text-xs font-normal">

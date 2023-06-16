@@ -1,15 +1,16 @@
-import education from "@/components/timeline/education.json";
-import { GraduationCap } from "lucide-react";
+import certificates from "@/components/timeline/certificates.json";
+import { ScrollText, Award } from "lucide-react";
+import Link from "next/link";
 
-export default function TimelineEdu() {
+export default function TimelineCertificates() {
   return (
     <div className="rounded-xl px-4 text-primary">
       <div className="mb-2 flex justify-between border-b-2 border-primary">
-        <h1 className="text-2xl font-black uppercase">Education</h1>
-        <GraduationCap className="h-8 w-8" />
+        <h1 className="text-2xl font-black uppercase">Certificates</h1>
+        <ScrollText className="h-8 w-8" />
       </div>
       <ul>
-        {education.map((degree) => {
+        {certificates.map((degree) => {
           return (
             <li className="grid grid-cols-1 text-start md:grid-cols-9">
               <div className="col-span-7 grid grid-cols-12 border-l-2 border-primary pt-1 md:col-span-3 md:border-l-0 md:border-none">
@@ -24,6 +25,7 @@ export default function TimelineEdu() {
                   </span>
                 </div>
               </div>
+
               <div className="col-span-6 grid grid-cols-12 border-l-2 border-primary">
                 <svg className="col-span-1 mt-[6px] h-5 w-5 translate-x-[-8px] translate-y-[2px]">
                   <circle
@@ -39,7 +41,15 @@ export default function TimelineEdu() {
                   <p className="text-lg font-bold uppercase leading-5">
                     {degree.degree}
                   </p>
-                  <p className="text-xs font-light ">{degree.rate}</p>
+                  <p className="text-xs font-light">{degree.rate}</p>
+                  {degree.url ? (
+                    <Link href={degree.url} className="text-xs font-light">
+                      <div className="flex items-center">
+                        <span>to the certificate</span>
+                        <Award className="h-5 w-5 stroke-[3]" />
+                      </div>
+                    </Link>
+                  ) : null}
                 </div>
               </div>
             </li>
