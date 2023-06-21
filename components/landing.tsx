@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { AtSign } from "lucide-react";
 import { Linkedin } from "lucide-react";
@@ -14,7 +16,7 @@ export default function Landing() {
               <br />
               Bruno
             </h1>
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-4 z-10">
               <div className="flex items-center space-x-4 text-base md:text-lg lg:flex-col lg:items-end lg:space-x-0 lg:text-right">
                 <span>Münster. DE</span>
                 <span className="hidden lg:block">Tel. +39 3485796611</span>
