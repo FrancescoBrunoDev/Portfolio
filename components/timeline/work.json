@@ -1,10 +1,19 @@
 [
   {
+    "position": "Web Developer",
+    "organization": "Bayerische Staatsbibliothek",
+    "employment_type": "Contract",
+    "start_date": "Sept 2023",
+    "end_date": "Present",
+    "location": "München, Bavaria, Germany",
+    "link": null
+  },
+  {
     "position": "Italian Language Teacher",
     "organization": "University of Münster",
     "employment_type": "Contract",
     "start_date": "Oct 2022",
-    "end_date": "Feb. 2023",
+    "end_date": "Feb 2023",
     "location": "Münster, North Rhine-Westphalia, Germany",
     "description": "I teach Italian language and culture to students of the University of Münster.",
     "link": null
