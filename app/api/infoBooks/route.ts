@@ -1,17 +1,6 @@
-import { NextResponse } from 'next/server'
+import { NextResponse } from "next/server";
 
 export async function GET() {
-  // Assuming the 'books' object contains data for multiple years
-
-  // Define an async function to fetch book details
-  type Book = {
-    title: string;
-    month: number;
-    notes: string;
-    ISBN13: number;
-  };
-
-  type BooksRecord = Record<string, Book[]>;
 
   const books: BooksRecord = require("@/app/section/record/books/books.json");
   const years = Object.keys(books);
@@ -23,7 +12,6 @@ export async function GET() {
         `https://www.googleapis.com/books/v1/volumes?q=isbn:${book.ISBN13}`
       );
       const product = await res.json();
-      console.log(product.items[0].volumeInfo);
       return {
         bookInfo: product.items[0].volumeInfo,
         note: book.notes,

@@ -15,8 +15,8 @@ async function getData() {
 }
 
 export default function Books() {
-  const [books, setBooks] = useState([]);
-  const [filteredData, setFilteredData] = useState(books);
+  const [books, setBooks] = useState<Year[]>([]);
+  const [filteredData, setFilteredData] = useState<Year[]>(books);
   const [isFiltering, setIsFiltering] = useState(false);
 
   useEffect(() => {
@@ -58,7 +58,10 @@ export default function Books() {
                     </div>
                     <div className="flex h-full w-full gap-2 overflow-x-scroll pb-4 lg:h-full">
                       {year.bookDetails.map((book) => (
-                        <BookItem key={book.id} item={book.bookInfo} />
+                        <BookItem
+                          key={book.bookInfo.industryIdentifiers[0].identifier}
+                          item={book.bookInfo}
+                        />
                       ))}
                     </div>
                   </div>

@@ -1,8 +1,19 @@
 import { Book } from "lucide-react";
+import React, { FormEvent } from "react";
 
-export default function SearchBox({ books, setFilteredData, setIsFiltering }) {
-  function handleInput(event) {
-    const input = event.target.value;
+interface SearchBoxProps {
+  books: Year[];
+  setFilteredData: React.Dispatch<React.SetStateAction<Year[]>>;
+  setIsFiltering: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function SearchBox({
+  books,
+  setFilteredData,
+  setIsFiltering,
+}: SearchBoxProps) {
+  function handleInput(event: FormEvent<HTMLInputElement>) {
+    const input = (event.target as HTMLInputElement).value;
     const filteredData = books
       .map((year) => {
         const filteredBookDetails = year.bookDetails.filter((book) => {
@@ -21,7 +32,9 @@ export default function SearchBox({ books, setFilteredData, setIsFiltering }) {
         }
       })
       .filter((year) => year !== null);
-    setFilteredData(filteredData);
+    console.log(filteredData, "filteredData");
+    setFilteredData(filteredData.filter((year) => year !== null) as Year[]);
+
     if (input.length > 0) {
       setIsFiltering(true);
     } else {

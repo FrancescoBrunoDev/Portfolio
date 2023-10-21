@@ -1,23 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
 
-type Book = {
-  item: {
-    title: string;
-    authors: string[];
-    publishedDate: string;
-    industryIdentifiers: {
-      type: string;
-      identifier: string;
-    }[];
-    categories: string[];
-    imageLinks: {
-      smallThumbnail: string;
-      thumbnail: string;
-    };
-    language: string;
-  };
-};
-
 export default function BookItem(book: Book) {
   return (
     <div
