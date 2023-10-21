@@ -2,13 +2,26 @@ import books from "@/app/section/record/books/books.json";
 
 export async function GET() {
   // Assuming the 'books' object contains data for multiple years
-  const years = Object.keys(books);
 
   // Define an async function to fetch book details
-  async function fetchBookDetails(year) {
+  type Book = {
+    title: string;
+    month: number;
+    notes: string;
+    ISBN13: number;
+  };
+
+  type BooksRecord = Record<string, Book[]>;
+
+  const books: BooksRecord = require("@/app/section/record/books/books.json");
+  const years = Object.keys(books);
+
+  async function fetchBookDetails(year: string) {
     const booksArray = books[year];
     const bookDetailPromises = booksArray.map(async (book) => {
-      const res = await fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${book.ISBN13}`);
+      const res = await fetch(
+        `https://www.googleapis.com/books/v1/volumes?q=isbn:${book.ISBN13}`
+      );
       const product = await res.json();
       return product;
     });
