@@ -33,7 +33,6 @@ export default function Books() {
     fetchData();
   }, []);
 
-  console.log(filteredData);
   return (
     <div className="h-screen w-screen items-center pt-32 text-primary">
       <SearchBox
@@ -59,10 +58,7 @@ export default function Books() {
                     </div>
                     <div className="flex h-full w-full gap-2 overflow-x-scroll pb-4 lg:h-full">
                       {year.bookDetails.map((book) => (
-                        <BookItem
-                          key={book.id}
-                          item={book.items[0].volumeInfo}
-                        />
+                        <BookItem key={book.id} item={book.bookInfo} />
                       ))}
                     </div>
                   </div>

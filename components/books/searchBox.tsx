@@ -7,8 +7,8 @@ export default function SearchBox({ books, setFilteredData, setIsFiltering }) {
       .map((year) => {
         const filteredBookDetails = year.bookDetails.filter((book) => {
           return (
-            book.items[0].volumeInfo.title.toLowerCase().includes(input) ||
-            book.items[0].volumeInfo.authors[0].toLowerCase().includes(input)
+            book.bookInfo.title.toLowerCase().includes(input) ||
+            book.bookInfo.authors[0].toLowerCase().includes(input)
           );
         });
 
@@ -35,7 +35,7 @@ export default function SearchBox({ books, setFilteredData, setIsFiltering }) {
         <Book strokeWidth={2.75} className="h-full w-fit text-primary" />
         <span className="text-3xl">/</span>
         <input
-          className="h-full w-full border-b-[3px] border-primary bg-transparent font-semibold placeholder:invisible focus:outline-none"
+          className="h-full w-full border-b-[3px] border-primary bg-transparent px-1 font-semibold placeholder:invisible focus:outline-none"
           type="text"
           placeholder="Search"
           onInput={handleInput}

@@ -1,4 +1,4 @@
-import books from "@/app/section/record/books/books.json";
+import { NextResponse } from 'next/server'
 
 export async function GET() {
   // Assuming the 'books' object contains data for multiple years
@@ -23,7 +23,11 @@ export async function GET() {
         `https://www.googleapis.com/books/v1/volumes?q=isbn:${book.ISBN13}`
       );
       const product = await res.json();
-      return product;
+      console.log(product.items[0].volumeInfo);
+      return {
+        bookInfo: product.items[0].volumeInfo,
+        note: book.notes,
+      };
     });
     const bookDetails = await Promise.all(bookDetailPromises);
     return { year, bookDetails };
@@ -33,5 +37,5 @@ export async function GET() {
   const yearDetailPromises = years.map(fetchBookDetails);
   const yearBookDetails = await Promise.all(yearDetailPromises);
 
-  return Response.json(yearBookDetails);
+  return NextResponse.json(yearBookDetails);
 }
