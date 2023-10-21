@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from "framer-motion"npm 
+import { motion, AnimatePresence } from "framer-motion";
 
 type Book = {
   item: {
