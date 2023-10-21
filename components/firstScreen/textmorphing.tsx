@@ -79,7 +79,6 @@ export default function TextHome() {
 
     function animate(cooldown: number) {
       requestAnimationFrame(animate);
-      console.log(cooldown);
       if (cooldown <= 0) {
         doMorph();
       } else {

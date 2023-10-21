@@ -11,7 +11,8 @@ export default function Nav() {
           </Link>
           <div className="flex justify-around gap-4">
             <Link href={"section/about/"}>About</Link>/
-            <Link href={"section/projects/"}>Projects</Link>
+            <Link href={"section/projects/"}>Projects</Link>/
+            <Link href={"section/record/"}>Record</Link>
           </div>
         </div>
       </div>

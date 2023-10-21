@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { AtSign } from "lucide-react";
 import { Linkedin } from "lucide-react";
@@ -62,7 +60,13 @@ export default function Landing() {
               href="/section/projects/"
               className="tracking-wider transition-all duration-100 ease-in-out hover:font-semibold"
             >
-              Projects
+              Projects /
+            </Link>
+            <Link
+              href="/section/record/"
+              className="tracking-wider transition-all duration-100 ease-in-out hover:font-semibold"
+            >
+              Record
             </Link>
           </div>
         </div>
