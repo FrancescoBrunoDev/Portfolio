@@ -2,7 +2,6 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Minimize2, ExternalLink } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
 
 // make the interface for ItemDetail
 interface ItemDetailProps {
