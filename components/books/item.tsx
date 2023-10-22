@@ -52,7 +52,7 @@ export default function BookItem(book: Book) {
       {/* Modal */}
       {isopen ? (
         <div className="fixed bottom-0 left-0 right-0 top-0 z-20 flex h-screen w-screen items-center justify-center backdrop-grayscale">
-          <div className="relative m-2 h-full w-full bg-primary p-3 text-secondary md:h-3/4 md:w-1/2 lg:m-0">
+          <div className="relative m-2 h-full w-full bg-primary p-3 text-secondary md:h-3/4 md:max-w-md lg:m-0">
             {/* Buttons */}
             <div className="absolute right-4 top-6 flex gap-2">
               <button className="hover:scale-105">
