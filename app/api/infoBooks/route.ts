@@ -1,29 +1,77 @@
 import { NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 
 export async function GET() {
+  try {
+    const audioBooks: BooksRecord = require("@/app/section/record/books/audioBooks.json");
+    const paperBooks: BooksRecord = require("@/app/section/record/books/paperBooks.json");
 
-  const books: BooksRecord = require("@/app/section/record/books/books.json");
-  const years = Object.keys(books);
+    const mergedBooks: BooksRecord = {};
 
-  async function fetchBookDetails(year: string) {
-    const booksArray = books[year];
-    const bookDetailPromises = booksArray.map(async (book) => {
-      const res = await fetch(
-        `https://www.googleapis.com/books/v1/volumes?q=isbn:${book.ISBN13}`
-      );
-      const product = await res.json();
-      return {
-        bookInfo: product.items[0].volumeInfo,
-        note: book.notes,
-      };
-    });
-    const bookDetails = await Promise.all(bookDetailPromises);
-    return { year, bookDetails };
+    for (const year in audioBooks) {
+      if (audioBooks.hasOwnProperty(year) && paperBooks.hasOwnProperty(year)) {
+        mergedBooks[year] = [
+          ...audioBooks[year].map((book) => ({ ...book, type: "audio" })),
+          ...paperBooks[year].map((book) => ({ ...book, type: "paper" })),
+        ];
+      } else if (audioBooks.hasOwnProperty(year)) {
+        mergedBooks[year] = audioBooks[year].map((book) => ({
+          ...book,
+          type: "audiobook",
+        }));
+      } else if (paperBooks.hasOwnProperty(year)) {
+        mergedBooks[year] = paperBooks[year].map((book) => ({
+          ...book,
+          type: "paper",
+        }));
+      }
+    }
+
+    const years = Object.keys(mergedBooks);
+
+    const fetchBookDetails = async (year: string) => {
+      let booksArray = mergedBooks[year];
+      const bookDetailPromises = booksArray.map(async (book) => {
+        const GOOGLE_BOOKS_API_KEY = process.env.GOOGLE_BOOKS_API_KEY;
+        const res = await fetch(
+          `https://www.googleapis.com/books/v1/volumes?q=isbn:${book.ISBN13}&key=${GOOGLE_BOOKS_API_KEY}`
+        );
+        const product = await res.json();
+        const bookInfo = product.items?.[0]?.volumeInfo;
+        if (!bookInfo) console.log("No book info found for", book.ISBN13);
+        return {
+          bookInfo: {
+            title: bookInfo?.title || book.title || "unknown",
+            authors: bookInfo?.authors || book.authors || "unknown",
+            imageLinks: bookInfo?.imageLinks || {
+              thumbnail: "",
+            },
+            industryIdentifiers: bookInfo?.industryIdentifiers || [
+              { type: "ISBN", identifier: book.ISBN13 },
+            ],
+            categories: bookInfo?.categories || book.categories || "unknown",
+            publishedDate:
+              bookInfo?.publishedDate || book.publishedDate || "unknown",
+            pageCount: bookInfo?.pageCount || book.pageCount || "unknown",
+            language: bookInfo?.language || book.language || "unknown",
+            infoLink: bookInfo?.infoLink || book.infoLink || "unknown",
+          },
+          note: book.notes,
+          type: book.type || "unknown",
+        };
+      });
+      const bookDetails = await Promise.all(bookDetailPromises);
+      return { year, bookDetails };
+    };
+
+    // Use Promise.all to fetch details for all years concurrently
+    const yearDetailPromises = years.map((year) => fetchBookDetails(year));
+
+    const yearBookDetails = await Promise.all(yearDetailPromises);
+
+    return NextResponse.json(yearBookDetails);
+  } catch (error) {
+    console.log(error);
+    return Response.error();
   }
-
-  // Use Promise.all to fetch details for all years concurrently
-  const yearDetailPromises = years.map(fetchBookDetails);
-  const yearBookDetails = await Promise.all(yearDetailPromises);
-
-  return NextResponse.json(yearBookDetails);
 }

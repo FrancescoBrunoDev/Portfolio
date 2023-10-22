@@ -5,8 +5,8 @@ import SearchBox from "@/components/books/searchBox";
 import { useState, useEffect } from "react";
 
 async function getData() {
-  const res = await fetch("/api/infoBooks");
-
+  const res = await fetch(`/api/infoBooks`);
+  console.log(res);
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
@@ -44,13 +44,14 @@ export default function Books() {
         {filteredData
           .sort((a, b) => b.year - a.year)
           .map((year) => {
+            console.log(year);
             return (
               <div className=" h-full flex-row content-stretch items-center gap-4 overflow-x-scroll">
                 <div key={year.year} className="h-full">
-                  <div className="flex h-fit gap-2">
-                    <div className="relative flex h-auto w-60 items-center pr-10 text-8xl font-semibold uppercase">
+                  <div className="flex h-fit flex-col gap-2 md:flex-row">
+                    <div className="relative flex h-auto items-center gap-2 pr-10 text-4xl font-semibold uppercase lg:w-60 lg:text-8xl">
                       {year.year}{" "}
-                      <span className="absolute bottom-4 text-sm lowercase">
+                      <span className="text-xs lowercase md:absolute md:bottom-4 md:text-sm">
                         {year.bookDetails.length}{" "}
                         {year.bookDetails.length === 1 ? "book" : "books"}{" "}
                         {isFiltering ? "filtered" : "read"}
@@ -60,7 +61,7 @@ export default function Books() {
                       {year.bookDetails.map((book) => (
                         <BookItem
                           key={book.bookInfo.industryIdentifiers[0].identifier}
-                          item={book.bookInfo}
+                          item={book}
                         />
                       ))}
                     </div>

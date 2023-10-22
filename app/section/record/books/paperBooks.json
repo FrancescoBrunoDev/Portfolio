@@ -1,0 +1,22 @@
+{
+  "2023": [
+    {
+      "title": "Da zero a ultra",
+      "month": 0,
+      "notes": "",
+      "authors": ["Roberto Martini"],
+      "ISBN13": 9798364044136,
+      "categories": ["running", "sport"],
+      "publishedDate": "2022",
+      "pageCount": 338,
+      "language": "it",
+      "infoLink": "https://www.amazon.it/Zero-Ultra-manuale-completo-running/dp/B0BMJGLF1Z"
+    },
+    {
+      "title": "Clean Code",
+      "month": 0,
+      "notes": "",
+      "ISBN13": 9780132350884
+    }
+  ]
+}

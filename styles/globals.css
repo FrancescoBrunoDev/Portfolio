@@ -82,10 +82,6 @@
   }
 }
 
-.noise {
-  background: url(https://grainy-gradients.vercel.app/noise.svg);
-}
-
 .vertical-text {
   writing-mode: vertical-rl;
   text-orientation: mixed;
