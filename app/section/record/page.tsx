@@ -1,4 +1,4 @@
-import StravaInfo from "@/components/strava/stravaInfo";
+// import StravaInfo from "@/components/strava/stravaInfo";
 import Link from "next/link";
 
 export default function Landing() {
