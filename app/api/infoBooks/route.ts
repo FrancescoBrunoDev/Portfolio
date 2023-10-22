@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { NextRequest } from "next/server";
 
 export async function GET() {
   try {
@@ -11,7 +10,7 @@ export async function GET() {
     for (const year in audioBooks) {
       if (audioBooks.hasOwnProperty(year) && paperBooks.hasOwnProperty(year)) {
         mergedBooks[year] = [
-          ...audioBooks[year].map((book) => ({ ...book, type: "audio" })),
+          ...audioBooks[year].map((book) => ({ ...book, type: "audiobook" })),
           ...paperBooks[year].map((book) => ({ ...book, type: "paper" })),
         ];
       } else if (audioBooks.hasOwnProperty(year)) {
@@ -49,7 +48,7 @@ export async function GET() {
             industryIdentifiers: bookInfo?.industryIdentifiers || [
               { type: "ISBN", identifier: book.ISBN13 },
             ],
-            categories: bookInfo?.categories || book.categories || "unknown",
+            categories: bookInfo?.categories || book.categories || [],
             publishedDate:
               bookInfo?.publishedDate || book.publishedDate || "unknown",
             pageCount: bookInfo?.pageCount || book.pageCount || "unknown",

@@ -3,6 +3,7 @@
 import BookItem from "@/components/books/item";
 import SearchBox from "@/components/books/searchBox";
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 async function getData() {
   const res = await fetch(`/api/infoBooks`);
@@ -58,12 +59,16 @@ export default function Books() {
                       </span>
                     </div>
                     <div className="flex h-full w-full gap-2 overflow-x-scroll pb-4 lg:h-full">
-                      {year.bookDetails.map((book) => (
-                        <BookItem
-                          key={book.bookInfo.industryIdentifiers[0].identifier}
-                          item={book}
-                        />
-                      ))}
+                      <AnimatePresence>
+                        {year.bookDetails.map((book) => (
+                          <BookItem
+                            key={
+                              book.bookInfo.industryIdentifiers[0].identifier
+                            }
+                            item={book}
+                          />
+                        ))}
+                      </AnimatePresence>
                     </div>
                   </div>
                 </div>
