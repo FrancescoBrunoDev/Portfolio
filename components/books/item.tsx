@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Minimize2, ExternalLink } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 // make the interface for ItemDetail
 interface ItemDetailProps {
@@ -119,7 +120,21 @@ export default function BookItem(book: Book) {
                 />
               </div>
               {/* note personali */}
-              
+              {note !== "" ? (
+                <>
+                  <div className="h-fit self-start text-2xl font-bold">
+                    Personal Notes
+                  </div>
+                  <div className="flex h-3/5 items-center justify-center self-stretch">
+                    <Image
+                      src={note}
+                      alt="Personal Notes"
+                      className="w-full"
+                      aria-label="SVG Image"
+                    />
+                  </div>
+                </>
+              ) : null}
             </div>
             {/* title book */}
             <div className="absolute bottom-0 left-0 right-0 z-10 border-4 border-primary bg-background p-3 text-left text-4xl font-semibold uppercase text-primary">
