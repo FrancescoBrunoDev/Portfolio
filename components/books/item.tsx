@@ -130,6 +130,8 @@ export default function BookItem(book: Book) {
                       src={note}
                       alt="Personal Notes"
                       className="w-full"
+                      width={500}
+                      height={500}
                       aria-label="SVG Image"
                     />
                   </div>
