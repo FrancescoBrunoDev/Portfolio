@@ -47,7 +47,7 @@ export default function Books() {
           .map((year) => {
             console.log(year);
             return (
-              <div className=" h-full flex-row content-stretch items-center gap-4 overflow-x-scroll">
+              <div className=" h-full flex-row content-stretch items-center gap-4 overflow-x-scroll no-scrollbar">
                 <div key={year.year} className="h-full">
                   <div className="flex h-fit flex-col gap-2 md:flex-row">
                     <div className="relative flex h-auto items-center gap-2 pr-10 text-4xl font-semibold uppercase lg:w-60 lg:text-8xl">
@@ -58,7 +58,7 @@ export default function Books() {
                         {isFiltering ? "filtered" : "read"}
                       </span>
                     </div>
-                    <div className="flex h-full w-full gap-2 overflow-x-scroll pb-4 lg:h-full">
+                    <div className="flex h-full w-full gap-2 overflow-x-scroll pb-4 lg:h-full no-scrollbar">
                       <AnimatePresence>
                         {year.bookDetails.map((book) => (
                           <BookItem
