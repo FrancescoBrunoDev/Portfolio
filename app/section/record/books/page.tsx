@@ -58,7 +58,7 @@ export default function Books() {
                         {isFiltering ? "filtered" : "read"}
                       </span>
                     </div>
-                    <div className="flex h-full w-full gap-2 overflow-x-scroll pb-4 lg:h-full no-scrollbar">
+                    <div className="flex h-full w-full gap-2 overflow-x-scroll pb-4 lg:h-full">
                       <AnimatePresence>
                         {year.bookDetails.map((book) => (
                           <BookItem
