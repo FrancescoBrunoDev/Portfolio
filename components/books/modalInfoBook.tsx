@@ -19,7 +19,7 @@ interface ModalInfoBookProps {
 const formatVariants = [
   {
     type: "audiobook",
-    label: "🎧",
+    label: "📻",
     variants: [
       "Ear Candy",
       "Audio Adventures",
@@ -163,7 +163,7 @@ export default function ModalInfoBook({
             />
             <ItemDetail
               title="Format"
-              value={`${randomVariant}`}
+              value={`${selectedFormat.label} ${randomVariant}`}
             />
 
             <ItemDetail
