@@ -35,7 +35,7 @@ export default function Books() {
   }, []);
 
   return (
-    <div className="h-screen w-screen items-center pt-32 text-primary">
+    <div className="h-screen w-screen items-center pt-32 text-primary overflow-hidden">
       <SearchBox
         books={books}
         setFilteredData={setFilteredData}
