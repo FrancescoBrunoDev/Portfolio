@@ -2,6 +2,7 @@ import { Minimize2, ExternalLink } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import BackgroundDots from "@/components/books/backgroundDots";
 
 interface ItemDetailProps {
   title: string;
@@ -14,6 +15,8 @@ interface ModalInfoBookProps {
   note: string;
   type: string;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  altNotes: string | undefined;
+  tranlatedNotes: string | undefined;
 }
 
 const formatVariants = [
@@ -85,6 +88,8 @@ export default function ModalInfoBook({
   book,
   note,
   type,
+  altNotes,
+  tranlatedNotes,
   setIsOpen,
 }: ModalInfoBookProps) {
   const infoBooks = book.item.bookInfo;
@@ -106,7 +111,7 @@ export default function ModalInfoBook({
       exit={{ y: -10, opacity: 0 }}
       className="fixed bottom-0 left-0 right-0 top-0 z-20 flex h-screen w-screen items-center justify-center backdrop-grayscale"
     >
-      <div className="relative m-2 h-full w-full bg-primary p-3 text-secondary md:h-3/4 md:max-w-md lg:m-0">
+      <div className="relative m-2 h-4/5 w-full bg-primary p-3 text-secondary md:h-3/4 md:max-w-md lg:m-0">
         {/* Buttons */}
         <div className="absolute right-4 top-6 flex gap-2">
           <button className="hover:scale-105">
@@ -172,26 +177,31 @@ export default function ModalInfoBook({
             />
           </div>
           {/* note personali */}
-          {note !== "" ? (
-            <>
-              <div className="h-fit self-start text-2xl font-bold">
-                Personal Notes
-              </div>
-              <div className="flex h-3/5 items-center justify-center self-stretch">
+
+          <div className="h-fit self-start text-2xl font-bold">
+            Personal Notes
+          </div>
+          <div className="relative">
+            <BackgroundDots />
+          </div>
+          <div className="flex flex-col gap-y-6 h-2/5 items-center justify-center self-stretch">
+            {note !== "" ? (
+              <>
                 <Image
                   src={note}
-                  alt="Personal Notes"
-                  className="w-full"
+                  alt={altNotes || "note"}
+                  className="w-full px-6"
                   width={500}
                   height={500}
                   aria-label="SVG Image"
                 />
-              </div>
-            </>
-          ) : null}
+                <div className="text-center px-6">({tranlatedNotes})</div>
+              </>
+            ) : null}
+          </div>
         </div>
         {/* title book */}
-        <div className="absolute bottom-0 left-0 right-0 z-10 border-4 border-primary bg-background p-3 text-left text-4xl font-semibold uppercase text-primary">
+        <div className="absolute bottom-0 left-0 right-0 z-10 border-4 border-t-0 border-primary bg-background p-3 text-left text-4xl font-semibold uppercase text-primary">
           {infoBooks.title}
         </div>
       </div>

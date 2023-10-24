@@ -2,8 +2,10 @@ type Year = {
   year: number;
   bookDetails: {
     note: string;
-    bookInfo: any; // You might want to replace "any" with a more specific type
+    bookInfo: any;
     type: string;
+    altNotes: string;
+    tranlatedNotes?: string;
   }[];
 };
 
@@ -19,6 +21,8 @@ type BookJson = {
   pageCount?: number;
   language?: string;
   infoLink?: string;
+  altNotes?: string;
+  tranlatedNotes?: string;
 };
 
 type BooksRecord = Record<string, BookJson[]>;
@@ -44,5 +48,7 @@ type Book = {
     };
     note: string;
     type: string;
+    altNotes?: string;
+    tranlatedNotes?: string;
   };
 };

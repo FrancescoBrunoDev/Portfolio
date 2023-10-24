@@ -7,6 +7,8 @@ export default function BookItem(book: Book) {
   const infoBooks = book.item.bookInfo;
   const note = book.item.note;
   const type = book.item.type;
+  const altNotes = book.item.altNotes;
+  const tranlatedNotes = book.item.tranlatedNotes;
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -43,6 +45,8 @@ export default function BookItem(book: Book) {
             book={book}
             note={note}
             type={type}
+            altNotes={altNotes}
+            tranlatedNotes={tranlatedNotes}
             setIsOpen={setIsOpen}
           />
         )}
