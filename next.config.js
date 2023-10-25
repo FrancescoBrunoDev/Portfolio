@@ -12,7 +12,6 @@ const nextConfig = {
         pathname: "/account123/**",
       },
     ],
-    path: "/",
   },
 };
 
