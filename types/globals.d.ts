@@ -12,7 +12,6 @@ type Year = {
 
 type BookJson = {
   title: string;
-  month: number;
   notes: string;
   ISBN13: number;
   type?: string;
@@ -54,4 +53,29 @@ type Book = {
     tranlatedNotes?: string;
     month: number;
   };
+};
+
+type BookDetails = {
+  bookInfo: {
+    title: string;
+    authors: string[];
+    publishedDate: string;
+    industryIdentifiers: {
+      type: string;
+      identifier: string;
+    }[];
+    categories: string[];
+    pageCount: number;
+    infoLink: string;
+    imageLinks: {
+      smallThumbnail: string;
+      thumbnail: string;
+    };
+    language: string;
+  };
+  note: string;
+  type: string;
+  altNotes?: string;
+  tranlatedNotes?: string;
+  month: number;
 };

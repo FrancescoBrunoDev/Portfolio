@@ -3,7 +3,6 @@
 import BookItem from "@/components/books/item";
 import SearchBox from "@/components/books/searchBox";
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 
 async function getData() {
   const res = await fetch(`/api/infoBooks`);
@@ -33,7 +32,7 @@ export default function Books() {
     fetchData();
   }, []);
 
-  function getMonthName(month) {
+  function getMonthName(month: number) {
     const monthNames = [
       "🤷",
       "January",
@@ -77,21 +76,24 @@ export default function Books() {
                       </span>
                     </div>
                     <div className="flex h-full w-full gap-2 overflow-x-auto pb-4 lg:h-full">
-                      {Object.entries(
-                        year.bookDetails.slice().reduce((acc, book) => {
-                          const month = book.month;
-                          if (!acc[month]) {
-                            acc[month] = [];
-                          }
-                          acc[month].push(book);
-                          return acc;
-                        }, {})
+                      {Object.entries<BookDetails[]>(
+                        year.bookDetails
+                          .slice()
+                          .reduce((acc: any, book: BookDetails) => {
+                            const month = book.month;
+                            if (!acc[month]) {
+                              acc[month] = [] as BookDetails[];
+                            }
+                            acc[month].push(book);
+                            return acc;
+                          }, [])
                       )
                         .reverse()
                         .map(([month, booksInMonth]) => {
+                          const monthNum = parseInt(month);
                           return (
                             <div className="flex flex-col">
-                              <h2 className="h-6">{getMonthName(month)}</h2>{" "}
+                              <h2 className="h-6">{getMonthName(monthNum)}</h2>{" "}
                               <div key={month} className="flex flex-row gap-2">
                                 {booksInMonth.map((book) => (
                                   <BookItem
