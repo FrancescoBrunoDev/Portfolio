@@ -6,6 +6,7 @@ type Year = {
     type: string;
     altNotes: string;
     tranlatedNotes?: string;
+    month: number;
   }[];
 };
 
@@ -23,6 +24,7 @@ type BookJson = {
   infoLink?: string;
   altNotes?: string;
   tranlatedNotes?: string;
+  month: number;
 };
 
 type BooksRecord = Record<string, BookJson[]>;
@@ -50,5 +52,6 @@ type Book = {
     type: string;
     altNotes?: string;
     tranlatedNotes?: string;
+    month: number;
   };
 };

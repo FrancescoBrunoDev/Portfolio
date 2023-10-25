@@ -59,6 +59,7 @@ export async function GET() {
           type: book.type || "unknown",
           altNotes: book.altNotes || "",
           tranlatedNotes: book.tranlatedNotes || "",
+          month: book.month,
         };
       });
       const bookDetails = await Promise.all(bookDetailPromises);

@@ -19,7 +19,6 @@ export default function Books() {
   const [books, setBooks] = useState<Year[]>([]);
   const [filteredData, setFilteredData] = useState<Year[]>(books);
   const [isFiltering, setIsFiltering] = useState(false);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -34,8 +33,27 @@ export default function Books() {
     fetchData();
   }, []);
 
+  function getMonthName(month) {
+    const monthNames = [
+      "🤷",
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    return monthNames[month];
+  }
+
   return (
-    <div className="h-screen w-screen items-center pt-32 text-primary overflow-x-hidden no-scrollbar">
+    <div className="no-scrollbar h-screen w-screen items-center overflow-x-hidden pt-32 text-primary">
       <SearchBox
         books={books}
         setFilteredData={setFilteredData}
@@ -47,7 +65,7 @@ export default function Books() {
           .map((year) => {
             console.log(year);
             return (
-              <div className=" h-full flex-row content-stretch items-center gap-4 overflow-x-scroll no-scrollbar">
+              <div className=" no-scrollbar h-full flex-row content-stretch items-center gap-4 overflow-x-scroll">
                 <div key={year.year} className="h-full">
                   <div className="flex h-fit flex-col gap-2 md:flex-row">
                     <div className="relative flex h-auto items-center gap-2 pr-10 text-4xl font-semibold uppercase lg:w-60 lg:text-8xl">
@@ -59,16 +77,35 @@ export default function Books() {
                       </span>
                     </div>
                     <div className="flex h-full w-full gap-2 overflow-x-auto pb-4 lg:h-full">
-                      <AnimatePresence>
-                        {year.bookDetails.map((book) => (
-                          <BookItem
-                            key={
-                              book.bookInfo.industryIdentifiers[0].identifier
-                            }
-                            item={book}
-                          />
-                        ))}
-                      </AnimatePresence>
+                      {Object.entries(
+                        year.bookDetails.slice().reduce((acc, book) => {
+                          const month = book.month;
+                          if (!acc[month]) {
+                            acc[month] = [];
+                          }
+                          acc[month].push(book);
+                          return acc;
+                        }, {})
+                      )
+                        .reverse()
+                        .map(([month, booksInMonth]) => {
+                          return (
+                            <div className="flex flex-col">
+                              <h2 className="h-6">{getMonthName(month)}</h2>{" "}
+                              <div key={month} className="flex flex-row gap-2">
+                                {booksInMonth.map((book) => (
+                                  <BookItem
+                                    key={
+                                      book.bookInfo.industryIdentifiers[0]
+                                        .identifier
+                                    }
+                                    item={book}
+                                  />
+                                ))}
+                              </div>
+                            </div>
+                          );
+                        })}
                     </div>
                   </div>
                 </div>
