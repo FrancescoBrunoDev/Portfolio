@@ -1,6 +1,4 @@
-import { NextResponse } from "next/server";
-
-export async function GET() {
+export default async function fetchBooksInfo() {
   try {
     const audioBooks: BooksRecord = require("@/app/section/record/books/audioBooks.json");
     const paperBooks: BooksRecord = require("@/app/section/record/books/paperBooks.json");
@@ -71,9 +69,9 @@ export async function GET() {
 
     const yearBookDetails = await Promise.all(yearDetailPromises);
 
-    return NextResponse.json(yearBookDetails);
+    return yearBookDetails;
   } catch (error) {
     console.log(error);
-    return Response.error();
+    return error;
   }
 }
