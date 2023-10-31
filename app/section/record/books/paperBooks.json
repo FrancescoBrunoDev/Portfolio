@@ -1,6 +1,48 @@
 {
   "2023": [
     {
+      "titolo": "Storia dell'assedio di Lisbona",
+      "month": 8,
+      "notes": "",
+      "ISBN13": "9788807888885"
+    },
+    {
+      "title": "La casa in collina",
+      "month": 8,
+      "notes": "",
+      "ISBN13": "9788807904127"
+    },
+    {
+      "title": "Neve di primavera",
+      "month": 7,
+      "notes": "",
+      "ISBN13": "9788807886454"
+    },
+    {
+      "title": "La guerra dei Bepi",
+      "month": 6,
+      "notes": "",
+      "ISBN13": "9788832089950"
+    },
+    {
+      "title": "La storia infinita del Pojanistan",
+      "month": 5,
+      "notes": "",
+      "ISBN13": "9791280105721"
+    },
+    {
+      "title": "Al cuore dell'Italia",
+      "month": 4,
+      "notes": "",
+      "ISBN13": "9788804765646"
+    },
+    {
+      "title": "Sotto lo stesso cielo",
+      "month": 4,
+      "notes": "",
+      "ISBN13": "9788804738879"
+    },
+    {
       "title": "Da zero a ultra",
       "month": 0,
       "notes": "",
@@ -13,10 +55,36 @@
       "infoLink": "https://www.amazon.it/Zero-Ultra-manuale-completo-running/dp/B0BMJGLF1Z"
     },
     {
+      "title": "Foto mosse di famiglie immobili",
+      "month": 0,
+      "notes": "",
+      "ISBN13": "9788817173537"
+    },
+    {
       "title": "Clean Code",
       "month": 0,
       "notes": "",
-      "ISBN13": 9780132350884
+      "ISBN13": "9780132350884"
+    }
+  ],
+  "2022": [
+    {
+      "titolo": "Il segreto del bosco vecchio",
+      "month": 0,
+      "notes": "",
+      "ISBN13": "9788804667971"
+    },
+    {
+      "titolo": "La forma dell'acqua",
+      "month": 0,
+      "notes": "",
+      "ISBN13": "9788838910173"
+    },
+    {
+      "titolo": "Le cosmicomiche",
+      "month": 0,
+      "notes": "",
+      "ISBN13": "9788804667988"
     }
   ]
 }
