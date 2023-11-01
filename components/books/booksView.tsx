@@ -41,10 +41,10 @@ export default function BooksView(booksFetch: any) {
             .sort((a, b) => b.year - a.year)
             .map((year) => {
               return (
-                <div className=" no-scrollbar h-full flex-row content-stretch items-center gap-4 overflow-x-scroll">
-                  <div key={year.year} className="h-full">
-                    <div className="flex h-fit flex-col gap-2 md:flex-row">
-                      <div className="relative flex h-auto items-center gap-2 pr-10 text-4xl font-semibold uppercase lg:w-60 lg:text-8xl">
+                <div key={year.year} className="no-scrollbar h-full flex-row content-stretch items-center gap-4 overflow-x-scroll">
+                  <div className="h-full">
+                    <div className="flex h-fit flex-col md:flex-row">
+                      <div className="relative flex h-auto items-center gap-2 pr-10 text-4xl font-semibold uppercase lg:w-[21rem] lg:text-8xl md:w-28">
                         {year.year}{" "}
                         <span className="text-xs lowercase md:absolute md:bottom-4 md:text-sm">
                           {year.bookDetails.length}{" "}
@@ -69,7 +69,7 @@ export default function BooksView(booksFetch: any) {
                           .map(([month, booksInMonth]) => {
                             const monthNum = parseInt(month);
                             return (
-                              <div className="flex flex-col">
+                              <div key={month} className="flex flex-col">
                                 <h2 className="h-6">
                                   {getMonthName(monthNum)}
                                 </h2>{" "}

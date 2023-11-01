@@ -53,11 +53,11 @@ export default async function fetchBooksInfo() {
             language: bookInfo?.language || book.language || "unknown",
             infoLink: bookInfo?.infoLink || book.infoLink || "unknown",
           },
-          note: book.notes,
+          note: book.notes || "",
           type: book.type || "unknown",
           altNotes: book.altNotes || "",
           tranlatedNotes: book.tranlatedNotes || "",
-          month: book.month,
+          month: book.month || 0,
         };
       });
       const bookDetails = await Promise.all(bookDetailPromises);
