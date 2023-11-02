@@ -9,7 +9,7 @@ export default function BookItem(book: Book) {
   const type = book.item.type;
   const altNotes = book.item.altNotes;
   const tranlatedNotes = book.item.tranlatedNotes;
-  const titleParts = infoBooks.title.match(/[^.!]+[.!]?/g);
+  const titleParts = infoBooks.title.match(/[^.!]+[.!]?/g) || [];
   return (
     <motion.div
       initial={{ opacity: 0 }}
