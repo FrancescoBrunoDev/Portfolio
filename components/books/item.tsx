@@ -9,6 +9,7 @@ export default function BookItem(book: Book) {
   const type = book.item.type;
   const altNotes = book.item.altNotes;
   const tranlatedNotes = book.item.tranlatedNotes;
+  const titleParts = infoBooks.title.match(/[^.!]+[.!]?/g);
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -32,10 +33,8 @@ export default function BookItem(book: Book) {
           </div>
         </div>
         <div className="absolute bottom-0 left-0 right-0 z-10 border-t-2 border-primary bg-background p-2 text-left text-base font-semibold uppercase">
-          <div className="text-sm">{infoBooks.title.split(".")[0]}</div>
-          <div className="text-xs lowercase">
-            {infoBooks.title.split(".")[1]}
-          </div>
+          <div className="text-sm">{titleParts[0]}</div>
+          <div className="text-xs lowercase">{titleParts[1]}</div>
         </div>
       </button>
       {/* Modal */}
