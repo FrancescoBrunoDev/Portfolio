@@ -39,7 +39,7 @@ export default function ProjectItem(project: Project) {
         src={project.item.image}
         alt={project.item.title}
         height={500}
-        width={300}
+        width={500}
         className="z-0 h-full object-cover"
       />
       <div className="absolute bottom-0 z-10 border-t-2 border-primary bg-background p-2 text-base font-semibold uppercase lg:w-96 lg:origin-bottom-left lg:rotate-[270deg] lg:rounded-none lg:border-none lg:bg-transparent lg:p-0 lg:text-lg">
