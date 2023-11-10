@@ -12,10 +12,10 @@
   {
     "position": "Web Developer",
     "organization": "Self-employed",
-    "employment_type": "self-employed",
+    "employment_type": null,
     "start_date": "Jun 2022",
     "end_date": "Present",
-    "location": "Münster, North Rhine-Westphalia, Germany",
+    "location": null,
     "description": "Crafting vibrant and responsive websites with the magic touch of React, Next.js, Svelte.js, and more. Turning ideas into digital wonders, one line of code at a time!",
     "link": null
   },
