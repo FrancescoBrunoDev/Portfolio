@@ -10,6 +10,16 @@
     "link": null
   },
   {
+    "position": "Web Developer",
+    "organization": "Self-employed",
+    "employment_type": "self-employed",
+    "start_date": "Jun 2022",
+    "end_date": "Present",
+    "location": "Münster, North Rhine-Westphalia, Germany",
+    "description": "Crafting vibrant and responsive websites with the magic touch of React, Next.js, Svelte.js, and more. Turning ideas into digital wonders, one line of code at a time!",
+    "link": null
+  },
+  {
     "position": "Social Media Manager",
     "organization": "University of Münster",
     "employment_type": "Part-time",
@@ -18,16 +28,6 @@
     "location": "Münster, North Rhine-Westphalia, Germany",
     "description": "For the international project \"Indoctrination, Resistance, Conciliation,\" I am responsible for:\n- managing digital communication\n- creating content for social networks\n- providing IT support",
     "link": null
-  },
-  {
-    "position": "Web Developer",
-    "organization": "University of Münster",
-    "employment_type": "self-employed",
-    "start_date": "Jun 2022",
-    "end_date": "Sep 2022",
-    "location": "Münster, North Rhine-Westphalia, Germany",
-    "description": "Online Exhibition on Julius Otto Grimm, University of Münster | ",
-    "link": "https://julius-otto-grimm.uni-muenster.de/"
   },
   {
     "position": "Music engraver",
