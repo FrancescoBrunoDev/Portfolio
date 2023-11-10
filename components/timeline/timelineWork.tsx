@@ -1,11 +1,10 @@
-import { Button } from "@/components/ui/button";
 import workExperience from "@/components/timeline/work.json";
 import { Briefcase } from "lucide-react";
 import Link from "next/link";
 
 export default function TimelineWork() {
   return (
-    <div className="rounded-xl bg-background p-4 drop-shadow-xl text-primary">
+    <div className="rounded-xl bg-background p-4 text-primary drop-shadow-xl">
       <div className="flex justify-between border-b-2 border-primary">
         <h1 className="text-2xl font-black uppercase">Work Experience</h1>
         <Briefcase className="h-8 w-8" />
@@ -21,7 +20,7 @@ export default function TimelineWork() {
               <div className="col-span-7 grid grid-cols-12 border-l-2 border-primary pt-1 md:col-span-3 md:border-l-0 md:border-none">
                 <div className="col-span-1 block md:hidden" />
                 <div className="col-span-11 flex flex-col pr-2 text-xl font-black uppercase md:translate-x-0">
-                  <span className="text-xl font-black uppercase leading-5 break-words">
+                  <span className="break-words text-xl font-black uppercase leading-5">
                     {!isSequentialExperience ? work.organization : null}
                   </span>
                 </div>
@@ -56,6 +55,14 @@ export default function TimelineWork() {
                     >
                       {work.link}
                     </Link>
+                  )}
+                  {work.tools && (
+                    <div className="inline-flex flex-wrap gap-1">
+                      <span className="text-sm font-bold">Tools</span>
+                      {work.tools.map((tool) => (
+                        <span className="text-sm leading-tight">{tool}</span>
+                      ))}
+                    </div>
                   )}
                 </div>
               </div>

@@ -6,8 +6,9 @@
     "start_date": "Sept 2023",
     "end_date": "Present",
     "location": "München, Bavaria, Germany",
-    "description": "I work on full-stack web platform development for browsing large bibliographic databases and academic texts. Tools I use include Typo3, PHP, Bootstrap, and MySQL.",
-    "link": null
+    "description": "I work on full-stack web platform development for browsing large bibliographic databases and academic texts.",
+    "link": null,
+    "tools": ["Typo3", "PHP", "Bootstrap", "MySQL"]
   },
   {
     "position": "Web Developer",
@@ -16,17 +17,17 @@
     "start_date": "Jun 2022",
     "end_date": "Present",
     "location": null,
-    "description": "Crafting vibrant and responsive websites with the magic touch of React, Next.js, Svelte.js, and more. Turning ideas into digital wonders, one line of code at a time!"
-  },
-  {
-    "position": "Social Media Manager",
-    "organization": "University of Münster",
-    "employment_type": "Part-time",
-    "start_date": "Jun 2022",
-    "end_date": "Jun 2023",
-    "location": "Münster, North Rhine-Westphalia, Germany",
-    "description": "For the international project \"Indoctrination, Resistance, Conciliation,\" I am responsible for:\n- managing digital communication\n- creating content for social networks\n- providing IT support",
-    "link": null
+    "description": "Crafting vibrant and responsive websites with modern tools. Turning ideas into digital wonders, one line of code at a time!",
+    "link": null,
+    "tools": [
+      "React",
+      "Next.js",
+      "Sveltekit",
+      "TailwindCss",
+      "Node.js",
+      "Vercel",
+      "Github"
+    ]
   },
   {
     "position": "Music engraver",
@@ -36,6 +37,16 @@
     "end_date": "Present",
     "location": null,
     "description": "I specialize in creating musical scores for composers, universities, and music publishers.",
+    "link": null
+  },
+  {
+    "position": "Social Media Manager",
+    "organization": "University of Münster",
+    "employment_type": "Part-time",
+    "start_date": "Jun 2022",
+    "end_date": "Jun 2023",
+    "location": "Münster, North Rhine-Westphalia, Germany",
+    "description": "For the international project \"Indoctrination, Resistance, Conciliation,\" I am responsible for:\n- managing digital communication\n- creating content for social networks\n- providing IT support",
     "link": null
   },
   {
@@ -75,6 +86,7 @@
     "start_date": "Aug 2017",
     "end_date": "Mar 2018",
     "location": "Trento, Italy",
-    "description": "At the university library, I was responsible for inventory operations and catalog updates."
+    "description": "At the university library, I was responsible for inventory operations and catalog updates.",
+    "link": null
   }
 ]
