@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function TimelineWork() {
   return (
-    <div className="rounded-xl bg-background p-4 text-primary drop-shadow-xl">
+    <div className="rounded-xl bg-background p-4 text-primary shadow-ring shadow-xl">
       <div className="flex justify-between border-b-2 border-primary">
         <h1 className="text-2xl font-black uppercase">Work Experience</h1>
         <Briefcase className="h-8 w-8" />
@@ -16,7 +16,7 @@ export default function TimelineWork() {
             work.organization === workExperience[index - 1].organization;
 
           return (
-            <li className="grid grid-cols-1 text-start md:grid-cols-10">
+            <li key={work.id} className="grid grid-cols-1 text-start md:grid-cols-10">
               <div className="col-span-7 grid grid-cols-12 border-l-2 border-primary pt-1 md:col-span-3 md:border-l-0 md:border-none">
                 <div className="col-span-1 block md:hidden" />
                 <div className="col-span-11 flex flex-col pr-2 text-xl font-black uppercase md:translate-x-0">

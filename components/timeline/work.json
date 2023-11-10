@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "position": "Web Developer",
     "organization": "Bayerische Staatsbibliothek",
     "employment_type": "Contract",
@@ -11,6 +12,7 @@
     "tools": ["Typo3", "PHP", "Bootstrap", "MySQL"]
   },
   {
+    "id": 2,
     "position": "Web Developer",
     "organization": "Self-employed",
     "employment_type": null,
@@ -30,6 +32,7 @@
     ]
   },
   {
+    "id": 3,
     "position": "Music engraver",
     "organization": "Self-employed",
     "employment_type": null,
@@ -40,6 +43,7 @@
     "link": null
   },
   {
+    "id": 4,
     "position": "Social Media Manager",
     "organization": "University of Münster",
     "employment_type": "Part-time",
@@ -50,6 +54,7 @@
     "link": null
   },
   {
+    "id": 5,
     "position": "Tutor",
     "organization": "University of Pavia",
     "employment_type": "Part-time",
@@ -60,6 +65,7 @@
     "link": null
   },
   {
+    "id": 6,
     "position": "Social Media Manager",
     "organization": "Quartetto di Cremona",
     "employment_type": "Part-time",
@@ -70,6 +76,7 @@
     "link": null
   },
   {
+    "id": 7,
     "position": "Secretary",
     "organization": "University of Trento",
     "employment_type": "Part-time",
@@ -80,6 +87,7 @@
     "link": null
   },
   {
+    "id": 8,
     "position": "Student Librarian",
     "organization": "University of Trento",
     "employment_type": "Part-time",
