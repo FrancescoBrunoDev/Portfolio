@@ -48,7 +48,7 @@ export default async function fetchBooksInfo() {
             ],
             categories: bookInfo?.categories || book.categories || [],
             publishedDate:
-              bookInfo?.publishedDate || book.publishedDate || "unknown",
+              bookInfo?.publishedDate.substring(0, 4) || book.publishedDate?.substring(0, 4) || "unknown",
             pageCount: bookInfo?.pageCount || book.pageCount || "unknown",
             language: bookInfo?.language || book.language || "unknown",
             infoLink: bookInfo?.infoLink || book.infoLink || "unknown",
