@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import intern from "@/components/timeline/intern.json";
 import { PocketKnife } from "lucide-react";
 
