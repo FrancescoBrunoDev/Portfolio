@@ -69,7 +69,7 @@ export default function BooksView(booksFetch: any) {
                           .map(([month, booksInMonth]) => {
                             const monthNum = parseInt(month);
                             return (
-                              <div key={month} className="flex flex-col">
+                              <div key={month} className="flex flex-col pl-1">
                                 <h2 className="h-6">
                                   {getMonthName(monthNum)}
                                 </h2>{" "}

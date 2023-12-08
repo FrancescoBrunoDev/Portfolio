@@ -21,7 +21,7 @@ export default function BookItem(book: Book) {
       <button
         onClick={() => setIsOpen(true)}
         key={infoBooks.industryIdentifiers[0].identifier}
-        className="relative z-0 h-56 w-32 shrink-0 translate-x-0 border-2 border-primary transition-all duration-300 ease-in-out"
+        className="relative z-0 h-56 w-32 shrink-0 translate-x-0 border-2 border-primary transition-all duration-200 ease-in-out hover:scale-[1.025] overflow-visible"
       >
         <div className="h-full w-full bg-primary p-3 opacity-100 transition-opacity duration-300">
           <div className="flex h-full flex-col text-left text-background">
