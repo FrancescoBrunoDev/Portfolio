@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function TimelineWork() {
   return (
-    <div className="rounded-xl bg-background p-4 text-primary shadow-ring shadow-xl">
+    <div className="rounded-xl bg-background p-4 text-primary shadow-ring shadow-2xl hover:scale-[1.002] transition-all duration-200">
       <div className="flex justify-between border-b-2 border-primary">
         <h1 className="text-2xl font-black uppercase">Work Experience</h1>
         <Briefcase className="h-8 w-8" />
