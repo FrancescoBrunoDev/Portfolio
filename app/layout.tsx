@@ -1,5 +1,6 @@
 import "@/styles/globals.css";
 import { outfit } from "@/components/text";
+import Cursor  from "@/components/cursor"
 
 export const metadata = {
   title: "Francesco Bruno",
@@ -14,6 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={"" + outfit.className}>
+      <Cursor />
         <div>{children}</div>
       </body>
     </html>
