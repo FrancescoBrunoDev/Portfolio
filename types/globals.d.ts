@@ -79,3 +79,8 @@ type BookDetails = {
   tranlatedNotes?: string;
   month: number;
 };
+
+interface MousePosition {
+  x: number;
+  y: number;
+}
