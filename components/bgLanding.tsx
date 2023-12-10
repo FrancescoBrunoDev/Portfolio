@@ -3,9 +3,13 @@ import { motion } from "framer-motion";
 
 interface BgLandingProps {
   mousePosition: MousePosition;
+  windowDimensions: WindowDimensions;
 }
 
-export const BgLanding: React.FC<BgLandingProps> = ({ mousePosition }) => {
+export const BgLanding: React.FC<BgLandingProps> = ({
+  mousePosition,
+  windowDimensions,
+}) => {
   const [randomNum, setRandomNum] = useState(0);
   const [direction, setDirection] = useState(0);
   const [desiredDirection, setDesiredDirection] = useState(
@@ -33,10 +37,10 @@ export const BgLanding: React.FC<BgLandingProps> = ({ mousePosition }) => {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ delay: 1, duration: 1 }}
+      transition={{ delay: 2, duration: 1 }}
       className="absolute bottom-0 left-0 right-0 top-0 z-0 flex h-screen w-screen items-center justify-center"
     >
-      <svg width={window.innerWidth} height={window.innerHeight}>
+      <svg width={windowDimensions.width} height={windowDimensions.height}>
         <circle
           className="transition-all duration-100 ease-in-out"
           cx={getCircleX(movement)}
@@ -87,7 +91,7 @@ export const BgLanding: React.FC<BgLandingProps> = ({ mousePosition }) => {
 
   function getCircleX(movement: number): number {
     return (
-      window.innerWidth / 1.3 +
+      windowDimensions.width / 1.3 +
       movement * (mousePosition.x - centerX) +
       randomNum
     );
@@ -95,7 +99,7 @@ export const BgLanding: React.FC<BgLandingProps> = ({ mousePosition }) => {
 
   function getCircleY(movement: number): number {
     return (
-      window.innerHeight / 1.4 +
+      windowDimensions.height / 1.4 +
       movement * (mousePosition.y - centerY) +
       randomNum
     );

@@ -12,9 +12,17 @@ export default function Landing() {
     x: 0,
     y: 0,
   });
+  const [windowDimensions, setWindowDimensions] = useState<WindowDimensions>({
+    width: 0,
+    height: 0,
+  });
 
   const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
     setMousePosition({ x: event.clientX, y: event.clientY });
+    setWindowDimensions({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
   };
 
   return (
@@ -89,7 +97,10 @@ export default function Landing() {
           </div>
         </div>
       </div>
-      <BgLanding mousePosition={mousePosition} />
+      <BgLanding
+        mousePosition={mousePosition}
+        windowDimensions={windowDimensions}
+      />
     </>
   );
 }

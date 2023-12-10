@@ -84,3 +84,8 @@ interface MousePosition {
   x: number;
   y: number;
 }
+
+interface WindowDimensions {
+  width: number;
+  height: number;
+}
