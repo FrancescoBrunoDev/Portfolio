@@ -37,7 +37,7 @@ export const BgLanding: React.FC<BgLandingProps> = ({
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ delay: 2, duration: 1 }}
+      transition={{ delay: 1, duration: 1 }}
       className="absolute bottom-0 left-0 right-0 top-0 z-0 flex h-screen w-screen items-center justify-center"
     >
       <svg width={windowDimensions.width} height={windowDimensions.height}>

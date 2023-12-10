@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { AtSign } from "lucide-react";
 import { Linkedin } from "lucide-react";
@@ -17,12 +17,15 @@ export default function Landing() {
     height: 0,
   });
 
-  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
-    setMousePosition({ x: event.clientX, y: event.clientY });
+  useEffect(() => {
     setWindowDimensions({
       width: window.innerWidth,
       height: window.innerHeight,
     });
+  }, []);
+
+  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
+    setMousePosition({ x: event.clientX, y: event.clientY });
   };
 
   return (
