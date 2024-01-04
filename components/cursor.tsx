@@ -1,9 +1,13 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const Cursor: React.FC = () => {
-  const isTouchDevice = 'ontouchstart' in window;
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+  useEffect(() => {
+    setIsTouchDevice('ontouchstart' in window);
+  }, []);
 
   function moveCursor(cursor: HTMLElement) {
     return (e: MouseEvent) => {
@@ -13,7 +17,6 @@ const Cursor: React.FC = () => {
   }
 
   useEffect(() => {
-    // Check if the device is not a touch device
     if (!isTouchDevice) {
       const cursor = document.querySelector(".circle-cursor") as HTMLElement;
 
@@ -26,7 +29,7 @@ const Cursor: React.FC = () => {
         };
       }
     }
-  }, []);
+  }, [isTouchDevice]);
 
   if (!isTouchDevice) {
     return <div className="circle-cursor pointer-events-none absolute z-50 h-5 w-5 -translate-x-1/2 -translate-y-1/2 transform rounded-full bg-primary mix-blend-multiply"/>
