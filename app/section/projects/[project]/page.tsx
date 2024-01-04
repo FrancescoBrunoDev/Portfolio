@@ -67,7 +67,7 @@ export default function Project({ params }: ProjectProps) {
         autoPlay
         loop
         muted
-        className="fixed -z-30 min-h-screen overflow-hidden object-cover"
+        className="fixed -z-30 min-h-screen min-w-full overflow-hidden object-cover"
       />
 
       <div className="container flex min-h-screen items-center px-10 pb-10 pt-14 text-primary">
