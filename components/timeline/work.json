@@ -9,7 +9,7 @@
     "location": "München, Bavaria, Germany",
     "description": "I work on full-stack web platform development for browsing large bibliographic databases and academic texts.",
     "link": null,
-    "tools": ["Typo3", "PHP", "Bootstrap", "MySQL"]
+    "tools": ["Typo3", "PHP", "Bootstrap", "MySQL", "Vufind"]
   },
   {
     "id": 2,

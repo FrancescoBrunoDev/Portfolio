@@ -18,7 +18,7 @@ export default function Frame({
   length,
 }: FrameProps) {
   return (
-    <>
+    <nav>
       <Link
         className="fixed right-0 z-10 h-full w-20 translate-x-10 bg-background transition-all ease-in-out hover:translate-x-8"
         href={
@@ -70,6 +70,6 @@ export default function Frame({
           </Link>
         )}
       </div>
-    </>
+    </nav>
   );
 }

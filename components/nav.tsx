@@ -3,7 +3,7 @@ import Logo from "@/components/logo";
 
 export default function Nav() {
   return (
-    <div className="fixed z-20 h-14 w-screen bg-background py-3 text-primary">
+    <header className="fixed z-20 h-14 w-screen bg-background py-3 text-primary">
       <div className="container">
         <div className="flex items-center justify-between">
           <Link href={"/"}>
@@ -16,6 +16,6 @@ export default function Nav() {
           </div>
         </div>
       </div>
-    </div>
+    </header>
   );
 }
