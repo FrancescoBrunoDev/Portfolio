@@ -1,54 +1,61 @@
 {
+  "2024": [
+    {
+      "title": "Pancreas. Trapianto del libro Cuore",
+      "month": 1,
+      "ISBN13": 9788877822451
+    }
+  ],
   "2023": [
      {
       "title": "Parola di Giobbe.",
       "month": 12,
-      "ISBN13": "9788877824929"
+      "ISBN13": 9788877824929
      },
     {
       "title": "Le commedie di Dario Fo. Mistero buffo. Ci ragiono e canto.",
       "month": 12,
-      "ISBN13": "9788806475482"
+      "ISBN13": 9788806475482
      },
     {
       "title": "Ricordi dal sottosuolo",
       "month": 11,
-      "ISBN13": "9788807900228"
+      "ISBN13": 9788807900228
     },
     {
       "title": "Storia dell'assedio di Lisbona",
       "month": 8,
-      "ISBN13": "9788807888885"
+      "ISBN13": 9788807888885
     },
     {
       "title": "La casa in collina",
       "month": 8,
-      "ISBN13": "9788807904127"
+      "ISBN13": 9788807904127
     },
     {
       "title": "Neve di primavera",
       "month": 7,
-      "ISBN13": "9788807886454"
+      "ISBN13": 9788807886454
     },
     {
       "title": "La guerra dei Bepi",
       "month": 6,
-      "ISBN13": "9788832089950"
+      "ISBN13": 9788832089950
     },
     {
       "title": "La storia infinita del Pojanistan",
       "month": 5,
-      "ISBN13": "9791280105721"
+      "ISBN13": 9791280105721
     },
     {
       "title": "Al cuore dell'Italia",
       "month": 4,
-      "ISBN13": "9788804765646"
+      "ISBN13": 9788804765646
     },
     {
       "title": "Sotto lo stesso cielo",
       "month": 4,
-      "ISBN13": "9788804738879"
+      "ISBN13": 9788804738879
     },
     {
       "title": "Da zero a ultra",
@@ -62,100 +69,100 @@
     },
     {
       "title": "Foto mosse di famiglie immobili",
-      "ISBN13": "9788817173537"
+      "ISBN13": 9788817173537
     },
     {
       "title": "Clean Code",
-      "ISBN13": "9780132350884"
+      "ISBN13": 9780132350884
     },
     {
       "title": "The art of Charlie Chan Hock Chye",
-      "ISBN13": "9781101870693"
+      "ISBN13": 9781101870693
     },
     {
       "title": "La terra dei figli",
-      "ISBN13": "9788876185465"
+      "ISBN13": 9788876185465
     },
     {
       "title": "LMVD",
-      "ISBN13": "9788876185533"
+      "ISBN13": 9788876185533
     },
     {
       "title": "La vita della mia ex per come la immagino io",
-      "ISBN13": "9788833894164"
+      "ISBN13": 9788833894164
     },
     {
       "title": "la straniera",
       "month": 8,
-      "ISBN13": "9788893447751"
+      "ISBN13": 9788893447751
     }
   ],
   "2022": [
     {
       "title": "Il segreto del bosco vecchio",
-      "ISBN13": "9788804667971"
+      "ISBN13": 9788804667971
     },
     {
       "title": "La forma dell'acqua",
-      "ISBN13": "9788838910173"
+      "ISBN13": 9788838910173
     },
     {
       "title": "Le cosmicomiche",
-      "ISBN13": "9788804667988"
+      "ISBN13": 9788804667988
     },
     {
       "title": "Guida all'uso delle parole",
-      "ISBN13": "9788835953692"
+      "ISBN13": 9788835953692
     }
   ],
   "2021": [
     {
       "title": "Critica portatile al visual design",
-      "ISBN13": "9788806217716"
+      "ISBN13": 9788806217716
     }
   ],
   "2020": [
     {
       "title": "Punti di riferimento",
-      "ISBN13": "9788806571825"
+      "ISBN13": 9788806571825
     },
     {
       "title": "il cimitero di Praga",
-      "ISBN13": "9788845266225"
+      "ISBN13": 9788845266225
     },
     {
       "title": "Il superuomo di massa",
-      "ISBN13": "9788845235757"
+      "ISBN13": 9788845235757
     }
   ],
   "🤷": [
     {
       "title": "Intervista sulla musica",
-      "ISBN13": "9788842081593"
+      "ISBN13": 9788842081593
     },
     {
       "title": "Il resto è rumore",
-      "ISBN13": "9788845267338"
+      "ISBN13": 9788845267338
     },
     {
       "title": "La musica del Novecento",
-      "ISBN13": "9788806213305"
+      "ISBN13": 9788806213305
     },
     {
       "title": "Breve storia della musica",
-      "ISBN13": "9788806173661"
+      "ISBN13": 9788806173661
     },
     {
       "title": "Intorno alla musica",
-      "ISBN13": "9788831785815"
+      "ISBN13": 9788831785815
     },
     {
       "title": "Carteggio - Briefwechesel",
-      "ISBN13": "8870962830"
+      "ISBN13": 8870962830
     },
     {
       "title": "Stile e pensiero",
-      "ISBN13": "9788842809593"
+      "ISBN13": 9788842809593
     }
   ]
 }
