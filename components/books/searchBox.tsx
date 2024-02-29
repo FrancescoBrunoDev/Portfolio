@@ -18,8 +18,8 @@ export default function SearchBox({
       .map((year) => {
         const filteredBookDetails = year.bookDetails.filter((book) => {
           return (
-            book.bookInfo.title.toLowerCase().includes(input) ||
-            book.bookInfo.authors[0].toLowerCase().includes(input)
+            book.bookInfo.title.toLocaleLowerCase().includes(input) ||
+            book.bookInfo.authors[0].toLocaleLowerCase().includes(input)
           );
         });
 
