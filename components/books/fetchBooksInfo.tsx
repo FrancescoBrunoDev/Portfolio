@@ -39,7 +39,7 @@ export default async function fetchBooksInfo() {
         return {
           bookInfo: {
             title: bookInfo?.title || book.title || "unknown",
-            authors: bookInfo?.authors || book.authors || "unknown",
+            authors: bookInfo?.authors || book.authors || ["unknown"],
             imageLinks: bookInfo?.imageLinks || {
               thumbnail: "",
             },
