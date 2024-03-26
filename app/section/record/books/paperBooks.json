@@ -1,6 +1,11 @@
 {
   "2024": [
     {
+      "title": "Frontiera",
+      "month": 13,
+      "ISBN13": 9788804776888
+    },
+    {
       "title": "Born to run",
       "month": 3,
       "ISBN13": 9781861978776
@@ -17,16 +22,16 @@
     }
   ],
   "2023": [
-     {
+    {
       "title": "Parola di Giobbe.",
       "month": 12,
       "ISBN13": 9788877824929
-     },
+    },
     {
       "title": "Le commedie di Dario Fo. Mistero buffo. Ci ragiono e canto.",
       "month": 12,
       "ISBN13": 9788806475482
-     },
+    },
     {
       "title": "Ricordi dal sottosuolo",
       "month": 11,

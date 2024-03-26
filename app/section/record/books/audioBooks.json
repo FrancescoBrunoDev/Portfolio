@@ -1,6 +1,11 @@
 {
   "2024": [
     {
+      "title": "Demian",
+      "month": 13,
+      "ISBN13": 9788804667919
+    },
+    {
       "title": "La casa del mago",
       "month": 3,
       "ISBN13": 9788833316659
@@ -116,11 +121,11 @@
       "ISBN13": 9788831811750
     },
     {
-      "title": "La linea verticale", 
+      "title": "La linea verticale",
       "ISBN13": 9788868528348
     },
     {
-      "title": "Marcia su Roma e dintorni", 
+      "title": "Marcia su Roma e dintorni",
       "ISBN13": 9788806221416
     },
     {
@@ -153,8 +158,7 @@
     },
     {
       "title": "M. l'Uomo della Provvidenza",
-      
-      
+
       "ISBN13": 9788830102651
     },
     {
@@ -324,7 +328,5 @@
       "ISBN13": 9788845296499
     }
   ],
-  "🤷": [
-
-  ]
+  "🤷": []
 }
