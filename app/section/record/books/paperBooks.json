@@ -2,8 +2,14 @@
   "2024": [
     {
       "title": "L'impuro folle",
-      "month": 13,
-      "ISBN13": 9788845900877
+      "authors": ["Roberto Calasso"],
+      "month": 13
+      "ISBN13": 9788845900877,
+      "categories": ["psicologia", "psicoanalisi", "psichiatra"],
+      "publishedDate": "1974",
+      "pageCount": 128,
+      "language": "it",
+      "infoLink": "https://www.adelphi.it/libro/9788845900877"
     },
     {
       "title": "Frontiera",
