@@ -48,7 +48,7 @@ export default function BooksView(booksFetch: any) {
                 >
                   <div className="h-full">
                     <div className="flex h-fit flex-col md:flex-row">
-                      <div className="relative flex h-auto items-center gap-2 pr-10 text-4xl font-semibold uppercase md:w-28 lg:w-[21rem] lg:text-8xl">
+                      <div className="relative flex h-auto items-center gap-2 pr-10 text-4xl font-semibold uppercase md:w-28 lg:w-[23rem] lg:text-8xl">
                         {year.year}{" "}
                         <span className="text-xs lowercase md:absolute md:bottom-4 md:text-sm">
                           {year.bookDetails.length}{" "}
