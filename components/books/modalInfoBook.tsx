@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import BackgroundDots from "@/components/books/backgroundDots";
+import { useState } from "react";
+import { ChevronRight, ChevronLeft } from "lucide-react";
 
 interface ItemDetailProps {
   title: string;
@@ -92,6 +94,8 @@ export default function ModalInfoBook({
   tranlatedNotes,
   setIsOpen,
 }: ModalInfoBookProps) {
+  const [currentPage, setCurrentPage] = useState(1);
+
   const infoBooks = book.item.bookInfo;
   // Randomly select a variant
   // Get the selected format or default to 'paper' if 'type' is not recognized
@@ -103,6 +107,19 @@ export default function ModalInfoBook({
     selectedFormat.variants[
       Math.floor(Math.random() * selectedFormat.variants.length)
     ];
+
+  const handleNext = () => {
+    if (currentPage < Object.keys(note).length) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePrevious = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
   return (
     <motion.div
       key="modal"
@@ -111,7 +128,7 @@ export default function ModalInfoBook({
       exit={{ y: -10, opacity: 0 }}
       className="fixed bottom-0 left-0 right-0 top-0 z-20 flex h-screen w-screen items-center justify-center backdrop-grayscale"
     >
-    <div className="relative m-2 h-4/5 max-h-[46rem] w-full bg-primary p-3 text-secondary md:h-3/4 md:max-w-md lg:m-0">
+      <div className="relative m-2 h-4/5 max-h-[46rem] w-full bg-primary p-3 text-secondary md:h-3/4 md:max-w-md lg:m-0">
         {/* Buttons */}
         <div className="absolute right-4 top-6 flex gap-2">
           <button className="hover:scale-105">
@@ -184,25 +201,50 @@ export default function ModalInfoBook({
           <div className="relative">
             <BackgroundDots />
           </div>
-          <div className="flex flex-col gap-y-6 h-2/5 items-center justify-center self-stretch">
+          <div className="z-10 flex h-2/5 flex-col items-center justify-center gap-y-6 self-stretch">
             {note !== "" ? (
               <>
                 <Image
-                  src={note}
+                  src={note[currentPage]}
                   alt={altNotes || "note"}
                   className="w-full px-6"
                   width={500}
                   height={500}
                   aria-label="SVG Image"
+                  title={tranlatedNotes || "note"}
                 />
-                <div className="text-center px-6">({tranlatedNotes})</div>
               </>
             ) : null}
           </div>
         </div>
         {/* title book */}
-        <div className="absolute bottom-0 left-0 right-0 z-10 border-4 border-t-0 border-primary bg-background p-3 text-left text-4xl font-semibold uppercase text-primary">
-          {infoBooks.title}
+        <div className="absolute bottom-0 left-0 right-0 z-10">
+          {note !== "" && Object.keys(note).length > 1 ? (
+            <div className="-top-20 z-50 mb-1 flex w-full justify-center px-3 opacity-20 transition-opacity hover:opacity-100">
+              <div className="flex justify-center rounded-lg bg-background px-3 text-primary">
+                <button
+                  className="transition-all disabled:opacity-50"
+                  onClick={handlePrevious}
+                  disabled={currentPage === 1}
+                >
+                  <ChevronLeft />
+                </button>
+                <span className="w-20 text-center text-xl font-bold">
+                  {currentPage}/{Object.keys(note).length}
+                </span>
+                <button
+                  className="transition-all disabled:opacity-50"
+                  onClick={handleNext}
+                  disabled={currentPage === Object.keys(note).length}
+                >
+                  <ChevronRight />
+                </button>
+              </div>
+            </div>
+          ) : null}
+          <div className="border-4 border-t-0 border-primary bg-background p-3 text-left text-4xl font-semibold uppercase text-primary">
+            {infoBooks.title}
+          </div>
         </div>
       </div>
     </motion.div>

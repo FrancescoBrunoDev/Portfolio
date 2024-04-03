@@ -6,6 +6,7 @@ import { useState } from "react";
 
 export default function BooksView(booksFetch: any) {
   const books: Year[] = booksFetch.booksFetch;
+  console.log(books);
   const [filteredData, setFilteredData] = useState<Year[]>(books);
   const [isFiltering, setIsFiltering] = useState(false);
 

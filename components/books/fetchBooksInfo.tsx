@@ -1,7 +1,7 @@
 export default async function fetchBooksInfo() {
   try {
-    const audioBooks: BooksRecord = require("@/app/section/record/books/audioBooks.json");
-    const paperBooks: BooksRecord = require("@/app/section/record/books/paperBooks.json");
+    const audioBooks: BooksRecord = require("@/app/section/record/books/audioBooksWithNotes.json");
+    const paperBooks: BooksRecord = require("@/app/section/record/books/paperBooksWithNotes.json");
 
     const mergedBooks: BooksRecord = {};
 
@@ -48,7 +48,9 @@ export default async function fetchBooksInfo() {
             ],
             categories: bookInfo?.categories || book.categories || [],
             publishedDate:
-              bookInfo?.publishedDate.substring(0, 4) || book.publishedDate?.substring(0, 4) || "unknown",
+              bookInfo?.publishedDate.substring(0, 4) ||
+              book.publishedDate?.substring(0, 4) ||
+              "unknown",
             pageCount: bookInfo?.pageCount || book.pageCount || "unknown",
             language: bookInfo?.language || book.language || "unknown",
             infoLink: bookInfo?.infoLink || book.infoLink || "unknown",

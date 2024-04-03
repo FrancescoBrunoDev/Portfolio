@@ -1,69 +1,68 @@
 {
-  "2024": [
+  "2020": [
     {
-      "title": "Le affinità elettive",
-      "month": 13,
-      "ISBN13": 9788807822414
+      "title": "Sapiens. Da animali a dèi: breve storia dell'umanità",
+      "ISBN13": 9788845296499
+    }
+  ],
+  "2021": [
+    {
+      "title": "Le città invisibili",
+      "ISBN13": 9788806476397
     },
     {
-      "title": "L'onda del porto",
-      "month": 4,
-      "ISBN13": 9788842077701
+      "title": "Madame Bovary",
+      "ISBN13": 9788807900983
     },
     {
-      "title": "Demian",
-      "month": 3,
-      "ISBN13": 9788804667919
+      "title": "Le mie risposte alle grandi domande",
+      "ISBN13": 9788817105279
     },
     {
-      "title": "La casa del mago",
-      "month": 3,
-      "ISBN13": 9788833316659
+      "title": "Una storia americana",
+      "ISBN13": 9788804739746
     },
     {
-      "title": "Dune",
-      "month": 3,
-      "ISBN13": 9788834739679
+      "title": "Questa è l'America",
+      "ISBN13": 9788804734338
     },
     {
-      "title": "Il lupo della steppa",
-      "month": 3,
-      "ISBN13": 9788804668060
+      "title": "Of Ants and Dinosaurs",
+      "ISBN13": 9781789546125
     },
     {
-      "title": "The science of storytelling",
-      "month": 3,
-      "ISBN13": 9781419743030
+      "title": "21 lezioni per il XXI secolo",
+      "ISBN13": 9788830100824
     },
     {
-      "title": "Lolita",
-      "month": 3,
-      "ISBN13": 9788845972928
+      "title": "Homo Deus. Breve storia del futuro",
+      "ISBN13": 9788845298752
+    }
+  ],
+  "2022": [
+    {
+      "title": "Lo straniero",
+      "ISBN13": 9788845277634
     },
     {
-      "title": "Lo stadio di Wimbledon",
-      "month": 2,
-      "ISBN13": 9788806252397
+      "title": "La peste",
+      "ISBN13": 9782701161662
     },
     {
-      "title": "Due vite",
-      "month": 2,
-      "ISBN13": 9788854522633
+      "title": "Storia perfetta dell'errore",
+      "ISBN13": 9788817143509
     },
     {
-      "title": "I fratelli Karamazov",
-      "month": 2,
-      "ISBN13": 9788811810629
+      "title": "Bomba atomica",
+      "ISBN13": 9788817147347
     },
     {
-      "title": "Il giuoco delle palle di Vetro",
-      "month": 1,
-      "ISBN13": 9788804700739
+      "title": "La società della performance",
+      "ISBN13": 9788899684501
     },
     {
-      "title": "Narciso e Boccadoro",
-      "month": 1,
-      "ISBN13": 9788804668145
+      "title": "Guerre ed eserciti nel Medioevo",
+      "ISBN13": 9788815279569
     }
   ],
   "2023": [
@@ -110,7 +109,9 @@
     {
       "title": "Il nome della rosa",
       "month": 10,
-      "notes": { "1": "/books/notes/nome_della_rosa.svg" },
+      "notes": {
+        "1": "/books/notes/nome_della_rosa.svg"
+      },
       "altNotes": "Ma allora a che serve nascondere i libri se dai libri palesi si può risalire a quelli occulti?",
       "tranlatedNotes": "So, what's the point of hiding books if you can uncover the concealed ones from the evident ones?",
       "ISBN13": 8834603001
@@ -168,7 +169,6 @@
     },
     {
       "title": "M. l'Uomo della Provvidenza",
-
       "ISBN13": 9788830102651
     },
     {
@@ -272,70 +272,71 @@
       "ISBN13": 9788804755210
     }
   ],
-  "2022": [
+  "2024": [
     {
-      "title": "Lo straniero",
-      "ISBN13": 9788845277634
+      "title": "Le affinità elettive",
+      "month": 13,
+      "ISBN13": 9788807822414
     },
     {
-      "title": "La peste",
-      "ISBN13": 9782701161662
+      "title": "L'onda del porto",
+      "month": 4,
+      "ISBN13": 9788842077701
     },
     {
-      "title": "Storia perfetta dell'errore",
-      "ISBN13": 9788817143509
+      "title": "Demian",
+      "month": 3,
+      "ISBN13": 9788804667919
     },
     {
-      "title": "Bomba atomica",
-      "ISBN13": 9788817147347
+      "title": "La casa del mago",
+      "month": 3,
+      "ISBN13": 9788833316659
     },
     {
-      "title": "La società della performance",
-      "ISBN13": 9788899684501
+      "title": "Dune",
+      "month": 3,
+      "ISBN13": 9788834739679
     },
     {
-      "title": "Guerre ed eserciti nel Medioevo",
-      "ISBN13": 9788815279569
-    }
-  ],
-  "2021": [
-    {
-      "title": "Le città invisibili",
-      "ISBN13": 9788806476397
+      "title": "Il lupo della steppa",
+      "month": 3,
+      "ISBN13": 9788804668060
     },
     {
-      "title": "Madame Bovary",
-      "ISBN13": 9788807900983
+      "title": "The science of storytelling",
+      "month": 3,
+      "ISBN13": 9781419743030
     },
     {
-      "title": "Le mie risposte alle grandi domande",
-      "ISBN13": 9788817105279
+      "title": "Lolita",
+      "month": 3,
+      "ISBN13": 9788845972928
     },
     {
-      "title": "Una storia americana",
-      "ISBN13": 9788804739746
+      "title": "Lo stadio di Wimbledon",
+      "month": 2,
+      "ISBN13": 9788806252397
     },
     {
-      "title": "Questa è l'America",
-      "ISBN13": 9788804734338
+      "title": "Due vite",
+      "month": 2,
+      "ISBN13": 9788854522633
     },
     {
-      "title": "Of Ants and Dinosaurs",
-      "ISBN13": 9781789546125
+      "title": "I fratelli Karamazov",
+      "month": 2,
+      "ISBN13": 9788811810629
     },
     {
-      "title": "21 lezioni per il XXI secolo",
-      "ISBN13": 9788830100824
+      "title": "Il giuoco delle palle di Vetro",
+      "month": 1,
+      "ISBN13": 9788804700739
     },
     {
-      "title": "Homo Deus. Breve storia del futuro",
-      "ISBN13": 9788845298752
-    }
-  ],
-  "2020": [
-    {
-      "title": "Sapiens. Da animali a dèi: breve storia dell'umanità",
-      "ISBN13": 9788845296499
+      "title": "Narciso e Boccadoro",
+      "month": 1,
+      "ISBN13": 9788804668145
     }
   ],
   "🤷": []
