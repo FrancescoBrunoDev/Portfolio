@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { Suspense } from "react";
 interface Props {
   type: string;
   secondaryLink: string | null;
