@@ -154,7 +154,11 @@
     {
       "title": "Frontiera",
       "month": 3,
-      "ISBN13": 9788804776888
+      "ISBN13": 9788804776888,
+      "notes": {
+        "1": "/books/notes/svg/9788804776888/page_1.svg",
+        "2": "/books/notes/svg/9788804776888/page_2.svg"
+      }
     },
     {
       "title": "Born to run",

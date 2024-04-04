@@ -311,7 +311,10 @@
     {
       "title": "Lolita",
       "month": 3,
-      "ISBN13": 9788845972928
+      "ISBN13": 9788845972928,
+      "notes": {
+        "1": "/books/notes/svg/9788845972928/page_1.svg"
+      }
     },
     {
       "title": "Lo stadio di Wimbledon",
@@ -321,7 +324,11 @@
     {
       "title": "Due vite",
       "month": 2,
-      "ISBN13": 9788854522633
+      "ISBN13": 9788854522633,
+      "notes": {
+        "1": "/books/notes/svg/9788854522633/page_1.svg",
+        "2": "/books/notes/svg/9788854522633/page_2.svg"
+      }
     },
     {
       "title": "I fratelli Karamazov",
