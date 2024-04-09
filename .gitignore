@@ -1,16 +1,8 @@
-# Logs
-*.log
-npm-debug.log*
-
 # Dependency directories
 node_modules
 
 # Optional REPL history
-.node_repl_history
 .next
 
 # Secrets
 .env.local
-
-# Git related
-.gitattributes
