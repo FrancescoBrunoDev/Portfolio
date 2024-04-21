@@ -103,10 +103,11 @@ export default function ModalInfoBook({
     formatVariants.find((format) => format.type === type) || formatVariants[0];
 
   // Randomly select a variant
-  const randomVariant =
+  const [randomVariant] = useState(
     selectedFormat.variants[
       Math.floor(Math.random() * selectedFormat.variants.length)
-    ];
+    ]
+  );
 
   const handleNext = () => {
     if (currentPage < Object.keys(note).length) {
