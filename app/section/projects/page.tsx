@@ -5,8 +5,8 @@ import otherProjects from "@/app/section/projects/otherProjects.json";
 export default function Project() {
   return (
     <div className="h-screen w-screen items-center pt-12 text-primary">
-      <div className="container grid h-full w-full grid-rows-2 gap-10 py-8">
-        <div className="flex h-full flex-col content-stretch lg:flex-row lg:items-center">
+      <div className="container grid h-full w-screen grid-rows-2 gap-10 py-8 ">
+        <div className="flex h-full flex-col content-stretch lg:flex-row lg:items-center overflow-hidden">
           <div className="flex h-1/3 items-center pr-10 text-8xl font-semibold uppercase lg:h-auto">
             Dev
           </div>
@@ -16,7 +16,7 @@ export default function Project() {
             ))}
           </div>
         </div>
-        <div className="flex h-full flex-col content-stretch overflow-x-auto lg:flex-row lg:items-center">
+        <div className="flex h-full flex-col content-stretch lg:flex-row lg:items-center overflow-hidden">
           <div className="flex h-1/3 items-center pr-10 text-8xl font-semibold uppercase lg:h-auto">
             Other
           </div>
