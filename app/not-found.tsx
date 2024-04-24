@@ -1,5 +1,3 @@
-"use client"; // Error components must be Client Components
-
 import { Brain } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
