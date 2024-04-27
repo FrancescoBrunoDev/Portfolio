@@ -135,11 +135,16 @@
   ],
   "2024": [
     {
+      "title": "Specchio delle mie brame",
+      "month": 13,
+      "ISBN13": 9788845911279
+    },
+    {
       "title": "L'impuro folle",
       "authors": [
         "Roberto Calasso"
       ],
-      "month": 13,
+      "month": 4,
       "ISBN13": 9788845900877,
       "categories": [
         "psicologia",
