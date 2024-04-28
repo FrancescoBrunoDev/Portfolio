@@ -8,8 +8,7 @@
     "dev:sync": "node ./scripts/syncBooksNotesSvg.js",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "syncBooksNotesSvg": "node ./scripts/syncBooksNotesSvg.js"
+    "lint": "next lint"
   },
   "dependencies": {
     "@radix-ui/react-popover": "^1.0.6",
