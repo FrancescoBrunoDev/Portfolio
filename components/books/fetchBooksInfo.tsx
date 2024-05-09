@@ -94,10 +94,12 @@ const getNotes = async (isbn: number) => {
         const res = await fetch(url);
         if (res.ok) {
           const svg = await res.text();
-          notes.push({ url, name, svg });
+          notes.push({ name, svg });
         }
       }
       return notes;
     }
+  } else {
+    return [];
   }
 }

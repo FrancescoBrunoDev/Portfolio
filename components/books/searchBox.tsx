@@ -32,7 +32,7 @@ export default function SearchBox({
         }
       })
       .filter((year) => year !== null);
-    console.log(filteredData, "filteredData");
+
     setFilteredData(filteredData.filter((year) => year !== null) as Year[]);
 
     if (input.length > 0) {

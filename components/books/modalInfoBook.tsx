@@ -121,8 +121,6 @@ export default function ModalInfoBook({
     }
   };
 
-  console.log(currentPage);
-
   return (
     <motion.div
       key="modal"
@@ -205,19 +203,12 @@ export default function ModalInfoBook({
             <BackgroundDots />
           </div>
           <div className="z-10 flex h-2/5 flex-col items-center justify-center gap-y-6 self-stretch">
-            {note.length !== 0 ? (
-              <>
-                <Image
-                  src={note[currentPage].url}
-                  alt={altNotes || "note"}
-                  className="w-full px-6"
-                  width={500}
-                  height={500}
-                  aria-label="SVG Image"
-                  title={tranlatedNotes || "note"}
-                />
-              </>
-            ) : null}
+            {note?.length !== 0 && (
+              <div
+                className="w-full max-w-md px-6"
+                dangerouslySetInnerHTML={{ __html: note[currentPage].svg }}
+              />
+            )}
           </div>
         </div>
         {/* title book */}
