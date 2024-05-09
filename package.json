@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "npm-run-all --parallel dev:*",
     "dev:next": "next dev",
-    "dev:sync": "node ./scripts/syncBooksNotesSvg.js",
+    "sync": "node ./scripts/syncBooksNotesSvg.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -22,14 +22,11 @@
     "eslint": "8.42.0",
     "eslint-config-next": "13.4.4",
     "framer-motion": "^10.16.4",
-    "fs-extra": "^11.2.0",
     "html-react-parser": "^4.0.0",
     "lucide-react": "^0.244.0",
     "next": "^14.2.2",
     "npm-run-all": "^4.1.5",
-    "pdf-img-convert": "^1.2.1",
     "postcss": "^8.4.31",
-    "potrace": "^2.1.8",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "tailwind-merge": "^1.13.1",

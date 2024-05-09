@@ -1,7 +1,7 @@
 export default async function fetchBooksInfo() {
   try {
-    const audioBooks: BooksRecord = require("@/app/section/record/books/audioBooksWithNotes.json");
-    const paperBooks: BooksRecord = require("@/app/section/record/books/paperBooksWithNotes.json");
+    const audioBooks: BooksRecord = require("@/app/section/record/books/audioBooks.json");
+    const paperBooks: BooksRecord = require("@/app/section/record/books/paperBooks.json");
 
     const mergedBooks: BooksRecord = {};
 
@@ -35,6 +35,7 @@ export default async function fetchBooksInfo() {
         );
         const product = await res.json();
         const bookInfo = product.items?.[0]?.volumeInfo;
+        const notes = await getNotes(book.ISBN13);
         if (!bookInfo) console.log("No book info found for", book.ISBN13);
         return {
           bookInfo: {
@@ -55,7 +56,7 @@ export default async function fetchBooksInfo() {
             language: bookInfo?.language || book.language || "unknown",
             infoLink: bookInfo?.infoLink || book.infoLink || "unknown",
           },
-          note: book.notes || "",
+          note: notes,
           type: book.type || "unknown",
           altNotes: book.altNotes || "",
           tranlatedNotes: book.tranlatedNotes || "",
@@ -75,5 +76,28 @@ export default async function fetchBooksInfo() {
   } catch (error) {
     console.log(error);
     return error;
+  }
+}
+
+const getNotes = async (isbn: number) => {
+  const res = await fetch(`http://raspberrypi1:3020/book/getBookMetadata?isbn=${isbn}`);
+  console.log(res);
+  if (res.ok) {
+    const svgMetadata = await res.json();
+    const numberPages = svgMetadata.pages;
+    // for each number of pages retrive the notes, the notes are svg files in the same folder with format page_1.1.svg , page_2.2.svg etc
+    if (numberPages) {
+      const notes = [];
+      for (let i = 1; i <= numberPages; i++) {
+        const name = `page_${i}.${i}.svg`;
+        const url = `http://raspberrypi1:3020/svg/${isbn}/${name}`;
+        const res = await fetch(url);
+        if (res.ok) {
+          const svg = await res.text();
+          notes.push({ url, name, svg });
+        }
+      }
+      return notes;
+    }
   }
 }

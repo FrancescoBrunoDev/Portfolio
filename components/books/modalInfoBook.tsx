@@ -14,7 +14,7 @@ interface ItemDetailProps {
 // make the interface for ItemDetail
 interface ModalInfoBookProps {
   book: Book;
-  note: string;
+  note: note[];
   type: string;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   altNotes: string | undefined;
@@ -94,7 +94,7 @@ export default function ModalInfoBook({
   tranlatedNotes,
   setIsOpen,
 }: ModalInfoBookProps) {
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(0);
 
   const infoBooks = book.item.bookInfo;
   // Randomly select a variant
@@ -105,21 +105,23 @@ export default function ModalInfoBook({
   // Randomly select a variant
   const [randomVariant] = useState(
     selectedFormat.variants[
-      Math.floor(Math.random() * selectedFormat.variants.length)
+    Math.floor(Math.random() * selectedFormat.variants.length)
     ]
   );
 
   const handleNext = () => {
-    if (currentPage < Object.keys(note).length) {
+    if (currentPage < Object.keys(note).length - 1) {
       setCurrentPage(currentPage + 1);
     }
   };
 
   const handlePrevious = () => {
-    if (currentPage > 1) {
+    if (currentPage > 0) {
       setCurrentPage(currentPage - 1);
     }
   };
+
+  console.log(currentPage);
 
   return (
     <motion.div
@@ -203,10 +205,10 @@ export default function ModalInfoBook({
             <BackgroundDots />
           </div>
           <div className="z-10 flex h-2/5 flex-col items-center justify-center gap-y-6 self-stretch">
-            {note !== "" ? (
+            {note.length !== 0 ? (
               <>
                 <Image
-                  src={note[currentPage]}
+                  src={note[currentPage].url}
                   alt={altNotes || "note"}
                   className="w-full px-6"
                   width={500}
@@ -220,23 +222,23 @@ export default function ModalInfoBook({
         </div>
         {/* title book */}
         <div className="absolute bottom-0 left-0 right-0 z-10">
-          {note !== "" && Object.keys(note).length > 1 ? (
+          {note.length !== 0 && Object.keys(note).length > 1 ? (
             <div className="-top-20 z-50 mb-1 flex w-full justify-center px-3 opacity-20 transition-opacity hover:opacity-100">
               <div className="flex justify-center rounded-lg bg-background px-3 text-primary">
                 <button
                   className="transition-all disabled:opacity-50"
                   onClick={handlePrevious}
-                  disabled={currentPage === 1}
+                  disabled={currentPage === 0}
                 >
                   <ChevronLeft />
                 </button>
                 <span className="w-20 text-center text-xl font-bold">
-                  {currentPage}/{Object.keys(note).length}
+                  {currentPage + 1}/{Object.keys(note).length}
                 </span>
                 <button
                   className="transition-all disabled:opacity-50"
                   onClick={handleNext}
-                  disabled={currentPage === Object.keys(note).length}
+                  disabled={currentPage === Object.keys(note).length - 1}
                 >
                   <ChevronRight />
                 </button>

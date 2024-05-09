@@ -1,7 +1,7 @@
 type Year = {
   year: number;
   bookDetails: {
-    note: string;
+    note: note[];
     bookInfo: any;
     type: string;
     altNotes: string;
@@ -10,9 +10,15 @@ type Year = {
   }[];
 };
 
+interface note {
+  url: string;
+  name: string;
+  svg: string;
+};
+
 type BookJson = {
   title: string;
-  notes: string;
+  notes: note[];
   ISBN13: number;
   type?: string;
   authors?: string[];
@@ -47,7 +53,7 @@ type Book = {
       };
       language: string;
     };
-    note: string;
+    note: note[];
     type: string;
     altNotes?: string;
     tranlatedNotes?: string;
@@ -73,7 +79,7 @@ type BookDetails = {
     };
     language: string;
   };
-  note: string;
+  note: note[];
   type: string;
   altNotes?: string;
   tranlatedNotes?: string;
