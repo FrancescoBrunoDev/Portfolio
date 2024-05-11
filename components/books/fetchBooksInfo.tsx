@@ -27,16 +27,25 @@ export default async function fetchBooksInfo() {
     const years = Object.keys(mergedBooks);
 
     const fetchBookDetails = async (year: string) => {
+      const urlBase = "https://www.googleapis.com/books/v1/volumes"
       let booksArray = mergedBooks[year];
       const bookDetailPromises = booksArray.map(async (book) => {
         const GOOGLE_BOOKS_API_KEY = process.env.GOOGLE_BOOKS_API_KEY;
         const res = await fetch(
-          `https://www.googleapis.com/books/v1/volumes?q=isbn:${book.ISBN13}&key=${GOOGLE_BOOKS_API_KEY}`, { next: { revalidate: 3600 } }
+          `${urlBase}?q=isbn:${book.ISBN13}&key=${GOOGLE_BOOKS_API_KEY}`, { next: { revalidate: 3600 } }
         );
         const product = await res.json();
-        const bookInfo = product.items?.[0]?.volumeInfo;
-        const notes = await getNotes(book.ISBN13);
+        let bookInfo = product.items?.[0]?.volumeInfo;
+        if (!bookInfo) {
+          // something google api don't answer, two tries helps
+          const res = await fetch(
+            `${urlBase}?q=isbn:${book.ISBN13}&key=${GOOGLE_BOOKS_API_KEY}`, { next: { revalidate: 3600 } }
+          );
+          const product = await res.json();
+          bookInfo = product.items?.[0]?.volumeInfo;
+        }
         if (!bookInfo) console.log("No book info found for", book.ISBN13);
+        const notes = await getNotes(book.ISBN13);
         return {
           bookInfo: {
             title: bookInfo?.title || book.title || "unknown",
@@ -82,7 +91,6 @@ export default async function fetchBooksInfo() {
 const getNotes = async (isbn: number) => {
   const urlBase = process.env.PATH_SVG_MAKER;
   const res = await fetch(`${urlBase}/book/getBookMetadata?isbn=${isbn}&key=${process.env.PATH_SVG_MAKER_KEY}`, { next: { revalidate: 3600 } }); // 3600 = 1 hour
-  console.log(res);
   if (res.ok) {
     const svgMetadata = await res.json();
     const numberPages = svgMetadata.pages;
@@ -92,7 +100,6 @@ const getNotes = async (isbn: number) => {
         const name = `page.${i}.svg`;
         const url = `${urlBase}/svg/${isbn}/${name}`;
         const res = await fetch(url, { next: { revalidate: 3600 } }); // 3600 = 1 hour
-        console.log(res);
         if (res.ok) {
           const svg = await res.text();
           notes.push({ name, svg });
