@@ -80,13 +80,12 @@ export default async function fetchBooksInfo() {
 }
 
 const getNotes = async (isbn: number) => {
-  const urlBase = `http://raspberrypi1:3020`;
+  const urlBase = process.env.PATH_SVG_MAKER;
   const res = await fetch(`${urlBase}/book/getBookMetadata?isbn=${isbn}`, { next: { revalidate: 3600 } }); // 3600 = 1 hour
   console.log(res);
   if (res.ok) {
     const svgMetadata = await res.json();
     const numberPages = svgMetadata.pages;
-    // for each number of pages retrive the notes, the notes are svg files in the same folder with format page_1.1.svg , page_2.2.svg etc
     if (numberPages) {
       const notes = [];
       for (let i = 1; i <= numberPages; i++) {
