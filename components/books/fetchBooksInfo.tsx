@@ -81,17 +81,17 @@ export default async function fetchBooksInfo() {
 
 const getNotes = async (isbn: number) => {
   const urlBase = process.env.PATH_SVG_MAKER;
-  const res = await fetch(`${urlBase}/book/getBookMetadata?isbn=${isbn}`, { next: { revalidate: 3600 } }); // 3600 = 1 hour
-  console.log(res);
+  const res = await fetch(`${urlBase}/book/getBookMetadata?isbn=${isbn}&key=${process.env.PATH_SVG_MAKER_KEY}`, { next: { revalidate: 3600 } }); // 3600 = 1 hour
   if (res.ok) {
     const svgMetadata = await res.json();
     const numberPages = svgMetadata.pages;
     if (numberPages) {
       const notes = [];
       for (let i = 1; i <= numberPages; i++) {
-        const name = `page_${i}.${i}.svg`;
+        const name = `page.${i}.svg`;
         const url = `${urlBase}/svg/${isbn}/${name}`;
         const res = await fetch(url, { next: { revalidate: 3600 } }); // 3600 = 1 hour
+        console.log(res);
         if (res.ok) {
           const svg = await res.text();
           notes.push({ name, svg });
