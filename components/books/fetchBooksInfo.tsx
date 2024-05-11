@@ -32,18 +32,11 @@ export default async function fetchBooksInfo() {
       const bookDetailPromises = booksArray.map(async (book) => {
         const GOOGLE_BOOKS_API_KEY = process.env.GOOGLE_BOOKS_API_KEY;
         const res = await fetch(
-          `${urlBase}?q=isbn:${book.ISBN13}&key=${GOOGLE_BOOKS_API_KEY}`, { next: { revalidate: 3600 } }
+          `${urlBase}?q=isbn:${book.ISBN13}&key=${GOOGLE_BOOKS_API_KEY}`
         );
+        console.log(res);
         const product = await res.json();
         let bookInfo = product.items?.[0]?.volumeInfo;
-        if (!bookInfo) {
-          // something google api don't answer, two tries helps
-          const res = await fetch(
-            `${urlBase}?q=isbn:${book.ISBN13}&key=${GOOGLE_BOOKS_API_KEY}`, { next: { revalidate: 3600 } }
-          );
-          const product = await res.json();
-          bookInfo = product.items?.[0]?.volumeInfo;
-        }
         if (!bookInfo) console.log("No book info found for", book.ISBN13);
         const notes = await getNotes(book.ISBN13);
         return {
