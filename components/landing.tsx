@@ -31,7 +31,7 @@ export default function Landing() {
   return (
     <>
       <div
-        className="absolute z-20 flex h-screen w-screen items-center text-primary backdrop-blur-2xl"
+        className="absolute z-10 flex h-screen w-screen items-center text-primary backdrop-blur-2xl"
         onMouseMove={handleMouseMove}
       >
         <div className="container">

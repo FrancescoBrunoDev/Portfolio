@@ -90,8 +90,6 @@ export default function ModalInfoBook({
   book,
   note,
   type,
-  altNotes,
-  tranlatedNotes,
   setIsOpen,
 }: ModalInfoBookProps) {
   const [currentPage, setCurrentPage] = useState(0);
