@@ -32,7 +32,7 @@ export default async function fetchBooksInfo() {
       const bookDetailPromises = booksArray.map(async (book) => {
         const GOOGLE_BOOKS_API_KEY = process.env.GOOGLE_BOOKS_API_KEY;
         const res = await fetch(
-          `${urlBase}?q=isbn:${book.ISBN13}&key=${GOOGLE_BOOKS_API_KEY}`
+          `${urlBase}?q=isbn:${book.ISBN13}&key=${GOOGLE_BOOKS_API_KEY}`, { next: { revalidate: 43200 } }
         );
         console.log(res);
         const product = await res.json();
