@@ -80,7 +80,8 @@ export default async function fetchBooksInfo() {
 }
 
 const getNotes = async (isbn: number) => {
-  const res = await fetch(`http://raspberrypi1:3020/book/getBookMetadata?isbn=${isbn}`);
+  const urlBase = `http://raspberrypi1:3020`;
+  const res = await fetch(`${urlBase}/book/getBookMetadata?isbn=${isbn}`, { next: { revalidate: 3600 } }); // 3600 = 1 hour
   console.log(res);
   if (res.ok) {
     const svgMetadata = await res.json();
@@ -90,8 +91,8 @@ const getNotes = async (isbn: number) => {
       const notes = [];
       for (let i = 1; i <= numberPages; i++) {
         const name = `page_${i}.${i}.svg`;
-        const url = `http://raspberrypi1:3020/svg/${isbn}/${name}`;
-        const res = await fetch(url);
+        const url = `${urlBase}/svg/${isbn}/${name}`;
+        const res = await fetch(url, { next: { revalidate: 3600 } }); // 3600 = 1 hour
         if (res.ok) {
           const svg = await res.text();
           notes.push({ name, svg });
