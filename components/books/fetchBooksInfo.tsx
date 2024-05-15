@@ -34,7 +34,6 @@ export default async function fetchBooksInfo() {
         const res = await fetch(
           `${urlBase}?q=isbn:${book.ISBN13}&key=${GOOGLE_BOOKS_API_KEY}`
         );
-        console.log(res);
         const product = await res.json();
         let bookInfo = product.items?.[0]?.volumeInfo;
         if (!bookInfo) console.log("No book info found for", book.ISBN13);
