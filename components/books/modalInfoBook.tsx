@@ -14,6 +14,7 @@ interface ItemDetailProps {
 // make the interface for ItemDetail
 interface ModalInfoBookProps {
   book: Book;
+  titleParts: string[];
   note: note[];
   type: string;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -90,6 +91,7 @@ export default function ModalInfoBook({
   book,
   note,
   type,
+  titleParts,
   setIsOpen,
 }: ModalInfoBookProps) {
   const [currentPage, setCurrentPage] = useState(0);
@@ -147,7 +149,7 @@ export default function ModalInfoBook({
         </div>
         <div className="flex h-full flex-col gap-6">
           {/* authors book */}
-          <div className="flex flex-col text-left text-background">
+          <div className="flex flex-col text-left text-background pr-20">
             {infoBooks.authors.map((author, index) => (
               <span key={index} className="text-4xl font-bold leading-tight">
                 {author}
@@ -234,8 +236,8 @@ export default function ModalInfoBook({
               </div>
             </div>
           ) : null}
-          <div className="border-4 border-t-0 border-primary bg-background p-3 text-left text-4xl font-semibold uppercase text-primary">
-            {infoBooks.title}
+          <div className="border-4 border-t-0 border-primary bg-background p-3 text-left font-semibold text-primary">
+            <div className="uppercase text-4xl">{titleParts[0]}</div><div className="max-h-36text-2xl ">{titleParts[1]}.</div>
           </div>
         </div>
       </div>

@@ -43,6 +43,7 @@ export default function BookItem(book: Book) {
         {isopen && (
           <ModalInfoBook
             book={book}
+            titleParts={titleParts}
             note={note}
             type={type}
             altNotes={altNotes}
