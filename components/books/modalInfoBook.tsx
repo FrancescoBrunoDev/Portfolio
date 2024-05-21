@@ -237,7 +237,7 @@ export default function ModalInfoBook({
             </div>
           ) : null}
           <div className="border-4 border-t-0 border-primary bg-background p-3 text-left font-semibold text-primary">
-            <div className="uppercase text-4xl">{titleParts[0]}</div><div className="max-h-36text-2xl ">{titleParts[1]}.</div>
+            <div className="uppercase text-4xl">{titleParts[0]}</div><div className="max-h-36text-2xl ">{titleParts[1]}</div>
           </div>
         </div>
       </div>
