@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ModalInfoBook from "@/components/books/modalInfoBook";
+import Image from "next/image"
 
 export default function BookItem(book: Book) {
   const [isopen, setIsOpen] = useState(false);
@@ -31,11 +32,16 @@ export default function BookItem(book: Book) {
                 {index < infoBooks.authors.length - 1 && <br />}
               </span>
             ))}
+            {note.length !== 0 && Object.keys(note).length > 1 &&
+              <div className="pt-6">
+                <Image width={300} height={300} alt="sketch holdplace" src="/books/sketches/1.svg" />
+              </div>
+            }
           </div>
         </div>
         <div className="absolute bottom-0 left-0 right-0 z-10 border-t-2 border-primary bg-background p-2 text-left text-base font-semibold uppercase">
           <div className="text-sm">{titleParts[0]}</div>
-          <div className="text-xs lowercase">{titleParts[1]}</div>
+          <div className="text-xs lowercase truncate">{titleParts[1]}</div>
         </div>
       </button>
       {/* Modal */}

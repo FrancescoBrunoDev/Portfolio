@@ -1,5 +1,5 @@
 import { Book } from "lucide-react";
-import React, { FormEvent } from "react";
+import { FormEvent } from "react";
 
 interface SearchBoxProps {
   books: Year[];
