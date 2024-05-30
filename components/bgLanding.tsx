@@ -30,7 +30,7 @@ export const BgLanding: React.FC<BgLandingProps> = ({
   }, [direction, desiredDirection]);
 
   const dist = getDistanceFromCenter();
-  const radius = getRadius(dist);
+  const radius = getRadius(dist) ? getRadius(dist) : 0;
   const movement = getMovement(radius);
 
   return (
@@ -77,7 +77,7 @@ export const BgLanding: React.FC<BgLandingProps> = ({
   function getDistanceFromCenter() {
     return Math.sqrt(
       Math.pow(mousePosition.x - centerX, 2) +
-        Math.pow(mousePosition.y - centerY, 2)
+      Math.pow(mousePosition.y - centerY, 2)
     );
   }
 
