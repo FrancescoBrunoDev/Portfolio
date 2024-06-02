@@ -1,19 +1,17 @@
-import TimelineWork from "@/components/timeline/timelineWork";
-import TimelineEdu from "@/components/timeline/timelineEdu";
-import TimelineInter from "@/components/timeline/timelineIntern";
-import TimelineCertificates from "@/components/timeline/timelineCertificates";
-// import workExperience from "@/app/section/about/work.json";
-import certificates from "@/app/section/about/certificates.json";
-import intern from "@/app/section/about/intern.json";
-import education from "@/app/section/about/education.json";
+import TimelineWork from "@/components/timeline/timelinePrimary";
+import TimelineSecondary from "@/components/timeline/timelineSecondaty";
+import { GraduationCap } from "lucide-react";
+import { PocketKnife } from "lucide-react";
+import { ScrollText } from "lucide-react";
 
 import { getAllDocuments } from "@/lib/appwrite";
 
-
-
 export default async function About() {
-  const res = await getAllDocuments(process.env.APPWRITE_WORK_POSITIONS_COLLECTION_ID ?? '');
-  const workExperience = res.documents as unknown as WorkExperience[];
+  const workExperience = await getAllDocuments(process.env.APPWRITE_WORK_POSITIONS_COLLECTION_ID ?? '').then((res) => res.documents as unknown as WorkExperience[]);
+  const education = await getAllDocuments(process.env.APPWRITE_EDUCATION_COLLECTION_ID ?? '').then((res) => res.documents as unknown as Education[]);
+  const intern = await getAllDocuments(process.env.APPWRITE_INTERNSHIPS_COLLECTION_ID ?? '').then((res) => res.documents as unknown as Internship[]);
+  const certificates = await getAllDocuments(process.env.APPWRITE_CERTIFICATES_COLLECTION_ID ?? '').then((res) => res.documents as unknown as Education[]);
+
   return (
     <div className="flex w-screen shrink-0 snap-center snap-always items-center py-14 lg:h-screen lg:py-10">
       <div className="container">
@@ -22,9 +20,9 @@ export default async function About() {
             <TimelineWork workExperience={workExperience} />
           </div>
           <div className="grid h-fit gap-2 pt-4 lg:col-span-4">
-            <TimelineEdu education={education} />
-            <TimelineInter intern={intern} />
-            <TimelineCertificates certificates={certificates} />
+            <TimelineSecondary content={education} icon={<GraduationCap className="h-8 w-8" />} title="Education" />
+            <TimelineSecondary content={intern} icon={<PocketKnife className="h-7 w-7" />} title="Internship" />
+            <TimelineSecondary content={certificates} icon={<ScrollText className="h-8 w-8" />} title="Certificates" />
           </div>
         </div>
       </div>

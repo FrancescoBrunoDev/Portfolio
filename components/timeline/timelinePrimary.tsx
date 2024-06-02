@@ -20,7 +20,6 @@ export default function TimelineWork({ workExperience }: {
           const formattedStartDate = `${convertedStartDate.getMonth() + 1}.${convertedStartDate.getFullYear()}`;
           const convertedEndDate = new Date(work.end_date);
           const formattedEndDate = `${convertedEndDate.getMonth() + 1}.${convertedEndDate.getFullYear()}`;
-          console.log(work.tools)
           return (
             <li key={work.id} className="grid grid-cols-1 text-start md:grid-cols-10">
               <div className="col-span-7 grid grid-cols-12 border-l-2 border-primary pt-1 md:col-span-3 md:border-l-0 md:border-none">

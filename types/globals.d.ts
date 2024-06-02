@@ -96,25 +96,14 @@ interface WindowDimensions {
   height: number;
 }
 
-type Certificate = {
-  id: number;
-  university: string;
-  degree: string;
-  start_date: string;
-  end_date: string;
-  rate: number | null;
-  url: string;
-};
-
 type WorkExperience = {
   id: number;
   position: string;
-  organizations:
-    | [
-        {
-          name: string;
-        }
-      ];
+  organizations: [
+    {
+      name: string;
+    }
+  ];
   employment_type: string | null;
   start_date: string;
   end_date: string;
@@ -133,14 +122,19 @@ type Education = {
   university: string;
   degree: string;
   start_date: string;
-  end_date: string;
-  rate: string;
+  end_date?: string;
+  rate?: string;
+  url?: string;
 };
 
 type Internship = {
   id: number;
   position: string;
-  organization: string;
+  organizations: [
+    {
+      name: string;
+    }
+  ];
   employment_type: string;
   start_date: string;
   end_date: string;
