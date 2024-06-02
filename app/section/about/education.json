@@ -1,5 +1,6 @@
 [
   {
+    "id": 2,
     "university": "University of Pavia",
     "degree": "master in musicology",
     "start_date": "2018",
@@ -7,6 +8,7 @@
     "rate": "110/110 cum laude"
   },
   {
+    "id": 1,
     "university": "University of Trento",
     "degree": "BACHELOR’S DEGREE IN CULTURAL HERITAGE",
     "start_date": "2015",

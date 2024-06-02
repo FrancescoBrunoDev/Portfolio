@@ -1,8 +1,9 @@
-import certificates from "@/components/timeline/certificates.json";
 import { ScrollText, Award } from "lucide-react";
 import Link from "next/link";
 
-export default function TimelineCertificates() {
+export default function TimelineCertificates({ certificates }: {
+  certificates: Certificate[]
+}) {
   return (
     <div className="rounded-xl px-4 text-primary">
       <div className="mb-2 flex justify-between border-b-2 border-primary">
@@ -12,7 +13,7 @@ export default function TimelineCertificates() {
       <ul>
         {certificates.map((degree) => {
           return (
-            <li className="grid grid-cols-1 text-start md:grid-cols-9">
+            <li key={degree.id} className="grid grid-cols-1 text-start md:grid-cols-9">
               <div className="col-span-7 grid grid-cols-12 border-l-2 border-primary pt-1 md:col-span-3 md:border-l-0 md:border-none">
                 <div className="col-span-1 block md:hidden" />
                 <div className="col-span-11 flex translate-x-[-1rem] flex-col pr-2 text-xl font-black uppercase md:translate-x-0">

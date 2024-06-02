@@ -1,5 +1,6 @@
 [
   {
+    "id": 2,
     "university": "Udemy",
     "degree": "PHP-Bootcamp: Von Anfänger zum PHP-Entwickler",
     "start_date": "10 OCT 2023",
@@ -8,6 +9,7 @@
     "url": "https://www.udemy.com/certificate/UC-045ce30e-71bd-4f80-a991-dd1c53a1c3b8/"
   },
   {
+    "id": 1,
     "university": "freeCodeCamp",
     "degree": "Front End Development Libraries",
     "start_date": "30 APR 2023",

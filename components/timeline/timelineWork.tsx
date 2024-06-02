@@ -1,8 +1,9 @@
-import workExperience from "@/components/timeline/work.json";
 import { Briefcase } from "lucide-react";
 import Link from "next/link";
 
-export default function TimelineWork() {
+export default function TimelineWork({ workExperience }: {
+  workExperience: WorkExperience[];
+}) {
   return (
     <div className="rounded-xl bg-background p-4 text-primary shadow-ring shadow-2xl hover:scale-[1.002] transition-all duration-200">
       <div className="flex justify-between border-b-2 border-primary">

@@ -14,7 +14,7 @@ interface note {
   url: string;
   name: string;
   svg: string;
-};
+}
 
 type BookJson = {
   title: string;
@@ -95,3 +95,47 @@ interface WindowDimensions {
   width: number;
   height: number;
 }
+
+type Certificate = {
+  id: number;
+  university: string;
+  degree: string;
+  start_date: string;
+  end_date: string;
+  rate: number | null;
+  url: string;
+};
+
+type WorkExperience = {
+  id: number;
+  position: string;
+  organization: string;
+  employment_type: string | null;
+  start_date: string;
+  end_date: string;
+  location: string | null;
+  description: string;
+  link: string | null;
+  tools?: string[];
+};
+
+type Education = {
+  id: number;
+  university: string;
+  degree: string;
+  start_date: string;
+  end_date: string;
+  rate: string;
+};
+
+type Internship = {
+  id: number;
+  position: string;
+  organization: string;
+  employment_type: string;
+  start_date: string;
+  end_date: string;
+  location: string | null;
+  description: string;
+  link: string | null;
+};

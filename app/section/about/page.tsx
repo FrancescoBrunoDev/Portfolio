@@ -2,6 +2,10 @@ import TimelineWork from "@/components/timeline/timelineWork";
 import TimelineEdu from "@/components/timeline/timelineEdu";
 import TimelineInter from "@/components/timeline/timelineIntern";
 import TimelineCertificates from "@/components/timeline/timelineCertificates";
+import workExperience from "@/app/section/about/work.json";
+import certificates from "@/app/section/about/certificates.json";
+import intern from "@/app/section/about/intern.json";
+import education from "@/app/section/about/education.json";
 
 export default function About() {
   return (
@@ -9,12 +13,12 @@ export default function About() {
       <div className="container">
         <div className="grid w-full gap-2 lg:grid-cols-9">
           <div className="grid h-fit grid-cols-1 lg:col-span-5">
-            <TimelineWork />
+            <TimelineWork workExperience={workExperience} />
           </div>
           <div className="grid h-fit gap-2 pt-4 lg:col-span-4">
-            <TimelineEdu />
-            <TimelineInter />
-            <TimelineCertificates />
+            <TimelineEdu education={education} />
+            <TimelineInter intern={intern} />
+            <TimelineCertificates certificates={certificates} />
           </div>
         </div>
       </div>

@@ -1,5 +1,6 @@
 [
   {
+    "id": 3,
     "position": "Proofreading Intern",
     "organization": "AMA Verlag",
     "employment_type": "Internship",
@@ -10,6 +11,7 @@
     "link": null
   },
   {
+    "id": 2,
     "position": "Communication Intern for Cremona Musica",
     "organization": "CremonaFiere",
     "employment_type": "Internship",
@@ -20,12 +22,14 @@
     "link": null
   },
   {
+    "id": 1,
     "position": "Production Intern",
     "organization": "Haydn Foundation of Bolzano and Trento",
     "employment_type": "Internship",
     "start_date": "Jan 2018",
     "end_date": "Feb 2018",
     "location": "Bolzano, Italy",
-    "description": "As a production intern at the Haydn Foundation of Bolzano and Trento, I gained experience in the production department."
+    "description": "As a production intern at the Haydn Foundation of Bolzano and Trento, I gained experience in the production department.",
+    "link": null
   }
 ]
