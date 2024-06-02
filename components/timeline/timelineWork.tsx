@@ -16,7 +16,10 @@ export default function TimelineWork({ workExperience }: {
           const isSequentialExperience =
             index > 0 &&
             work.organizations[0].name === workExperience[index - 1].organizations[0].name;
-          console.log("export", work)
+          const convertedStartDate = new Date(work.start_date);
+          const formattedStartDate = `${convertedStartDate.getMonth() + 1}.${convertedStartDate.getFullYear()}`;
+          const convertedEndDate = new Date(work.end_date);
+          const formattedEndDate = `${convertedEndDate.getMonth() + 1}.${convertedEndDate.getFullYear()}`;
           return (
             <li key={work.id} className="grid grid-cols-1 text-start md:grid-cols-10">
               <div className="col-span-7 grid grid-cols-12 border-l-2 border-primary pt-1 md:col-span-3 md:border-l-0 md:border-none">
@@ -44,8 +47,8 @@ export default function TimelineWork({ workExperience }: {
                     {work.position}
                   </p>
                   <span className="text-xs">
-                    {work.start_date}
-                    {work.end_date && ` - ${work.end_date}`}
+                    {formattedStartDate}
+                    {work.end_date ? ` - ${formattedEndDate}` : " - current"}
                   </span>
                   <span className="text-sm leading-tight">
                     {work.description}
