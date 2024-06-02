@@ -109,14 +109,23 @@ type Certificate = {
 type WorkExperience = {
   id: number;
   position: string;
-  organization: string;
+  organizations:
+    | [
+        {
+          name: string;
+        }
+      ];
   employment_type: string | null;
   start_date: string;
   end_date: string;
   location: string | null;
   description: string;
   link: string | null;
-  tools?: string[];
+  tools?: [
+    {
+      name: string;
+    }
+  ];
 };
 
 type Education = {

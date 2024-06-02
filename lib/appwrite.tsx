@@ -1,11 +1,14 @@
-import { Client, Account } from 'node-appwrite';
+import { Client, Account, Databases, Query } from 'node-appwrite';
 import { cookies } from 'next/headers';
 
-export async function createSessionClient() {
-    const client = new Client()
-        .setEndpoint(process.env.APPWRITE_ENDPOINT ?? '')
-        .setProject(process.env.APPWRITE_PROJECT ?? '');
+const client = new Client()
+    .setEndpoint(process.env.APPWRITE_ENDPOINT ?? '')
+    .setProject(process.env.APPWRITE_PROJECT ?? '')
+    .setKey(process.env.APPWRITE_KEY ?? '');
 
+const databases = new Databases(client);
+
+export async function createSessionClient() {
     const session = cookies().get("my-custom-session");
     if (!session || !session.value) {
         throw new Error("No session");
@@ -21,11 +24,6 @@ export async function createSessionClient() {
 }
 
 export async function createAdminClient() {
-    const client = new Client()
-        .setEndpoint(process.env.APPWRITE_ENDPOINT ?? '')
-        .setProject(process.env.APPWRITE_PROJECT ?? '')
-        .setKey(process.env.APPWRITE_KEY ?? '');
-
     return {
         get account() {
             return new Account(client);
@@ -40,4 +38,20 @@ export async function getLoggedInUser() {
     } catch (error) {
         return null;
     }
+}
+
+export async function getCollection(collectionId: string) {
+    return await databases.getCollection(
+        process.env.APPWRITE_DATABASE_ID ?? '',
+        collectionId,
+    );
+}
+
+export async function getAllDocuments(collectionId: string) {
+    const documents = await databases.listDocuments(
+        process.env.APPWRITE_WORK_DATABASE_ID ?? '',
+        collectionId,
+        []
+    )
+    return documents;
 }
