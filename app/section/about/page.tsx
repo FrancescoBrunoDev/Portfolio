@@ -4,13 +4,13 @@ import { GraduationCap } from "lucide-react";
 import { PocketKnife } from "lucide-react";
 import { ScrollText } from "lucide-react";
 
-import { getAllDocuments } from "@/lib/appwrite";
+import { databases } from "@/lib/appwrite";
 
 export default async function About() {
-  const workExperience = await getAllDocuments(process.env.APPWRITE_WORK_POSITIONS_COLLECTION_ID ?? '').then((res) => res.documents as unknown as WorkExperience[]);
-  const education = await getAllDocuments(process.env.APPWRITE_EDUCATION_COLLECTION_ID ?? '').then((res) => res.documents as unknown as Education[]);
-  const intern = await getAllDocuments(process.env.APPWRITE_INTERNSHIPS_COLLECTION_ID ?? '').then((res) => res.documents as unknown as Internship[]);
-  const certificates = await getAllDocuments(process.env.APPWRITE_CERTIFICATES_COLLECTION_ID ?? '').then((res) => res.documents as unknown as Education[]);
+  const workExperience = await databases.listDocuments(process.env.APPWRITE_WORK_DATABASE_ID ?? '', process.env.APPWRITE_WORK_POSITIONS_COLLECTION_ID ?? '').then((res) => res.documents as unknown as WorkExperience[]);
+  const education = await databases.listDocuments(process.env.APPWRITE_WORK_DATABASE_ID ?? '', process.env.APPWRITE_EDUCATION_COLLECTION_ID ?? '').then((res) => res.documents as unknown as Education[]);
+  const intern = await databases.listDocuments(process.env.APPWRITE_WORK_DATABASE_ID ?? '', process.env.APPWRITE_INTERNSHIPS_COLLECTION_ID ?? '').then((res) => res.documents as unknown as Internship[]);
+  const certificates = await databases.listDocuments(process.env.APPWRITE_WORK_DATABASE_ID ?? '', process.env.APPWRITE_CERTIFICATES_COLLECTION_ID ?? '').then((res) => res.documents as unknown as Education[]);
 
   return (
     <div className="flex w-screen shrink-0 snap-center snap-always items-center py-14 lg:h-screen lg:py-10">

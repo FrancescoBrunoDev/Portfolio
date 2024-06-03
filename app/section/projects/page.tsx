@@ -1,8 +1,15 @@
-import devProjects from "@/app/section/projects/devProjects.json";
 import ProjectItem from "@/components/projects/item";
 import otherProjects from "@/app/section/projects/otherProjects.json";
+import { databases } from "@/lib/appwrite";
+import { Query } from "node-appwrite";
 
-export default function Project() {
+export default async function Project() {
+  const devProjects = await databases.listDocuments(
+    process.env.APPWRITE_PROJECTS_DATABASE_ID ?? '',
+    process.env.APPWRITE_PROJECTS_COLLECTION_ID ?? '',
+    [Query.equal("type", "665c800800298dea7a17")],
+  ).then((res) => res.documents as unknown as Project[]);
+
   return (
     <div className="h-screen w-screen items-center pt-12 text-primary">
       <div className="container grid h-full w-screen grid-rows-2 gap-10 py-8 ">
@@ -11,10 +18,10 @@ export default function Project() {
             Dev
           </div>
           <div className="flex h-2/3 w-full gap-2 overflow-x-auto lg:h-full">
-            {devProjects.map(
+            {devProjects && devProjects.map(
               (project) =>
                 project.hidden === false && (
-                  <ProjectItem key={project.id} item={project} />
+                  <ProjectItem project={project} />
                 )
             )}
           </div>
@@ -27,7 +34,7 @@ export default function Project() {
             {otherProjects.map(
               (project) =>
                 project.hidden === false && (
-                  <ProjectItem key={project.id} item={project} />
+                  <ProjectItem project={project} />
                 )
             )}
           </div>

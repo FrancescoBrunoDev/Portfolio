@@ -4,7 +4,7 @@
     "title": "WorkSizzle",
     "description": "Calculate the optimal number of on-site workdays based on your remote work allowance percentage for each month.",
     "image": "/projectImg/img/WorkSizzle.png",
-    "video": { "src": "", "dark": true },
+    "video": { "src": "", "dark": null },
     "id": 1,
     "scoreImg": null,
     "type": "website",

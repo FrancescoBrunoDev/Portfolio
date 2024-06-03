@@ -6,7 +6,7 @@ const client = new Client()
     .setProject(process.env.APPWRITE_PROJECT ?? '')
     .setKey(process.env.APPWRITE_KEY ?? '');
 
-const databases = new Databases(client);
+export const databases = new Databases(client);
 
 export async function createSessionClient() {
     const session = cookies().get("my-custom-session");
@@ -45,13 +45,4 @@ export async function getCollection(collectionId: string) {
         process.env.APPWRITE_DATABASE_ID ?? '',
         collectionId,
     );
-}
-
-export async function getAllDocuments(collectionId: string) {
-    const documents = await databases.listDocuments(
-        process.env.APPWRITE_WORK_DATABASE_ID ?? '',
-        collectionId,
-        []
-    )
-    return documents;
 }

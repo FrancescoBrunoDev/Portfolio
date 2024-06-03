@@ -142,3 +142,22 @@ type Internship = {
   description: string;
   link: string | null;
 };
+
+type Video = {
+  src: string;
+  dark: boolean;
+};
+
+type Project = {
+  hidden: boolean;
+  title: string;
+  description: string;
+  image: string;
+  video: Video;
+  scoreImg: null | string;
+  id: number;
+  type: string;
+  link: string | null;
+  secondaryLink: string | null;
+  $id: string;
+};
