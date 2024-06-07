@@ -4,11 +4,22 @@ import { databases } from "@/lib/appwrite";
 import { Query } from "node-appwrite";
 
 export default async function Project() {
-  const devProjects = await databases.listDocuments(
-    process.env.APPWRITE_PROJECTS_DATABASE_ID ?? '',
-    process.env.APPWRITE_PROJECTS_COLLECTION_ID ?? '',
-    [Query.equal("type", "665c800800298dea7a17")],
-  ).then((res) => res.documents as unknown as Project[]);
+  let devProjects: Project[] = [];
+  let otherProjects: Project[] = [];
+  try {
+    devProjects = await databases.listDocuments(
+      process.env.APPWRITE_PROJECTS_DATABASE_ID ?? '',
+      process.env.APPWRITE_PROJECTS_COLLECTION_ID ?? '',
+      [Query.equal("type", "665c800800298dea7a17")],
+    ).then((res) => res.documents as unknown as Project[]);
+    otherProjects = await databases.listDocuments(
+      process.env.APPWRITE_PROJECTS_DATABASE_ID ?? '',
+      process.env.APPWRITE_PROJECTS_COLLECTION_ID ?? '',
+      [Query.notEqual("type", "665c800800298dea7a17")],
+    ).then((res) => res.documents as unknown as Project[]);
+  } catch (error) {
+    console.error("Errore durante il recupero dei progetti:", error);
+  }
 
   return (
     <div className="h-screen w-screen items-center pt-12 text-primary">

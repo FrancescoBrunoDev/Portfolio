@@ -1,63 +1,49 @@
+import { getAdjacentIds } from "@/actions/actions";
 import Link from "next/link";
 
 interface FrameProps {
-  thereIsPrev: boolean;
-  thereIsNext: boolean;
-  projectId: number;
+  projectId: string;
+  projectType: {
+    type: string;
+    macro_type: string;
+  }
   link: string | null;
-  isDev: boolean;
-  length: number;
 }
 
-export default function Frame({
-  thereIsPrev,
-  thereIsNext,
+interface AdjacentIds {
+  prev: string;
+  next: string;
+  prevUsesAnotherArray: boolean;
+  nextUsesAnotherArray: boolean;
+}
+
+export default async function Frame({
   projectId,
-  link,
-  isDev,
-  length,
+  projectType,
+  link
 }: FrameProps) {
+  const adjacentIds: AdjacentIds = await getAdjacentIds(projectId);
+  console.log(projectType.macro_type);
   return (
     <nav>
       <Link
         className="fixed right-0 z-10 h-full w-20 translate-x-10 bg-background transition-all ease-in-out hover:translate-x-8"
-        href={
-          !thereIsNext
-            ? `/section/projects/${projectId + 1}`
-            : `${
-                isDev ? `/section/projects/${1001}` : `/section/projects/${1}`
-              }`
-        }
+        href={`/section/projects/${adjacentIds.prev}`}
+
       >
         <div className="relative flex h-full w-20 items-center text-clip">
           <div className="vertical-text fixed left-2 text-center text-lg text-primary">
-            {!thereIsNext
-              ? "next"
-              : isDev
-              ? "to other projects"
-              : "to dev projects"}
+            {adjacentIds.prevUsesAnotherArray ? `to ${projectType.macro_type === "dev" ? "other" : "dev"} projects` : "next"}
           </div>
         </div>
       </Link>
       <Link
         className="fixed left-0 z-10 h-full w-20 -translate-x-10 bg-background transition-all ease-in-out hover:-translate-x-8"
-        href={
-          thereIsPrev
-            ? `/section/projects/${projectId - 1}`
-            : `${
-                isDev
-                  ? `/section/projects/${1000 + length + 1}` 
-                  : `/section/projects/${length - 1}` // perché inizia da 0
-              }`
-        }
+        href={`/section/projects/${adjacentIds.next}`}
       >
         <div className="flex h-full w-20 items-center text-clip">
           <div className="vertical-text fixed right-2 rotate-180 text-center text-lg text-primary">
-            {thereIsPrev
-              ? "prev"
-              : isDev
-              ? "to other projects"
-              : "to dev projects"}
+            {adjacentIds.nextUsesAnotherArray ? `to ${projectType.macro_type === "dev" ? "other" : "dev"} projects` : "prev"}
           </div>
         </div>
       </Link>

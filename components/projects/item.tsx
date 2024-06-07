@@ -13,7 +13,7 @@ export default function ProjectItem({ project }: { project: Project }) {
         <div className="flex h-full items-start lg:items-end">
           <div className="flex items-center">
             <Fingerprint className="mr-0.5 h-3 w-3 stroke-background stroke-[3]" />
-            <span className="text-sm text-background">{project.id}</span>
+            <span className="text-sm text-background">{project.$id}</span>
           </div>
         </div>
       </div>

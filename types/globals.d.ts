@@ -146,18 +146,23 @@ type Internship = {
 type Video = {
   src: string;
   dark: boolean;
-};
+} | null;
 
 type Project = {
   hidden: boolean;
   title: string;
   description: string;
   image: string;
-  video: Video;
+  videoSrc: Video;
   scoreImg: null | string;
   id: number;
-  type: string;
+  type: {
+    type: string;
+    $id: string;
+    macro_type: string;
+  };
   link: string | null;
   secondaryLink: string | null;
   $id: string;
+  order: number;
 };
