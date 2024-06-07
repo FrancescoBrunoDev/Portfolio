@@ -7,16 +7,20 @@ export default async function Project() {
   let devProjects: Project[] = [];
   let otherProjects: Project[] = [];
   try {
-    devProjects = await databases.listDocuments(
-      process.env.APPWRITE_PROJECTS_DATABASE_ID ?? '',
-      process.env.APPWRITE_PROJECTS_COLLECTION_ID ?? '',
-      [Query.equal("type", "665c800800298dea7a17")],
-    ).then((res) => res.documents as unknown as Project[]);
-    otherProjects = await databases.listDocuments(
-      process.env.APPWRITE_PROJECTS_DATABASE_ID ?? '',
-      process.env.APPWRITE_PROJECTS_COLLECTION_ID ?? '',
-      [Query.notEqual("type", "665c800800298dea7a17")],
-    ).then((res) => res.documents as unknown as Project[]);
+    devProjects = await databases
+      .listDocuments(
+        process.env.APPWRITE_PROJECTS_DATABASE_ID ?? "",
+        process.env.APPWRITE_PROJECTS_COLLECTION_ID ?? "",
+        [Query.equal("type", "665c800800298dea7a17")]
+      )
+      .then((res) => res.documents as unknown as Project[]);
+    otherProjects = await databases
+      .listDocuments(
+        process.env.APPWRITE_PROJECTS_DATABASE_ID ?? "",
+        process.env.APPWRITE_PROJECTS_COLLECTION_ID ?? "",
+        [Query.notEqual("type", "665c800800298dea7a17")]
+      )
+      .then((res) => res.documents as unknown as Project[]);
   } catch (error) {
     console.error("Errore durante il recupero dei progetti:", error);
   }
@@ -29,12 +33,11 @@ export default async function Project() {
             Dev
           </div>
           <div className="flex h-2/3 w-full gap-2 overflow-x-auto lg:h-full">
-            {devProjects && devProjects.map(
-              (project) =>
-                project.hidden === false && (
-                  <ProjectItem project={project} />
-                )
-            )}
+            {devProjects &&
+              devProjects.map(
+                (project) =>
+                  project.hidden === false && <ProjectItem project={project} />
+              )}
           </div>
         </div>
         <div className="flex h-full flex-col content-stretch overflow-hidden lg:flex-row lg:items-center">
@@ -44,9 +47,7 @@ export default async function Project() {
           <div className="flex h-2/3 w-full gap-2 overflow-x-auto lg:h-full">
             {otherProjects.map(
               (project) =>
-                project.hidden === false && (
-                  <ProjectItem project={project} />
-                )
+                project.hidden === false && <ProjectItem project={project} />
             )}
           </div>
         </div>

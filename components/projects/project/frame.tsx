@@ -6,7 +6,7 @@ interface FrameProps {
   projectType: {
     type: string;
     macro_type: string;
-  }
+  };
   link: string | null;
 }
 
@@ -20,7 +20,7 @@ interface AdjacentIds {
 export default async function Frame({
   projectId,
   projectType,
-  link
+  link,
 }: FrameProps) {
   const adjacentIds: AdjacentIds = await getAdjacentIds(projectId);
   console.log(projectType.macro_type);
@@ -29,11 +29,14 @@ export default async function Frame({
       <Link
         className="fixed right-0 z-10 h-full w-20 translate-x-10 bg-background transition-all ease-in-out hover:translate-x-8"
         href={`/section/projects/${adjacentIds.prev}`}
-
       >
         <div className="relative flex h-full w-20 items-center text-clip">
           <div className="vertical-text fixed left-2 text-center text-lg text-primary">
-            {adjacentIds.prevUsesAnotherArray ? `to ${projectType.macro_type === "dev" ? "other" : "dev"} projects` : "next"}
+            {adjacentIds.prevUsesAnotherArray
+              ? `to ${
+                  projectType.macro_type === "dev" ? "other" : "dev"
+                } projects`
+              : "next"}
           </div>
         </div>
       </Link>
@@ -43,7 +46,11 @@ export default async function Frame({
       >
         <div className="flex h-full w-20 items-center text-clip">
           <div className="vertical-text fixed right-2 rotate-180 text-center text-lg text-primary">
-            {adjacentIds.nextUsesAnotherArray ? `to ${projectType.macro_type === "dev" ? "other" : "dev"} projects` : "prev"}
+            {adjacentIds.nextUsesAnotherArray
+              ? `to ${
+                  projectType.macro_type === "dev" ? "other" : "dev"
+                } projects`
+              : "prev"}
           </div>
         </div>
       </Link>
