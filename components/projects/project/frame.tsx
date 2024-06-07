@@ -1,4 +1,4 @@
-import { getAdjacentIds } from "@/actions/actions";
+import { getAdjacentIds } from "@/actions/actionsProjects";
 import Link from "next/link";
 
 interface FrameProps {
@@ -23,7 +23,7 @@ export default async function Frame({
   link,
 }: FrameProps) {
   const adjacentIds: AdjacentIds = await getAdjacentIds(projectId);
-  console.log(projectType.macro_type);
+
   return (
     <nav>
       <Link

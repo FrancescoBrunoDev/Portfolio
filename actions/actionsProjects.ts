@@ -17,9 +17,6 @@ type ProjectsOrder = {
   other: ProjectOrderType[];
 };
 
-// TODO Qui bisogna fare in modo che questo array venga creato in automatico
-const devTypes = ["website"];
-
 export async function getProjects() {
   const projects = await databases
     .listDocuments(

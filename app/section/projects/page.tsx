@@ -1,5 +1,4 @@
 import ProjectItem from "@/components/projects/item";
-import otherProjects from "@/app/section/projects/otherProjects.json";
 import { databases } from "@/lib/appwrite";
 import { Query } from "node-appwrite";
 
