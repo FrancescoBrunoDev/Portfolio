@@ -166,3 +166,57 @@ type Project = {
   $id: string;
   order: number;
 };
+
+interface GoogleBooksIndustryIdentifier {
+  type: "ISBN_10" | "ISBN_13" | "OTHER";
+  identifier: string;
+}
+
+interface GoogleBooksReadingModes {
+  text: boolean;
+  image: boolean;
+}
+
+interface GoogleBooksImageLinks {
+  smallThumbnail: string;
+  thumbnail: string;
+}
+
+interface GoogleBooksVolumeInfo {
+  title: string;
+  subtitle: string | null;
+  authors: string[];
+  publisher: string | null;
+  publishedDate: string;
+  industryIdentifiers: GoogleBooksIndustryIdentifier[];
+  readingModes: GoogleBooksReadingModes;
+  pageCount: number | null;
+  printType: string;
+  categories: string[];
+  maturityRating: "NOT_MATURE" | "MATURE";
+  allowAnonLogging: boolean;
+  contentVersion: string;
+  imageLinks: GoogleBooksImageLinks;
+  language: string;
+  previewLink: string;
+  infoLink: string;
+  canonicalVolumeLink: string;
+  finished: boolean;
+  finished_date: string | null;
+  enjoied_as: "audio" | "paper";
+}
+
+interface GoogleBooksSaleInfo {
+  country: string;
+  saleability: "FOR_SALE" | "NOT_FOR_SALE";
+  isEbook: boolean;
+}
+
+interface GoogleBooksVolume {
+  kind: "books#volume";
+  id: string;
+  etag: string;
+  selfLink: string | null;
+  volumeInfo: GoogleBooksVolumeInfo;
+  saleInfo: GoogleBooksSaleInfo;
+}

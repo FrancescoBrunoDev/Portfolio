@@ -32,12 +32,12 @@ export default async function SignUpPage() {
 
   return (
     <div className="flex h-screen w-screen items-center justify-center">
-      <form action={logIn} className="flex flex-col w-72 gap-4 text-primary">
+      <form action={logIn} className="flex w-72 flex-col gap-4 text-primary">
         <div className="flex h-8 w-full items-center gap-1  bg-transparent">
           <User strokeWidth={2.75} className="h-full w-fit text-primary" />
           <span className="text-2xl">/</span>
           <input
-            className="h-full w-full border-b-[3px] border-primary bg-transparent px-1 font-semibold placeholder:invisible focus:outline-none"
+            className="h-full w-full border-b-[3px] border-primary bg-transparent px-1 font-semibold placeholder:text-primary/50 focus:outline-none"
             id="email"
             name="email"
             placeholder="Email"
@@ -49,7 +49,7 @@ export default async function SignUpPage() {
           <KeyRound strokeWidth={2.75} className="h-full w-fit text-primary" />
           <span className="text-2xl">/</span>
           <input
-            className="h-full w-full border-b-[3px] border-primary bg-transparent px-1 font-semibold placeholder:invisible focus:outline-none"
+            className="h-full w-full border-b-[3px] border-primary bg-transparent px-1 font-semibold placeholder:text-primary/50 focus:outline-none"
             id="password"
             name="password"
             placeholder="Password"
@@ -62,4 +62,3 @@ export default async function SignUpPage() {
     </div>
   );
 }
-

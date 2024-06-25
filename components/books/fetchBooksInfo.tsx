@@ -27,7 +27,7 @@ export default async function fetchBooksInfo() {
     const years = Object.keys(mergedBooks);
 
     const fetchBookDetails = async (year: string) => {
-      const urlBase = "https://www.googleapis.com/books/v1/volumes"
+      const urlBase = "https://www.googleapis.com/books/v1/volumes";
       let booksArray = mergedBooks[year];
       const bookDetailPromises = booksArray.map(async (book) => {
         const GOOGLE_BOOKS_API_KEY = process.env.GOOGLE_BOOKS_API_KEY;
@@ -35,6 +35,7 @@ export default async function fetchBooksInfo() {
           `${urlBase}?q=isbn:${book.ISBN13}&key=${GOOGLE_BOOKS_API_KEY}`
         );
         const product = await res.json();
+
         let bookInfo = product.items?.[0]?.volumeInfo;
         if (!bookInfo) console.log("No book info found for", book.ISBN13);
         const notes = await getNotes(book.ISBN13);
@@ -82,7 +83,10 @@ export default async function fetchBooksInfo() {
 
 const getNotes = async (isbn: number) => {
   const urlBase = process.env.PATH_SVG_MAKER;
-  const res = await fetch(`${urlBase}/book/getBookMetadata?isbn=${isbn}&key=${process.env.PATH_SVG_MAKER_KEY}`, { next: { revalidate: 3600 } }); // 3600 = 1 hour
+  const res = await fetch(
+    `${urlBase}/book/getBookMetadata?isbn=${isbn}&key=${process.env.PATH_SVG_MAKER_KEY}`,
+    { next: { revalidate: 3600 } }
+  ); // 3600 = 1 hour
   if (res.ok) {
     const svgMetadata = await res.json();
     const numberPages = svgMetadata.pages;
@@ -102,4 +106,4 @@ const getNotes = async (isbn: number) => {
   } else {
     return [];
   }
-}
+};

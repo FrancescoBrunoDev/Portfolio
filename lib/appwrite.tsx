@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 const clientDb = new Client()
   .setEndpoint(process.env.APPWRITE_ENDPOINT ?? "")
   .setProject(process.env.APPWRITE_PROJECT ?? "")
-  .setKey(process.env.APPWRITE_KEY ?? "");
+  .setKey(process.env.APPWRITE_KEY_ADMIN ?? "");
 
 const client = new Client()
   .setEndpoint(process.env.APPWRITE_ENDPOINT ?? "")
