@@ -8,7 +8,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import Image from "next/image";
-import { format } from "date-fns";
+import { format, set } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -119,7 +119,7 @@ export default function BookManager() {
                 placeholder={"search for a book"}
                 minLength={8}
                 {...(type === "isbn" ? { type: "number" } : {})}
-                onChange={(e) => setSearchInput(e.target.value)}
+                onChange={(e) => setSearchInput(Number(e.target.value))}
               />
             </div>
             <Button onClick={() => getBooks()} className="whitespace-nowrap">
@@ -201,7 +201,7 @@ export function ShowFetchedDataBook({
 }
 
 function ControlsBook({ item }: { item: GoogleBooksVolume }) {
-  const [finished_date, setDate] = useState<Date>();
+  const [finished_date, setDate] = useState<Date>(new Date());
   const [syncType, setSyncType] = useState<TypeOfBook>("paper");
   const [isFinished, setIsFinished] = useState(false);
 
@@ -227,7 +227,7 @@ function ControlsBook({ item }: { item: GoogleBooksVolume }) {
           <Calendar
             mode="single"
             selected={finished_date}
-            onSelect={setDate}
+            onSelect={(date: Date | undefined) => setDate(date ?? new Date())}
             initialFocus
           />
         </PopoverContent>
@@ -236,10 +236,7 @@ function ControlsBook({ item }: { item: GoogleBooksVolume }) {
         onValueChange={(value: TypeOfBook) => setSyncType(value as TypeOfBook)}
         defaultValue="paper"
       >
-        <SelectTrigger
-          class
-          Name="flex content-center border-none bg-primary text-secondary group-hover:bg-background group-hover:text-primary"
-        >
+        <SelectTrigger className="flex content-center border-none bg-primary text-secondary group-hover:bg-background group-hover:text-primary">
           <SelectValue
             placeholder="type of sync"
             className="text-base font-semibold"
@@ -265,16 +262,16 @@ function ControlsBook({ item }: { item: GoogleBooksVolume }) {
       <div className="flex items-center space-x-2">
         <Checkbox
           id="isFinished"
+          checked={isFinished}
           className="data bg-background group-hover:bg-background data-[state=checked]:text-primary"
         />
-        <label
-          htmlFor="isFinished"
-          checked={isFinished}
-          onChange={(e) => setIsFinished(e.target.checked)}
+        <button
+          onClick={() => setIsFinished(!isFinished)}
+          type="button"
           className="text-sm font-medium leading-none"
         >
           is finished
-        </label>
+        </button>
       </div>
       <Button
         onClick={() =>
