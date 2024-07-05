@@ -24,13 +24,38 @@ export default async function About() {
       process.env.APPWRITE_WORK_DATABASE_ID ?? "",
       process.env.APPWRITE_INTERNSHIPS_COLLECTION_ID ?? ""
     )
-    .then((res) => res.documents as unknown as Internship[]);
+    .then((res) => res.documents as unknown as Internship[])
+    .then((intern) => {
+      intern.sort((a, b) => {
+        if (a.end_date < b.end_date) {
+          return 1;
+        }
+        if (a.end_date > b.end_date) {
+          return -1;
+        }
+        return 0;
+      });
+      return intern;
+    });
   const certificates = await databases
     .listDocuments(
       process.env.APPWRITE_WORK_DATABASE_ID ?? "",
       process.env.APPWRITE_CERTIFICATES_COLLECTION_ID ?? ""
     )
-    .then((res) => res.documents as unknown as Education[]);
+    .then((res) => res.documents as unknown as Education[])
+    .then((certificates) => {
+      certificates.sort((a, b) => {
+        if (a.start_date < b.start_date) {
+          return 1;
+        }
+        if (a.start_date > b.start_date) {
+          return -1;
+        }
+        return 0;
+      });
+      return certificates;
+    });
+  console.log(certificates);
 
   return (
     <div className="flex w-screen shrink-0 snap-center snap-always items-center py-14 lg:h-screen lg:py-10">
