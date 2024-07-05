@@ -264,7 +264,10 @@ async function handleIndustryIdentifiers(industryIdentifiers: any[]) {
         ),
       ]
     );
-    if (industryIdentifiersList.documents.length === 0) {
+
+    if (industryIdentifiersList.documents.length > 0) {
+      return industryIdentifiersList.documents[0];
+    } else {
       industryIdentifiersList = await databases.createDocument(
         process.env.APPWRITE_BOOKS_DATABASE_ID ?? "",
         process.env.APPWRITE_BOOKS_INDUSTRY_IDENTIFIERS_ID ?? "",
