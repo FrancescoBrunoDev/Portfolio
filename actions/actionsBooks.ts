@@ -7,14 +7,17 @@ import audioBooks from "@/app/section/record/books/audioBooks.json";
 
 const urlBase = "https://www.googleapis.com/books/v1/volumes";
 
-export async function getBooksFromGoogleApi(ISBN13: number, type: any) {
+export async function getBooksFromGoogleApi(
+  searchInput: number | string,
+  type: any
+) {
   const GOOGLE_BOOKS_API_KEY = process.env.GOOGLE_BOOKS_API_KEY;
   const res = await fetch(
-    `${urlBase}?q=${type}:${ISBN13}&key=${GOOGLE_BOOKS_API_KEY}&maxResults=40`
+    `${urlBase}?q=${type}:${searchInput}&key=${GOOGLE_BOOKS_API_KEY}&maxResults=40`
   );
-  const book = await res.json();
+  const books = await res.json();
 
-  return book.items;
+  return books.items;
 }
 
 async function getBookFromGoogleApi(ISBN13: string) {
@@ -27,35 +30,36 @@ async function getBookFromGoogleApi(ISBN13: string) {
   return book.items;
 }
 
-export async function syncFormJson(syncType) {
-  let booksJson;
+export async function syncFormJson({ syncType }: { syncType: TypeOfBook }) {
+  let booksJson: BooksRecord = {};
   if (syncType === "paper") {
     booksJson = paperBooks;
   } else if (syncType === "audio") {
     booksJson = audioBooks;
   }
-  // Assumi che paperBook sia l'oggetto JSON fornito
+
   for (const [year, books] of Object.entries(booksJson)) {
     for (const book of books) {
       try {
         const res = await getBookFromGoogleApi(book.ISBN13.toString());
         // Utilizza solo il primo risultato
         const item = res[0];
+        let isFinished = false;
+        let finished_date = null;
         if (item) {
           // Se month è uguale a 13 o mancante, significa che non è finito
-          const finished =
-            book?.month === 13 || book?.month == null ? false : true;
-          item.volumeInfo.finished = finished;
+          isFinished = book?.month === 13 || book?.month == null ? false : true;
           // Aggiungi a item il parametro finished_date se il libro è finito
-          if (finished) {
-            item.volumeInfo.finished_date = new Date(
-              parseInt(year),
-              book.month - 1,
-              15
-            ).toISOString();
+          if (isFinished && book.month) {
+            finished_date = new Date(parseInt(year), book.month - 1, 15);
           }
-          const finished_date = item.volumeInfo.finished_date ?? null;
-          await addBookToDatabase({ item, finished_date, syncType });
+
+          await addBookToDatabase({
+            item,
+            finished_date,
+            enjoied_as: syncType,
+            isFinished,
+          });
         }
       } catch (error) {
         console.error(
@@ -101,14 +105,15 @@ function createBookID(industryIdentifiers: GoogleBooksIndustryIdentifier[]) {
 export async function addBookToDatabase({
   item,
   finished_date,
-  syncType,
+  isFinished,
+  enjoied_as,
 }: {
   item: GoogleBooksVolume;
-  finished_date?: Date;
-  syncType?: string;
+  finished_date: Date | null;
+  isFinished: boolean;
+  enjoied_as: TypeOfBook;
 }) {
   const volumeInfo = item.volumeInfo;
-  console.log(volumeInfo);
   let industryIdentifiers, authorsList, categoriesList;
 
   if (volumeInfo.industryIdentifiers) {
@@ -144,7 +149,7 @@ export async function addBookToDatabase({
         return;
       }
     } catch (error) {
-      await databases.createDocument(
+      const book = await databases.createDocument(
         process.env.APPWRITE_BOOKS_DATABASE_ID ?? "",
         process.env.APPWRITE_BOOKS_BOOKS_DATA_ID ?? "",
         ID.custom(IDcode),
@@ -157,19 +162,56 @@ export async function addBookToDatabase({
           language: volumeInfo?.language,
           authors: authorsList?.documents?.map((author) => author.$id),
           published_date: volumeInfo.publishedDate,
-          industryIdentifiers: industryIdentifiers.$id,
+          industryIdentifiers: industryIdentifiers?.$id,
           page_count: volumeInfo?.pageCount,
           categories: categoriesList?.documents?.map(
             (category) => category.$id
           ),
-          finished: volumeInfo.finished,
-          finished_date: finished_date,
-          enjoied_as: syncType,
         }
       );
+      console.log(volumeInfo.title, "added to the database");
+      await addBookToMyBooks({
+        book,
+        finished_date,
+        isFinished,
+        enjoied_as,
+      });
     }
   } catch (error) {
     console.log(error);
+  }
+}
+
+async function addBookToMyBooks({
+  book,
+  finished_date,
+  isFinished,
+  enjoied_as,
+}: {
+  book: {
+    $id: string;
+  };
+  finished_date: Date | null;
+  isFinished: boolean;
+  enjoied_as: TypeOfBook;
+}) {
+  const ISOfinished_date = finished_date ? finished_date.toISOString() : null;
+  try {
+    await databases.createDocument(
+      process.env.APPWRITE_BOOKS_DATABASE_ID ?? "",
+      process.env.APPWRITE_BOOKS_MY_BOOKS_ID ?? "",
+      ID.unique(),
+      {
+        bookData: book.$id,
+        finished_date: ISOfinished_date,
+        isFinished,
+        enjoied_as,
+      }
+    );
+    console.log("Libro aggiunto ai miei libri");
+  } catch (error) {
+    console.error("Errore durante l'aggiunta del libro ai miei libri:", error);
+    throw error; // Rilancia l'errore per gestirlo ulteriormente o informare l'utente
   }
 }
 
@@ -208,8 +250,9 @@ async function handleSimpleArrays(array: string[], collectionId: string) {
 }
 
 async function handleIndustryIdentifiers(industryIdentifiers: any[]) {
+  let industryIdentifiersList;
   try {
-    let industryIdentifiersList = await databases.listDocuments(
+    industryIdentifiersList = await databases.listDocuments(
       process.env.APPWRITE_BOOKS_DATABASE_ID ?? "",
       process.env.APPWRITE_BOOKS_INDUSTRY_IDENTIFIERS_ID ?? "",
       [

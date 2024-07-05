@@ -27,14 +27,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
 
 export default function BookManager() {
   const [books, setBooks] = useState<GoogleBooksVolume[]>([]);
   const [searchInput, setSearchInput] = useState(0);
   const [type, setType] = useState("isbn");
-  const [syncType, setSyncType] = useState("paper");
+  const [syncType, setSyncType] = useState<TypeOfBook>("audio");
 
   async function getBooks() {
+    console.log(searchInput, type);
     const res = await getBooksFromGoogleApi(searchInput, type);
     setBooks(res);
   }
@@ -43,7 +45,12 @@ export default function BookManager() {
     <>
       <div className="flex w-full flex-col gap-4 text-primary">
         <div className="flex gap-2 rounded-lg border-2 border-primary p-2">
-          <Select onValueChange={setSyncType} defaultValue="paper">
+          <Select
+            onValueChange={(value: TypeOfBook) =>
+              setSyncType(value as TypeOfBook)
+            }
+            defaultValue={syncType}
+          >
             <SelectTrigger className="w-28 border-none">
               <SelectValue
                 placeholder="type of sync"
@@ -67,7 +74,11 @@ export default function BookManager() {
               </SelectGroup>
             </SelectContent>
           </Select>
-          <Button onClick={() => syncFormJson(syncType)}>Sync by Json</Button>
+          <Button
+            onClick={() => syncFormJson({ syncType: syncType as TypeOfBook })}
+          >
+            Sync by Json
+          </Button>
         </div>
         <div className="flex flex-col gap-2 rounded-lg border-2 border-primary p-2">
           <div className="flex w-full justify-center gap-4">
@@ -191,10 +202,11 @@ export function ShowFetchedDataBook({
 
 function ControlsBook({ item }: { item: GoogleBooksVolume }) {
   const [finished_date, setDate] = useState<Date>();
-  const [syncType, setSyncType] = useState("paper");
+  const [syncType, setSyncType] = useState<TypeOfBook>("paper");
+  const [isFinished, setIsFinished] = useState(false);
 
   return (
-    <div className="flex gap-2 pt-4">
+    <div className="flex flex-col gap-4 pt-4">
       <Popover>
         <PopoverTrigger asChild>
           <Button
@@ -220,8 +232,14 @@ function ControlsBook({ item }: { item: GoogleBooksVolume }) {
           />
         </PopoverContent>
       </Popover>
-      <Select onValueChange={setSyncType} defaultValue="paper">
-        <SelectTrigger className="w-28 border-none bg-primary text-secondary group-hover:bg-background group-hover:text-primary">
+      <Select
+        onValueChange={(value: TypeOfBook) => setSyncType(value as TypeOfBook)}
+        defaultValue="paper"
+      >
+        <SelectTrigger
+          class
+          Name="flex content-center border-none bg-primary text-secondary group-hover:bg-background group-hover:text-primary"
+        >
           <SelectValue
             placeholder="type of sync"
             className="text-base font-semibold"
@@ -244,8 +262,29 @@ function ControlsBook({ item }: { item: GoogleBooksVolume }) {
           </SelectGroup>
         </SelectContent>
       </Select>
+      <div className="flex items-center space-x-2">
+        <Checkbox
+          id="isFinished"
+          className="data bg-background group-hover:bg-background data-[state=checked]:text-primary"
+        />
+        <label
+          htmlFor="isFinished"
+          checked={isFinished}
+          onChange={(e) => setIsFinished(e.target.checked)}
+          className="text-sm font-medium leading-none"
+        >
+          is finished
+        </label>
+      </div>
       <Button
-        onClick={() => addBookToDatabase({ item, finished_date, syncType })}
+        onClick={() =>
+          addBookToDatabase({
+            item,
+            finished_date,
+            isFinished,
+            enjoied_as: syncType,
+          })
+        }
         className="group-hover:bg-background group-hover:text-primary"
       >
         add to readed

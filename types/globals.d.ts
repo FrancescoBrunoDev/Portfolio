@@ -10,7 +10,7 @@ type Year = {
   }[];
 };
 
-interface note {
+interface Note {
   url: string;
   name: string;
   svg: string;
@@ -18,7 +18,7 @@ interface note {
 
 type BookJson = {
   title: string;
-  notes: note[];
+  notes?: note[];
   ISBN13: number;
   type?: string;
   authors?: string[];
@@ -29,36 +29,13 @@ type BookJson = {
   infoLink?: string;
   altNotes?: string;
   tranlatedNotes?: string;
-  month: number;
+  month?: number;
 };
 
 type BooksRecord = Record<string, BookJson[]>;
 
 type Book = {
-  item: {
-    bookInfo: {
-      title: string;
-      authors: string[];
-      publishedDate: string;
-      industryIdentifiers: {
-        type: string;
-        identifier: string;
-      }[];
-      categories: string[];
-      pageCount: number;
-      infoLink: string;
-      imageLinks: {
-        smallThumbnail: string;
-        thumbnail: string;
-      };
-      language: string;
-    };
-    note: note[];
-    type: string;
-    altNotes?: string;
-    tranlatedNotes?: string;
-    month: number;
-  };
+  item: BookDetails;
 };
 
 type BookDetails = {
@@ -79,11 +56,16 @@ type BookDetails = {
     };
     language: string;
   };
-  note: note[];
-  type: string;
-  altNotes?: string;
-  tranlatedNotes?: string;
-  month: number;
+  note: Note[];
+  type: string; // da eliminare perché sará enjoied_as
+  altNotes?: string; // questi sono da spostare in Note
+  tranlatedNotes?: string; // quest sono da spostare in Note
+  month: number; // da eliminare perché sarà finished_date
+  finished: boolean;
+  finished_date: string | null;
+  enjoied_as: TypeOfBook;
+  bookData: GoogleBooksVolumeInfo;
+  $id: string;
 };
 
 interface MousePosition {
@@ -201,10 +183,9 @@ interface GoogleBooksVolumeInfo {
   previewLink: string;
   infoLink: string;
   canonicalVolumeLink: string;
-  finished: boolean;
-  finished_date: string | null;
-  enjoied_as: "audio" | "paper";
 }
+
+type TypeOfBook = "audio" | "paper";
 
 interface GoogleBooksSaleInfo {
   country: string;
