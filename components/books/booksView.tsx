@@ -31,7 +31,7 @@ export default function BooksView(booksFetch: any) {
   }
 
   return (
-    <div className="no-scrollbar overscroll-x-contain h-screen w-screen items-center overflow-x-hidden pt-32 text-primary">
+    <div className="no-scrollbar h-screen w-screen items-center overflow-x-hidden overscroll-x-contain pt-32 text-primary">
       <SearchBox
         books={books}
         setFilteredData={setFilteredData}

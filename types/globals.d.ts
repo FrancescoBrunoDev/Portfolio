@@ -1,13 +1,6 @@
 type Year = {
   year: number;
-  bookDetails: {
-    note: note[];
-    bookInfo: any;
-    type: string;
-    altNotes: string;
-    tranlatedNotes?: string;
-    month: number;
-  }[];
+  bookDetails: BookDetails[];
 };
 
 interface Note {
