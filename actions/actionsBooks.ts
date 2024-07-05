@@ -224,7 +224,9 @@ async function handleSimpleArrays(array: string[], collectionId: string) {
         collectionId ?? "",
         [Query.equal("name", item)]
       );
-      if (arrayDb.documents.length === 0) {
+      if (arrayDb.documents.length > 0) {
+        return arrayDb.documents[0];
+      } else {
         await databases.createDocument(
           process.env.APPWRITE_BOOKS_DATABASE_ID ?? "",
           collectionId ?? "",
