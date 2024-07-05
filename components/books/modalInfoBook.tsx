@@ -1,7 +1,6 @@
 import { Minimize2, ExternalLink } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import Image from "next/image";
 import BackgroundDots from "@/components/books/backgroundDots";
 import { useState } from "react";
 import { ChevronRight, ChevronLeft } from "lucide-react";
@@ -15,7 +14,7 @@ interface ItemDetailProps {
 interface ModalInfoBookProps {
   book: Book;
   titleParts: string[];
-  note: note[];
+  note: Note[];
   type: string;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   altNotes: string | undefined;
@@ -105,7 +104,7 @@ export default function ModalInfoBook({
   // Randomly select a variant
   const [randomVariant] = useState(
     selectedFormat.variants[
-    Math.floor(Math.random() * selectedFormat.variants.length)
+      Math.floor(Math.random() * selectedFormat.variants.length)
     ]
   );
 
@@ -149,7 +148,7 @@ export default function ModalInfoBook({
         </div>
         <div className="flex h-full flex-col gap-6">
           {/* authors book */}
-          <div className="flex flex-col text-left text-background pr-20">
+          <div className="flex flex-col pr-20 text-left text-background">
             {infoBooks.authors.map((author, index) => (
               <span key={index} className="text-4xl font-bold leading-tight">
                 {author}
@@ -237,7 +236,8 @@ export default function ModalInfoBook({
             </div>
           ) : null}
           <div className="border-4 border-t-0 border-primary bg-background p-3 text-left font-semibold text-primary">
-            <div className="uppercase text-4xl">{titleParts[0]}</div><div className="max-h-36text-2xl ">{titleParts[1]}</div>
+            <div className="text-4xl uppercase">{titleParts[0]}</div>
+            <div className="max-h-36text-2xl ">{titleParts[1]}</div>
           </div>
         </div>
       </div>
