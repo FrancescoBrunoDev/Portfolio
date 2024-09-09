@@ -10,14 +10,17 @@ export default async function Project() {
       .listDocuments(
         process.env.APPWRITE_PROJECTS_DATABASE_ID ?? "",
         process.env.APPWRITE_PROJECTS_COLLECTION_ID ?? "",
-        [Query.equal("type", "665c800800298dea7a17")]
+        [Query.equal("type", "665c800800298dea7a17"), Query.orderDesc("order")]
       )
       .then((res) => res.documents as unknown as Project[]);
     otherProjects = await databases
       .listDocuments(
         process.env.APPWRITE_PROJECTS_DATABASE_ID ?? "",
         process.env.APPWRITE_PROJECTS_COLLECTION_ID ?? "",
-        [Query.notEqual("type", "665c800800298dea7a17")]
+        [
+          Query.notEqual("type", "665c800800298dea7a17"),
+          Query.orderDesc("order"),
+        ]
       )
       .then((res) => res.documents as unknown as Project[]);
   } catch (error) {
