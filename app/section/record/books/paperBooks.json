@@ -1,6 +1,11 @@
 {
   "2024": [
     {
+      "title": "Milione",
+      "month": 13,
+      "ISBN13": 9788845910326
+    },
+    {
       "title": "Gödel, Escher, Bach.",
       "month": 13,
       "ISBN13": 9780465026562
@@ -132,6 +137,7 @@
       "title": "Da zero a ultra",
       "authors": ["Roberto Martini"],
       "ISBN13": 9798364044136,
+      "ISBN10": null,
       "categories": ["running", "sport"],
       "publishedDate": "2022",
       "pageCount": 338,
