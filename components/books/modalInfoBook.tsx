@@ -189,8 +189,8 @@ export default function ModalInfoBook({
             />
 
             <ItemDetail
-              title={infoBooks.industryIdentifiers[0].type}
-              value={infoBooks.industryIdentifiers[0].identifier.toString()}
+              title={infoBooks.ISBN_13 ? "ISBN-13" : "ISBN-10"}
+              value={String(infoBooks.ISBN_13) || String(infoBooks.ISBN_10)}
             />
           </div>
           {/* note personali */}

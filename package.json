@@ -32,6 +32,7 @@
     "next": "^14.2.2",
     "node-appwrite": "^13.0.0",
     "npm-run-all": "^4.1.5",
+    "pocketbase": "^0.21.5",
     "postcss": "^8.4.31",
     "react": "18.2.0",
     "react-day-picker": "^8.10.1",

@@ -10,7 +10,7 @@ export default function BookItem(book: Book) {
   const type = book.item.type;
   const altNotes = book.item.altNotes;
   const tranlatedNotes = book.item.tranlatedNotes;
-  const titleParts = infoBooks.title.match(/[^.!]+[.!]?/g) || [];
+  const titleParts = infoBooks.title?.match(/[^.!]+[.!]?/g) || [];
 
   const lenghtMainTitle = 50;
 
@@ -23,12 +23,12 @@ export default function BookItem(book: Book) {
     >
       <button
         onClick={() => setIsOpen(true)}
-        key={infoBooks.industryIdentifiers[0].identifier}
+        key={infoBooks.ISBN_13 || infoBooks.ISBN_10}
         className="relative z-0 h-56 w-32 shrink-0 translate-x-0 overflow-visible border-2 border-primary transition-all duration-200 ease-in-out hover:scale-[1.025]"
       >
         <div className="h-full w-full bg-primary p-3 opacity-100 transition-opacity duration-300">
           <div className="flex h-full flex-col text-left text-background">
-            {infoBooks.authors.map((author, index) => (
+            {infoBooks.authors?.map((author, index) => (
               <span key={index} className="leading-tight">
                 {author}
                 {index < infoBooks.authors.length - 1 && <br />}

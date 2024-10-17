@@ -36,10 +36,8 @@ type BookDetails = {
     title: string;
     authors: string[];
     publishedDate: string;
-    industryIdentifiers: {
-      type: string;
-      identifier: string;
-    }[];
+    ISBN_13: number;
+    ISBN_10: number;
     categories: string[];
     pageCount: number;
     infoLink: string;

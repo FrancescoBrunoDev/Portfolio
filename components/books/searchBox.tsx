@@ -16,10 +16,11 @@ export default function SearchBox({
     const input = (event.target as HTMLInputElement).value;
     const filteredData = books
       .map((year) => {
-        const filteredBookDetails = year.bookDetails.filter((book) => {
+        const filteredBookDetails = year.bookDetails.filter(({bookInfo}) => {
+          console.log(bookInfo)
           return (
-            book.bookInfo.title.toLocaleLowerCase().includes(input) ||
-            book.bookInfo.authors[0].toLocaleLowerCase().includes(input)
+            bookInfo?.title?.toLocaleLowerCase().includes(input) ||
+            (Array.isArray(bookInfo?.authors) && bookInfo.authors[0]?.toLocaleLowerCase().includes(input))
           );
         });
 
