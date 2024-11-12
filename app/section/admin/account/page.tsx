@@ -9,7 +9,7 @@ async function signOut() {
 
   const { account } = await createSessionClient();
 
-  cookies().delete("my-custom-session");
+  (await cookies()).delete("my-custom-session");
   await account.deleteSession("current");
 
   redirect("/");

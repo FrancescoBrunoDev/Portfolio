@@ -13,7 +13,7 @@ const client = new Client()
 export const databases = new Databases(clientDb);
 
 export async function createSessionClient() {
-  const session = cookies().get("my-custom-session");
+  const session = (await cookies()).get("my-custom-session");
   if (!session || !session.value) {
     throw new Error("No session");
   }

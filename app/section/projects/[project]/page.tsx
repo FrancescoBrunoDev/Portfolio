@@ -5,12 +5,13 @@ import { Fingerprint } from "lucide-react";
 import { databases } from "@/lib/appwrite";
 
 interface ProjectProps {
-  params: {
+  params: Promise<{
     project: string;
-  };
+  }>;
 }
 
-export default async function Project({ params }: ProjectProps) {
+export default async function Project(props: ProjectProps) {
+  const params = await props.params;
   let project = null;
 
   project = await databases

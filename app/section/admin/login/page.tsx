@@ -16,7 +16,7 @@ async function logIn(formData: FormData) {
 
   const session = await account.createEmailPasswordSession(email, password);
 
-  cookies().set("my-custom-session", session.secret, {
+  (await cookies()).set("my-custom-session", session.secret, {
     path: "/",
     httpOnly: true,
     sameSite: "strict",
