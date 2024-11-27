@@ -144,14 +144,17 @@ export default function ModalInfoBook({
       <div className="relative m-2 h-4/5 max-h-[46rem] w-full bg-primary p-3 text-secondary md:h-3/4 md:max-w-md lg:m-0">
         {/* Buttons */}
         <div className="absolute right-4 top-6 flex gap-2">
-          <button className="hover:scale-105">
-            <Link href={infoBooks.infoLink} target="_blank">
-              <ExternalLink
-                strokeWidth={2.75}
-                className="stroke-secondar place-self-end"
-              />
-            </Link>
-          </button>
+          {infoBooks.infoLink && (
+            <button className="hover:scale-105">
+              <Link href={infoBooks.infoLink} target="_blank">
+                <ExternalLink
+                  strokeWidth={2.75}
+                  className="stroke-secondar place-self-end"
+                />
+              </Link>
+            </button>
+          )}
+
           <button onClick={() => setIsOpen(false)} className="hover:scale-105">
             <Minimize2
               strokeWidth={2.75}
