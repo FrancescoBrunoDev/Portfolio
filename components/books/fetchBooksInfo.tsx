@@ -1,6 +1,5 @@
 import pb from "@/lib/pocketbase";
 
-const GOOGLE_BOOKS_API_KEY = process.env.GOOGLE_BOOKS_API_KEY;
 const PATH_SVG_MAKER = process.env.PATH_SVG_MAKER;
 const PATH_SVG_MAKER_KEY = process.env.PATH_SVG_MAKER_KEY;
 
@@ -78,56 +77,6 @@ async function getBookRecordWithISBN_13(isbn: number): Promise<any | null> {
   } catch (error) {
     console.log("No book info found in the database:", isbn);
     console.log("Error:", error);
-    return null;
-  }
-}
-
-async function createBookRecord({
-  bookInfo,
-  book,
-}: {
-  year: string;
-  bookInfo: any;
-  book: any;
-}) {
-  try {
-    const isbn13 = bookInfo.industryIdentifiers?.find(
-      (id: any) => id.type === "ISBN_13"
-    )?.identifier;
-    const isbn10 = bookInfo.industryIdentifiers?.find(
-      (id: any) => id.type === "ISBN_10"
-    )?.identifier;
-
-    if (
-      isbn13 &&
-      (await getBookRecordWithISBN_13(Number(isbn13) || Number(book.ISBN13)))
-    ) {
-      console.log("Book already exists");
-      return;
-    }
-
-    const data = {
-      title: bookInfo.title || book.title || null,
-      authors: bookInfo.authors || book.author || null,
-      imageLinks: bookInfo.imageLinks || book.imageLinks || null,
-      categories: bookInfo.categories || book.categories || null,
-      publishedDate: bookInfo.publishedDate || book.publishedDate || null,
-      pageCount:
-        bookInfo.pageCount?.toString() || book.pageCount?.toString() || null,
-      language: bookInfo.language || book.language || null,
-      infoLink: bookInfo.infoLink || book.infoLink || null,
-      ISBN_13: Number(isbn13) || Number(book.ISBN13) || null,
-      ISBN_10: Number(isbn10) || Number(book.ISBN10) || null,
-    };
-    if (bookInfo.ISBN13 === 9798364044136) {
-      console.log(data);
-    }
-    const res = await pb
-      .collection("books_info")
-      .create(data, { requestKey: null });
-    return res;
-  } catch (error) {
-    console.error("Error creating book record:", error);
     return null;
   }
 }
