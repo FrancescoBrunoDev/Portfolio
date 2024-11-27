@@ -34,7 +34,7 @@ export default function BookItem(book: Book) {
                 {index < infoBooks.authors.length - 1 && <br />}
               </span>
             ))}
-            {note.length !== 0 && Object.keys(note).length > 1 && (
+            {note && note.length !== 0 && Object.keys(note).length > 1 && (
               <div className="pt-6">
                 <Image
                   width={300}

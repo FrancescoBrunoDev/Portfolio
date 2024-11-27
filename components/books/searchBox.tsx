@@ -14,13 +14,14 @@ export default function SearchBox({
 }: SearchBoxProps) {
   function handleInput(event: FormEvent<HTMLInputElement>) {
     const input = (event.target as HTMLInputElement).value;
-    const filteredData = books
+    const filteredData = Object.values(books)
       .map((year) => {
-        const filteredBookDetails = year.bookDetails.filter(({bookInfo}) => {
-          console.log(bookInfo)
+        const filteredBookDetails = year.bookDetails.filter(({ bookInfo }) => {
+          console.log(bookInfo);
           return (
             bookInfo?.title?.toLocaleLowerCase().includes(input) ||
-            (Array.isArray(bookInfo?.authors) && bookInfo.authors[0]?.toLocaleLowerCase().includes(input))
+            (Array.isArray(bookInfo?.authors) &&
+              bookInfo.authors[0]?.toLocaleLowerCase().includes(input))
           );
         });
 
