@@ -1,6 +1,6 @@
-'use client'
+"use client";
 
-import { usePathname } from 'next/navigation'
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Logo from "@/components/logo";
@@ -12,8 +12,8 @@ export default function Nav() {
   }
   return (
     <AnimatePresence>
-      <header className="fixed z-20 h-14 w-screen bg-background py-3 text-primary">
-        <motion.div className="container"
+      <header className="container fixed z-20 h-14 w-screen bg-background py-3 text-primary">
+        <motion.div
           key="navbar"
           initial={{ y: -5, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}

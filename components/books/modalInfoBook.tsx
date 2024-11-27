@@ -126,7 +126,20 @@ export default function ModalInfoBook({
       initial={{ y: 10, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       exit={{ y: -10, opacity: 0 }}
-      className="fixed bottom-0 left-0 right-0 top-0 z-20 flex h-screen w-screen items-center justify-center backdrop-grayscale"
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        zIndex: 20,
+        height: "100vh",
+        width: "100vw",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        backdropFilter: "grayscale(100%)",
+      }}
     >
       <div className="relative m-2 h-4/5 max-h-[46rem] w-full bg-primary p-3 text-secondary md:h-3/4 md:max-w-md lg:m-0">
         {/* Buttons */}

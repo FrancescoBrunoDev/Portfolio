@@ -34,24 +34,25 @@ export const BgLanding: React.FC<BgLandingProps> = ({
   const movement = getMovement(radius);
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 1, duration: 1 }}
-      className="absolute bottom-0 left-0 right-0 top-0 z-0 flex h-screen w-screen items-center justify-center"
-    >
-      <svg width={windowDimensions.width} height={windowDimensions.height}>
-        <circle
-          className="transition-all duration-100 ease-in-out"
-          cx={getCircleX(movement)}
-          cy={getCircleY(movement)}
-          r={radius + randomNum}
-          stroke="hsl(var(--primary))"
-          strokeWidth={20}
-          fill="transparent"
-        />
-      </svg>
-    </motion.div>
+    <div className="absolute bottom-0 left-0 right-0 top-0 z-0 flex h-screen w-screen items-center justify-center">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1, duration: 1 }}
+      >
+        <svg width={windowDimensions.width} height={windowDimensions.height}>
+          <circle
+            className="transition-all duration-100 ease-in-out"
+            cx={getCircleX(movement)}
+            cy={getCircleY(movement)}
+            r={radius + randomNum}
+            stroke="hsl(var(--primary))"
+            strokeWidth={20}
+            fill="transparent"
+          />
+        </svg>
+      </motion.div>
+    </div>
   );
 
   function getInitialDirection() {
@@ -77,7 +78,7 @@ export const BgLanding: React.FC<BgLandingProps> = ({
   function getDistanceFromCenter() {
     return Math.sqrt(
       Math.pow(mousePosition.x - centerX, 2) +
-      Math.pow(mousePosition.y - centerY, 2)
+        Math.pow(mousePosition.y - centerY, 2)
     );
   }
 

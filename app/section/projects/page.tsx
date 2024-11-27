@@ -38,7 +38,9 @@ export default async function Project() {
             {devProjects &&
               devProjects.map(
                 (project) =>
-                  project.hidden === false && <ProjectItem project={project} />
+                  project.hidden === false && (
+                    <ProjectItem key={project.$id} project={project} />
+                  )
               )}
           </div>
         </div>

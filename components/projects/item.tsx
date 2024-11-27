@@ -6,7 +6,6 @@ export default function ProjectItem({ project }: { project: Project }) {
   return (
     <Link
       href={`/section/projects/${project.$id}`}
-      key={project.$id}
       className="relative z-0 h-full w-32 shrink-0 translate-x-0 border-2 border-primary transition-all duration-300 ease-in-out lg:border-none lg:text-transparent lg:hover:z-10 lg:hover:mr-6 lg:hover:translate-x-6 lg:hover:text-primary"
     >
       <div className="absolute h-full w-full bg-primary p-3 opacity-100 transition-opacity duration-300 hover:opacity-0">
