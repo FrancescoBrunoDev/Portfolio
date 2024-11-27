@@ -47,18 +47,10 @@ async function fetchBookDetails(year: string, books: any[]) {
   const bookDetailsPromises = books.map(async (book) => {
     let bookInfo = await getBookRecordWithISBN_13(book.ISBN13);
 
-    if (!bookInfo) {
-      bookInfo = await fetchGoogleBooksInfo(book.ISBN13);
-
-      if (bookInfo) {
-        const createdRecord = await createBookRecord({ year, bookInfo, book });
-
-        if (createdRecord) {
-          bookInfo = createdRecord;
-        }
-      }
+    if (bookInfo) {
+      //console.log(`Book found in database: ${bookInfo.title}`);
     } else {
-      console.log(`Book found in database: ${bookInfo.title}`);
+      console.log(`Book not found in database: ${book.title}`);
     }
 
     const notes = await getNotes(book.ISBN13);
@@ -86,18 +78,6 @@ async function getBookRecordWithISBN_13(isbn: number): Promise<any | null> {
   } catch (error) {
     console.log("No book info found in the database:", isbn);
     console.log("Error:", error);
-    return null;
-  }
-}
-
-async function fetchGoogleBooksInfo(isbn: number): Promise<any | null> {
-  const url = `https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}&key=${GOOGLE_BOOKS_API_KEY}`;
-  try {
-    const res = await fetch(url);
-    const data = await res.json();
-    return data.items?.[0]?.volumeInfo || null;
-  } catch (error) {
-    console.error("Error fetching from Google Books API:", error);
     return null;
   }
 }
