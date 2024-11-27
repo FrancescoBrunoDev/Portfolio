@@ -33,7 +33,7 @@ export default async function fetchBooksInfo() {
         return [year, { ...yearData, bookDetails: enrichedDetails }];
       })
     );
-    console.log(Object.fromEntries(enrichedBooks)[2024]);
+
     return Object.fromEntries(enrichedBooks);
   } catch (error) {
     console.error("Error in fetchBooksInfo:", error);
