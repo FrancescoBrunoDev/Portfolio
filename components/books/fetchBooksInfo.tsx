@@ -8,31 +8,38 @@ export default async function fetchBooksInfo() {
     const dbBooks = await pb.collection("books").getFullList({
       expand: "books_info",
     });
-    return await groupPerYear(dbBooks);
+
+    // Prima raggruppa i libri per anno
+    const groupedBooks = dbBooks.reduce<{
+      [key: string]: { year: string; bookDetails: any[] };
+    }>((acc, book) => {
+      const year = book.year || "🤷";
+      if (!acc[year]) {
+        acc[year] = { year, bookDetails: [] };
+      }
+      acc[year].bookDetails.push(moveBooksInfoOutOfExpand(book));
+      return acc;
+    }, {});
+
+    // Poi ottieni le note in parallelo per ogni libro
+    const enrichedBooks = await Promise.all(
+      Object.entries(groupedBooks).map(async ([year, yearData]) => {
+        const enrichedDetails = await Promise.all(
+          yearData.bookDetails.map(async (book) => {
+            const note = await getNotes(book.bookInfo?.ISBN_13);
+            return { ...book, note };
+          })
+        );
+        return [year, { ...yearData, bookDetails: enrichedDetails }];
+      })
+    );
+    console.log(Object.fromEntries(enrichedBooks)[2024]);
+    return Object.fromEntries(enrichedBooks);
   } catch (error) {
     console.error("Error in fetchBooksInfo:", error);
     throw error;
   }
 }
-
-async function groupPerYear(dbbooks: any[]) {
-  const books = await dbbooks.reduce(async (promise, book) => {
-    const acc = await promise;
-    let enrichedBook = moveBooksInfoOutOfExpand(book);
-    const notes = await getNotes(book.ISBN_13);
-    console.log(notes);
-
-    const year = book.year || "🤷";
-    if (!acc[year]) {
-      acc[year] = { year, bookDetails: [], note: notes };
-    }
-    acc[year].bookDetails.push(enrichedBook);
-    return acc;
-  }, Promise.resolve({}));
-
-  return books;
-}
-
 function moveBooksInfoOutOfExpand(book: any) {
   const bookInfo = book.expand?.books_info;
   delete book.books_info;

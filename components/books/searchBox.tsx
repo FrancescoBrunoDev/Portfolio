@@ -17,7 +17,6 @@ export default function SearchBox({
     const filteredData = Object.values(books)
       .map((year) => {
         const filteredBookDetails = year.bookDetails.filter(({ bookInfo }) => {
-          console.log(bookInfo);
           return (
             bookInfo?.title?.toLocaleLowerCase().includes(input) ||
             (Array.isArray(bookInfo?.authors) &&

@@ -41,7 +41,6 @@ export default function BooksView({ booksFetch }: { booksFetch: Year[] }) {
         {Object.values(filteredData)
           .sort((a, b) => b.year - a.year)
           .map((year) => {
-            console.log(year.bookDetails[0], "year");
             return (
               <div
                 key={year.year}

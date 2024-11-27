@@ -6,7 +6,7 @@ import Image from "next/image";
 export default function BookItem(book: Book) {
   const [isopen, setIsOpen] = useState(false);
   const infoBooks = book.item.bookInfo;
-  const note = book.item.note;
+  const note = book.item.note || [];
   const type = book.item.type;
   const altNotes = book.item.altNotes;
   const tranlatedNotes = book.item.tranlatedNotes;
@@ -34,7 +34,7 @@ export default function BookItem(book: Book) {
                 {index < infoBooks.authors.length - 1 && <br />}
               </span>
             ))}
-            {note && note.length !== 0 && Object.keys(note).length > 1 && (
+            {note.length !== 0 && Object.keys(note).length > 1 && (
               <div className="pt-6">
                 <Image
                   width={300}

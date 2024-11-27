@@ -55,7 +55,6 @@ export default async function About() {
       });
       return certificates;
     });
-  console.log(certificates);
 
   return (
     <div className="flex w-screen shrink-0 snap-center snap-always items-center py-14 lg:h-screen lg:py-10">
