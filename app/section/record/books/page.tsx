@@ -3,6 +3,8 @@ import fetchBooksInfo from "@/components/books/fetchBooksInfo";
 import { Suspense } from "react";
 import { BookCopy } from "lucide-react";
 
+export const dynamic = 'force-dynamic';
+
 async function View() {
   const data: Year[] = await fetchBooksInfo();
   return <BooksView booksFetch={data} />;
