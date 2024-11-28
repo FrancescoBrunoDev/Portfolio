@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
@@ -40,16 +41,15 @@ export default function Nav() {
               </Link>
               <div className="flex justify-around gap-4">
                 {sections.map((section, index) => (
-                  <>
+                  <React.Fragment key={section.href}>
                     <Link
-                      key={section.href}
                       className="transition-all duration-100 ease-in-out hover:font-semibold"
                       href={section.href}
                     >
                       {section.name}
                     </Link>
-                    {index < sections.length - 1 && <span className="">/</span>}
-                  </>
+                    {index < sections.length - 1 && <span>/</span>}
+                  </React.Fragment>
                 ))}
               </div>
             </div>
