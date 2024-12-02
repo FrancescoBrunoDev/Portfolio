@@ -13,7 +13,7 @@ export default function SearchBox({
   setIsFiltering,
 }: SearchBoxProps) {
   function handleInput(event: FormEvent<HTMLInputElement>) {
-    const input = (event.target as HTMLInputElement).value;
+    const input = (event.target as HTMLInputElement).value.toLocaleLowerCase();
     const filteredData = Object.values(books)
       .map((year) => {
         const filteredBookDetails = year.bookDetails.filter(({ bookInfo }) => {
