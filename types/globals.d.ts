@@ -32,31 +32,30 @@ type Book = {
 };
 
 type BookDetails = {
-  bookInfo: {
-    title: string;
-    authors: string[];
-    publishedDate: string;
-    ISBN_13: number;
-    ISBN_10: number;
-    categories: string[];
-    pageCount: number;
-    infoLink: string;
-    imageLinks: {
-      smallThumbnail: string;
-      thumbnail: string;
+  expand: {
+    book_info: {
+      id: string;
+      title: string;
+      authors: string[];
+      publishedDate: string;
+      ISBN_13: number;
+      ISBN_10: number;
+      categories: string[];
+      pageCount: number;
+      infoLink: string;
+      imageLinks: {
+        smallThumbnail: string;
+        thumbnail: string;
+      };
+      language: string;
     };
-    language: string;
-  };
+  }
   note: Note[];
-  type: string; // da eliminare perché sará enjoied_as
-  altNotes?: string; // questi sono da spostare in Note
-  tranlatedNotes?: string; // quest sono da spostare in Note
-  month: number; // da eliminare perché sarà finished_date
-  finished: boolean;
-  finished_date: string | null;
-  enjoied_as: TypeOfBook;
-  bookData: GoogleBooksVolumeInfo;
-  $id: string;
+  type: string;
+  altNotes?: string;
+  tranlatedNotes?: string;
+  month: number;
+  id: string;
 };
 
 interface MousePosition {

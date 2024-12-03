@@ -22,7 +22,7 @@ export default async function fetchBooksInfo() {
       if (!acc[year]) {
         acc[year] = { year, bookDetails: [] };
       }
-      acc[year].bookDetails.push(moveBooksInfoOutOfExpand(book));
+      acc[year].bookDetails.push(book);
       return acc;
     }, {});
 
@@ -31,7 +31,7 @@ export default async function fetchBooksInfo() {
       Object.entries(groupedBooks).map(async ([year, yearData]) => {
         const enrichedDetails = await Promise.all(
           yearData.bookDetails.map(async (book) => {
-            const note = await getNotes(book.bookInfo?.ISBN_13);
+            const note = await getNotes(book.expand.book_info?.ISBN_13);
             return { ...book, note };
           })
         );
@@ -44,12 +44,6 @@ export default async function fetchBooksInfo() {
     console.error("Error in fetchBooksInfo:", error);
     return { error: "Failed to fetch books information. Please try again later." };
   }
-}
-function moveBooksInfoOutOfExpand(book: any) {
-  const bookInfo = book.expand?.book_info;
-  delete book.books_info;
-  delete book.expand;
-  return { ...book, bookInfo };
 }
 
 async function getNotes(isbn: number) {

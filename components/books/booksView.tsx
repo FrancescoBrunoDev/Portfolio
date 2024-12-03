@@ -80,17 +80,14 @@ export default function BooksView({ booksFetch }: { booksFetch: Year[] }) {
                               <h2 className="h-6 sticky left-0 w-fit">{getMonthName(monthNum)}</h2>{" "}
                               <div key={month} className="flex flex-row gap-2">
                                 {booksInMonth.map((book) => {
-                                  if (!book.bookInfo) {
+                                  if (!book.expand.book_info) {
                                     return null;
                                   }
+
                                   return (
                                     <BookItem
                                       key={
-                                        book.bookInfo.ISBN_13 ||
-                                        book.bookInfo.ISBN_10 ||
-                                        Math.random()
-                                          .toString(36)
-                                          .substring(2, 11)
+                                        book.id
                                       }
                                       item={book}
                                     />

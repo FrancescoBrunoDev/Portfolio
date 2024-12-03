@@ -95,7 +95,7 @@ export default function ModalInfoBook({
 }: ModalInfoBookProps) {
   const [currentPage, setCurrentPage] = useState(0);
 
-  const infoBooks = book.item.bookInfo;
+  const infoBook = book.item.expand.book_info;
   // Randomly select a variant
   // Get the selected format or default to 'paper' if 'type' is not recognized
   const selectedFormat =
@@ -144,9 +144,9 @@ export default function ModalInfoBook({
       <div className="relative m-2 h-4/5 max-h-[46rem] w-full bg-primary p-3 text-secondary md:h-3/4 md:max-w-md lg:m-0">
         {/* Buttons */}
         <div className="absolute right-4 top-6 flex gap-2">
-          {infoBooks.infoLink && (
+          {infoBook.infoLink && (
             <button className="hover:scale-105">
-              <Link href={infoBooks.infoLink} target="_blank">
+              <Link href={infoBook.infoLink} target="_blank">
                 <ExternalLink
                   strokeWidth={2.75}
                   className="stroke-secondar place-self-end"
@@ -165,10 +165,10 @@ export default function ModalInfoBook({
         <div className="flex h-full flex-col gap-6">
           {/* authors book */}
           <div className="flex flex-col pr-20 text-left text-background">
-            {infoBooks.authors.map((author, index) => (
+            {infoBook.authors.map((author, index) => (
               <span key={index} className="text-4xl font-bold leading-tight">
                 {author}
-                {index < infoBooks.authors.length - 1 && <br />}
+                {index < infoBook.authors.length - 1 && <br />}
               </span>
             ))}
           </div>
@@ -176,7 +176,7 @@ export default function ModalInfoBook({
           <div className="flex flex-wrap text-sm">
             <div className="flex items-center gap-1">
               <div className="font-bold">Cathegories</div>
-              {infoBooks.categories.map((category, index) => (
+              {infoBook.categories.map((category, index) => (
                 <span
                   key={index}
                   className="h-fit rounded-full bg-background px-1 pb-[0.10rem] text-xs leading-tight text-primary"
@@ -189,15 +189,15 @@ export default function ModalInfoBook({
 
             <ItemDetail
               title="Year of Publication"
-              value={infoBooks.publishedDate.toString()}
+              value={infoBook.publishedDate.toString()}
             />
             <ItemDetail
               title="Page Count"
-              value={infoBooks.pageCount.toString()}
+              value={infoBook.pageCount.toString()}
             />
             <ItemDetail
               title="Language"
-              value={infoBooks.language.toString()}
+              value={infoBook.language.toString()}
             />
             <ItemDetail
               title="Format"
@@ -205,8 +205,8 @@ export default function ModalInfoBook({
             />
 
             <ItemDetail
-              title={infoBooks.ISBN_13 ? "ISBN-13" : "ISBN-10"}
-              value={String(infoBooks.ISBN_13) || String(infoBooks.ISBN_10)}
+              title={infoBook.ISBN_13 ? "ISBN-13" : "ISBN-10"}
+              value={String(infoBook.ISBN_13) || String(infoBook.ISBN_10)}
             />
           </div>
           {/* note personali */}

@@ -16,11 +16,11 @@ export default function SearchBox({
     const input = (event.target as HTMLInputElement).value.toLocaleLowerCase();
     const filteredData = Object.values(books)
       .map((year) => {
-        const filteredBookDetails = year.bookDetails.filter(({ bookInfo }) => {
+        const filteredBookDetails = year.bookDetails.filter(({ expand }) => {
           return (
-            bookInfo?.title?.toLocaleLowerCase().includes(input) ||
-            (Array.isArray(bookInfo?.authors) &&
-              bookInfo.authors[0]?.toLocaleLowerCase().includes(input))
+            expand.book_info?.title?.toLocaleLowerCase().includes(input) ||
+            (Array.isArray(expand.book_info?.authors) &&
+              expand.book_info.authors[0]?.toLocaleLowerCase().includes(input))
           );
         });
 
@@ -45,7 +45,7 @@ export default function SearchBox({
 
   return (
     <div className="fixed left-0 right-0 top-0 z-10 flex h-32 items-end justify-center bg-background pb-4">
-      <div className="flex h-8 w-64 items-center gap-1  bg-transparent">
+      <div className="flex h-8 w-64 items-center gap-1 bg-transparent">
         <Book strokeWidth={2.75} className="h-full w-fit text-primary" />
         <span className="text-2xl">/</span>
         <input

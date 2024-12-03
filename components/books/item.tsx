@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function BookItem(book: Book) {
   const [isopen, setIsOpen] = useState(false);
-  const infoBooks = book.item.bookInfo;
+  const infoBooks = book.item.expand.book_info;
   const note = book.item.note || [];
   const type = book.item.type;
   const altNotes = book.item.altNotes;
