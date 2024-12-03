@@ -23,7 +23,7 @@ export default async function View({
   const randomVariant = await getFormatVariants({ type: book.type });
 
   return (
-    <div className="fixed inset-x-3 inset-y-0 flex flex-col items-center justify-center gap-4">
+    <div className="fixed inset-x-3 bottom-0 top-10 flex flex-col items-center justify-center gap-4 md:inset-y-0">
       <Link href={`/section/record/books`}>
         <Button className="text-md flex items-center">
           <ArrowLeft />
