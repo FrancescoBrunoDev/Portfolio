@@ -5,6 +5,11 @@ const PATH_SVG_MAKER_KEY = process.env.PATH_SVG_MAKER_KEY;
 
 export default async function fetchBooksInfo() {
   try {
+
+    if (!pb) {
+      throw new Error("PocketBase instance is not available");
+    }
+
     const dbBooks = await pb.collection("books").getFullList({
       expand: "books_info",
     });
@@ -37,7 +42,7 @@ export default async function fetchBooksInfo() {
     return Object.fromEntries(enrichedBooks);
   } catch (error) {
     console.error("Error in fetchBooksInfo:", error);
-    throw error;
+    return { error: "Failed to fetch books information. Please try again later." };
   }
 }
 function moveBooksInfoOutOfExpand(book: any) {
