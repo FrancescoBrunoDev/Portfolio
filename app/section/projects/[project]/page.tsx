@@ -2,7 +2,8 @@ import SpecialContetent from "@/components/projects/project/specialContent";
 import Frame from "@/components/projects/project/frame";
 import parse from "html-react-parser";
 import { Fingerprint } from "lucide-react";
-import { databases } from "@/lib/appwrite";
+import pb from "@/lib/pocketbase";
+import { getMacroType } from "@/actions/actionsProjects";
 
 interface ProjectProps {
   params: Promise<{
@@ -12,26 +13,21 @@ interface ProjectProps {
 
 export default async function Project(props: ProjectProps) {
   const params = await props.params;
-  let project = null;
+  let project: Project;
 
-  project = await databases
-    .getDocument(
-      process.env.APPWRITE_PROJECTS_DATABASE_ID ?? "",
-      process.env.APPWRITE_PROJECTS_COLLECTION_ID ?? "",
-      params.project
-    )
-    .then((res) => res as unknown as Project);
+  project = await pb.collection("projects").getOne(params.project);
+  const macroType = await getMacroType({ type: project.type });
 
   return (
     <div className="relative min-h-screen w-screen overflow-hidden">
       <Frame
-        projectId={project.$id}
-        projectType={project.type}
+        projectId={project.id}
+        macroType={macroType}
         link={project.link}
       />
       {project.videoSrc && (
         <video
-          src={project.videoSrc.src}
+          src={project.videoSrc}
           autoPlay
           loop
           muted
@@ -42,7 +38,7 @@ export default async function Project(props: ProjectProps) {
         <div className="w-full px-2 lg:px-10">
           <p className="flex items-baseline">
             <Fingerprint className="mr-0.5 h-3 w-3 stroke-[3]" />
-            {project.$id} • {project.type.macro_type}/{project.type.type}
+            {project.id} • {macroType}/{project.type}
           </p>
           <h1 className="text-4xl font-bold uppercase lg:text-8xl">
             {project.title}
@@ -51,7 +47,7 @@ export default async function Project(props: ProjectProps) {
             {parse(project.description)}
           </p>
           <SpecialContetent
-            type={project.type.type}
+            type={project.type}
             secondaryLink={project.secondaryLink}
             title={project.title}
             scoreImg={project.scoreImg}

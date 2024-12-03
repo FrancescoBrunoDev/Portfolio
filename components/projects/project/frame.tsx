@@ -3,11 +3,8 @@ import Link from "next/link";
 
 interface FrameProps {
   projectId: string;
-  projectType: {
-    type: string;
-    macro_type: string;
-  };
   link: string | null;
+  macroType: "dev" | "other";
 }
 
 interface AdjacentIds {
@@ -19,8 +16,8 @@ interface AdjacentIds {
 
 export default async function Frame({
   projectId,
-  projectType,
   link,
+  macroType
 }: FrameProps) {
   const adjacentIds: AdjacentIds = await getAdjacentIds(projectId);
 
@@ -34,7 +31,7 @@ export default async function Frame({
           <div className="vertical-text fixed left-2 text-center text-lg text-primary">
             {adjacentIds.prevUsesAnotherArray
               ? `to ${
-                  projectType.macro_type === "dev" ? "other" : "dev"
+                  macroType === "dev" ? "other" : "dev"
                 } projects`
               : "next"}
           </div>
@@ -48,7 +45,7 @@ export default async function Frame({
           <div className="vertical-text fixed right-2 rotate-180 text-center text-lg text-primary">
             {adjacentIds.nextUsesAnotherArray
               ? `to ${
-                  projectType.macro_type === "dev" ? "other" : "dev"
+                macroType === "dev" ? "other" : "dev"
                 } projects`
               : "prev"}
           </div>

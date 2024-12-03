@@ -1,28 +1,20 @@
 import ProjectItem from "@/components/projects/item";
-import { databases } from "@/lib/appwrite";
-import { Query } from "node-appwrite";
+import pb from "@/lib/pocketbase";
 
 export default async function Project() {
   let devProjects: Project[] = [];
   let otherProjects: Project[] = [];
   try {
-    devProjects = await databases
-      .listDocuments(
-        process.env.APPWRITE_PROJECTS_DATABASE_ID ?? "",
-        process.env.APPWRITE_PROJECTS_COLLECTION_ID ?? "",
-        [Query.equal("type", "665c800800298dea7a17"), Query.orderDesc("order")]
-      )
-      .then((res) => res.documents as unknown as Project[]);
-    otherProjects = await databases
-      .listDocuments(
-        process.env.APPWRITE_PROJECTS_DATABASE_ID ?? "",
-        process.env.APPWRITE_PROJECTS_COLLECTION_ID ?? "",
-        [
-          Query.notEqual("type", "665c800800298dea7a17"),
-          Query.orderDesc("order"),
-        ]
-      )
-      .then((res) => res.documents as unknown as Project[]);
+    devProjects = await pb.collection("projects").getFullList({
+      sort: "-priority",
+      filter: "hidden=false && type='website'",
+      fields: "title,imageSrc,id",
+    });
+    otherProjects = await pb.collection("projects").getFullList({
+      sort: "-priority",
+      filter: "hidden=false && type!='website'",
+      fields: "title,imageSrc,id",
+    });
   } catch (error) {
     console.error("Errore durante il recupero dei progetti:", error);
   }
@@ -38,9 +30,7 @@ export default async function Project() {
             {devProjects &&
               devProjects.map(
                 (project) =>
-                  project.hidden === false && (
-                    <ProjectItem key={project.$id} project={project} />
-                  )
+                    <ProjectItem key={project.id} project={project} />
               )}
           </div>
         </div>
@@ -51,7 +41,7 @@ export default async function Project() {
           <div className="flex h-2/3 w-full gap-2 overflow-x-auto lg:h-full">
             {otherProjects.map(
               (project) =>
-                project.hidden === false && <ProjectItem project={project} />
+                <ProjectItem key={project.id} project={project} />
             )}
           </div>
         </div>

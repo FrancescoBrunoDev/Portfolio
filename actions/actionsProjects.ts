@@ -1,15 +1,11 @@
 "use server";
 
-import { databases } from "@/lib/appwrite";
-import { Query } from "node-appwrite";
+import pb from "@/lib/pocketbase";
 
 type ProjectOrderType = {
-  order: number;
-  $id: string;
-  type: {
-    macro_type: "dev" | "other";
-    type: string;
-  };
+  priority: number;
+  id: string;
+  type: string;
 };
 
 type ProjectsOrder = {
@@ -17,57 +13,55 @@ type ProjectsOrder = {
   other: ProjectOrderType[];
 };
 
+export async function getMacroType({type}: {type: string}) {
+  switch (type) {
+    case "website":
+      return "dev";
+    default:
+      return "other";
+  }
+}
+
 export async function getProjects() {
-  const projects = await databases
-    .listDocuments(
-      process.env.APPWRITE_PROJECTS_DATABASE_ID ?? "",
-      process.env.APPWRITE_PROJECTS_COLLECTION_ID ?? "",
-      [
-        Query.equal("hidden", false),
-        Query.select(["$id", "type.type", "type.macro_type", "order"]),
-        Query.orderAsc("$createdAt"),
-      ]
-    )
-    .then((res) => res.documents as unknown as ProjectOrderType[]);
 
-  const orderedProjects = projects.sort((a, b) => a.order - b.order);
-
-  const devProjects = orderedProjects.filter(
-    (project) => project.type.macro_type === "dev"
-  );
-  const otherProjects = orderedProjects.filter(
-    (project) => project.type.macro_type === "other"
-  );
+  const devProjects: ProjectOrderType[] = await pb.collection("projects").getFullList({
+    sort: "-priority",
+    filter: "hidden=false && type='website'",
+    fields: "priority,type,id",
+  });
+  const otherProjects: ProjectOrderType[] = await pb.collection("projects").getFullList({
+    sort: "-priority",
+    filter: "hidden=false && type!='website'",
+    fields: "priority,type,id",
+  });
 
   return { dev: devProjects, other: otherProjects };
 }
 
 export async function getAdjacentIds(projectId: string) {
   const projects: ProjectsOrder = await getProjects();
+  console.log(projects);
   let nextUsesAnotherArray = false;
   let prevUsesAnotherArray = false;
 
   // Cerca il progetto corrente sia in "dev" che in "other"
   const currentProject =
-    projects.dev.find((project) => project.$id === projectId) ||
-    projects.other.find((project) => project.$id === projectId);
+    projects.dev.find((project) => project.id === projectId) ||
+    projects.other.find((project) => project.id === projectId);
 
   if (!currentProject) {
     throw new Error("Project not found");
   }
 
-  const orderNumberOfCurrentProject = currentProject.order;
+  const macroType = await getMacroType({type: currentProject.type});
 
-  // Cerca il progetto precedente e successivo nell'array specificato dal tipo
-  const previousProject = projects[currentProject.type.macro_type]?.find(
-    (project: ProjectOrderType) =>
-      project.order === orderNumberOfCurrentProject - 1
+  const currentProjectIndex = projects[macroType].findIndex(
+    (project: ProjectOrderType) => project.id === projectId
   );
 
-  const nextProject = projects[currentProject.type.macro_type]?.find(
-    (project: ProjectOrderType) =>
-      project.order === orderNumberOfCurrentProject + 1
-  );
+  // Cerca l'index del progetto precedente e successivo nell'array specificato dal tipo
+  const previousProject = projects[macroType][currentProjectIndex - 1] || null;
+  const nextProject = projects[macroType][currentProjectIndex + 1] || null;
 
   // Se non esistono, passa all'altro arrays
   if (!previousProject) {
@@ -78,14 +72,14 @@ export async function getAdjacentIds(projectId: string) {
   }
 
   const prev =
-    previousProject?.$id ||
-    projects[currentProject.type.macro_type === "dev" ? "other" : "dev"][
-      projects[currentProject.type.macro_type === "dev" ? "other" : "dev"]
+    previousProject?.id ||
+    projects[macroType === "dev" ? "other" : "dev"][
+      projects[macroType === "dev" ? "other" : "dev"]
         .length - 1
-    ].$id;
+    ].id;
   const next =
-    nextProject?.$id ||
-    projects[currentProject.type.macro_type === "dev" ? "other" : "dev"][0].$id;
+    nextProject?.id ||
+    projects[macroType === "dev" ? "other" : "dev"][0].id;
 
   return { prev, next, prevUsesAnotherArray, nextUsesAnotherArray };
 }

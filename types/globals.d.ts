@@ -116,28 +116,18 @@ type Internship = {
   link: string | null;
 };
 
-type Video = {
-  src: string;
-  dark: boolean;
-} | null;
-
 type Project = {
   hidden: boolean;
   title: string;
   description: string;
-  image: string;
-  videoSrc: Video;
+  imageSrc: string;
+  videoSrc: string;
   scoreImg: null | string;
-  id: number;
-  type: {
-    type: string;
-    $id: string;
-    macro_type: string;
-  };
+  type: string;
   link: string | null;
   secondaryLink: string | null;
-  $id: string;
-  order: number;
+  id: string;
+  priority: number;
 };
 
 interface GoogleBooksIndustryIdentifier {
