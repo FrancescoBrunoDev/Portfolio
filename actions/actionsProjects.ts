@@ -40,7 +40,7 @@ export async function getProjects() {
 
 export async function getAdjacentIds(projectId: string) {
   const projects: ProjectsOrder = await getProjects();
-  console.log(projects);
+
   let nextUsesAnotherArray = false;
   let prevUsesAnotherArray = false;
 

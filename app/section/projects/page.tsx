@@ -1,6 +1,8 @@
 import ProjectItem from "@/components/projects/item";
 import pb from "@/lib/pocketbase";
 
+const dynamic = 'force-dynamic'
+
 export default async function Project() {
   let devProjects: Project[] = [];
   let otherProjects: Project[] = [];
