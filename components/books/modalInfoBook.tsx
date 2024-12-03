@@ -128,13 +128,11 @@ export default function ModalInfoBook({
                 value={infoBook.pageCount.toString()}
               />
             )}
-
             <ItemDetail title="Language" value={infoBook.language.toString()} />
             <ItemDetail
               title="Format"
               value={`${randomVariant?.label} ${randomVariant?.variant}`}
             />
-
             <ItemDetail
               title={infoBook.ISBN_13 ? "ISBN-13" : "ISBN-10"}
               value={String(infoBook.ISBN_13) || String(infoBook.ISBN_10)}
