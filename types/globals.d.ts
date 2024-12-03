@@ -27,12 +27,8 @@ type BookJson = {
 
 type BooksRecord = Record<string, BookJson[]>;
 
-type Book = {
-  item: BookDetails;
-};
-
 type BookDetails = {
-  expand: {
+  expand?: {
     book_info: {
       id: string;
       title: string;
@@ -50,8 +46,8 @@ type BookDetails = {
       language: string;
     };
   }
-  note: Note[];
-  type: string;
+  note?: Note[];
+  type?: string;
   altNotes?: string;
   tranlatedNotes?: string;
   month: number;

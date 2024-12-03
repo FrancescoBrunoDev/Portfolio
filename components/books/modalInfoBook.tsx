@@ -1,9 +1,11 @@
+"use client";
 import { Minimize2, ExternalLink } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import BackgroundDots from "@/components/books/backgroundDots";
 import { useState } from "react";
 import { ChevronRight, ChevronLeft } from "lucide-react";
+import { useRouter } from 'next/navigation'
 
 interface ItemDetailProps {
   title: string;
@@ -12,11 +14,11 @@ interface ItemDetailProps {
 
 // make the interface for ItemDetail
 interface ModalInfoBookProps {
-  book: Book;
+  book: BookDetails;
   titleParts: string[];
   note: Note[];
   type: string;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isClosable: boolean;
   altNotes: string | undefined;
   tranlatedNotes: string | undefined;
 }
@@ -91,22 +93,22 @@ export default function ModalInfoBook({
   note,
   type,
   titleParts,
-  setIsOpen,
+  isClosable,
 }: ModalInfoBookProps) {
   const [currentPage, setCurrentPage] = useState(0);
-
-  const infoBook = book.item.expand.book_info;
+  const router = useRouter()
+  if(!book.expand?.book_info) return null
+  const infoBook = book.expand.book_info;
   // Randomly select a variant
   // Get the selected format or default to 'paper' if 'type' is not recognized
   const selectedFormat =
     formatVariants.find((format) => format.type === type) || formatVariants[0];
 
   // Randomly select a variant
-  const [randomVariant] = useState(
+  const randomVariant =
     selectedFormat.variants[
       Math.floor(Math.random() * selectedFormat.variants.length)
-    ]
-  );
+    ];
 
   const handleNext = () => {
     if (currentPage < Object.keys(note).length - 1) {
@@ -126,22 +128,8 @@ export default function ModalInfoBook({
       initial={{ y: 10, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       exit={{ y: -10, opacity: 0 }}
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        zIndex: 20,
-        height: "100vh",
-        width: "100vw",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        backdropFilter: "grayscale(100%)",
-      }}
     >
-      <div className="relative m-2 h-4/5 max-h-[46rem] w-full bg-primary p-3 text-secondary md:h-3/4 md:max-w-md lg:m-0">
+      <div className="relative m-2 h-[46rem] w-full bg-primary p-3 text-secondary md:max-w-md lg:m-0">
         {/* Buttons */}
         <div className="absolute right-4 top-6 flex gap-2">
           {infoBook.infoLink && (
@@ -154,13 +142,19 @@ export default function ModalInfoBook({
               </Link>
             </button>
           )}
-
-          <button onClick={() => setIsOpen(false)} className="hover:scale-105">
-            <Minimize2
-              strokeWidth={2.75}
-              className="stroke-secondar place-self-end"
-            />
-          </button>
+          {isClosable && (
+            <button
+            onClick={() => {
+              router.back()
+            }}
+              className="hover:scale-105"
+            >
+              <Minimize2
+                strokeWidth={2.75}
+                className="stroke-secondar place-self-end"
+              />
+            </button>
+          )}
         </div>
         <div className="flex h-full flex-col gap-6">
           {/* authors book */}
@@ -195,10 +189,7 @@ export default function ModalInfoBook({
               title="Page Count"
               value={infoBook.pageCount.toString()}
             />
-            <ItemDetail
-              title="Language"
-              value={infoBook.language.toString()}
-            />
+            <ItemDetail title="Language" value={infoBook.language.toString()} />
             <ItemDetail
               title="Format"
               value={`${selectedFormat.label} ${randomVariant}`}
@@ -253,7 +244,7 @@ export default function ModalInfoBook({
           ) : null}
           <div className="border-4 border-t-0 border-primary bg-background p-3 text-left font-semibold text-primary">
             <div className="text-4xl uppercase">{titleParts[0]}</div>
-            <div className="max-h-36text-2xl ">{titleParts[1]}</div>
+            <div className="max-h-36text-2xl">{titleParts[1]}</div>
           </div>
         </div>
       </div>

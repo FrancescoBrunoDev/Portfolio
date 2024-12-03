@@ -1,15 +1,15 @@
 import BooksView from "@/components/books/booksView";
-import fetchBooksInfo from "@/components/books/fetchBooksInfo";
+import { fetchBooks } from "@/components/books/fetchBooks";
 import { Suspense } from "react";
 import { BookCopy, FireExtinguisher } from "lucide-react";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 async function View() {
-  const data: Year[] = await fetchBooksInfo();
+  const data: Year[] = await fetchBooks();
 
-  if ('error' in data) return <Error />;
-  
+  if ("error" in data) return <Error />;
+
   return <BooksView booksFetch={data} />;
 }
 

@@ -3,7 +3,44 @@ import pb from "@/lib/pocketbase";
 const PATH_SVG_MAKER = process.env.PATH_SVG_MAKER;
 const PATH_SVG_MAKER_KEY = process.env.PATH_SVG_MAKER_KEY;
 
-export default async function fetchBooksInfo() {
+export async function fetchBookInfo(id: string) {
+  try {
+    if (!pb) {
+      throw new Error("PocketBase instance is not available");
+    }
+
+    const book = await pb.collection("books_info").getOne(id);
+    return book;
+  } catch (error) {
+    console.error("Error in fetchBookInfo:", error);
+    return { error: "Failed to fetch book information. Please try again later." };
+  }
+}
+
+export async function fetchBook(id: string) {
+  try {
+    if (!pb) {
+      throw new Error("PocketBase instance is not available");
+    }
+
+    const book = await pb.collection("books").getOne(id, {
+      expand: "book_info",
+    });
+    // Fetch notes for the book
+    if (!book || !book.expand) return book;
+
+    if (book.expand.book_info?.ISBN_13) {
+      const notes = await getNotes(book.expand.book_info.ISBN_13);
+      book.note = notes;
+    }
+    return book;
+  } catch (error) {
+    console.error("Error in fetchBook:", error);
+    return { error: "Failed to fetch book information. Please try again later." };
+  }
+}
+
+export async function fetchBooks() {
   try {
 
     if (!pb) {
@@ -12,6 +49,7 @@ export default async function fetchBooksInfo() {
 
     const dbBooks = await pb.collection("books").getFullList({
       expand: "book_info",
+      fields: "id,month,year,expand.book_info.title,expand.book_info.authors,expand.book_info.ISBN_13",
     });
 
     // Prima raggruppa i libri per anno
