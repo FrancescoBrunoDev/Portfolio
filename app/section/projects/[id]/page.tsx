@@ -5,17 +5,8 @@ import { Fingerprint } from "lucide-react";
 import pb from "@/lib/pocketbase";
 import { getMacroType } from "@/actions/actionsProjects";
 
-interface ProjectProps {
-  params: Promise<{
-    project: string;
-  }>;
-}
-
-export default async function Project(props: ProjectProps) {
-  const params = await props.params;
-  let project: Project;
-
-  project = await pb.collection("projects").getOne(params.project);
+export default async function Project({params}: {params: Promise<{id: string}>}) {
+  const project: Project = await pb.collection("projects").getOne((await params).id);
   const macroType = await getMacroType({ type: project.type });
 
   return (
