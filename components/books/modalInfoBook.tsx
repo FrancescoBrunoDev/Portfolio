@@ -66,7 +66,7 @@ export default function ModalInfoBook({
       exit={{ y: -10, opacity: 0 }}
       transition={{ delay: 0.3 }}
     >
-      <div className="relative m-2 h-[46rem] w-full bg-primary p-3 text-secondary md:max-w-md lg:m-0">
+      <div className="relative h-[80dvh] max-h-[46rem] w-full bg-primary p-3 text-secondary md:max-w-md lg:m-0">
         {/* Buttons */}
         <div className="absolute right-4 top-6 flex gap-2">
           {infoBook.infoLink && (
