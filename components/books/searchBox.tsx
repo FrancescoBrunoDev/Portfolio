@@ -2,8 +2,8 @@ import { Book } from "lucide-react";
 import { FormEvent } from "react";
 
 interface SearchBoxProps {
-  books: Year[];
-  setFilteredData: React.Dispatch<React.SetStateAction<Year[]>>;
+  books: Book.Year[];
+  setFilteredData: React.Dispatch<React.SetStateAction<Book.Year[]>>;
   setIsFiltering: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -34,7 +34,9 @@ export default function SearchBox({
       })
       .filter((year) => year !== null);
 
-    setFilteredData(filteredData.filter((year) => year !== null) as Year[]);
+    setFilteredData(
+      filteredData.filter((year) => year !== null) as Book.Year[],
+    );
 
     if (input.length > 0) {
       setIsFiltering(true);

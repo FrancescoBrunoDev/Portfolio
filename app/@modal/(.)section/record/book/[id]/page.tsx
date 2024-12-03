@@ -1,5 +1,5 @@
 import ModalInfoBook from "@/components/books/modalInfoBook";
-import { fetchBook } from "@/components/books/fetchBooks";
+import { fetchBook, getFormatVariants } from "@/components/books/fetchBooks";
 
 export default async function View({
   params,
@@ -17,10 +17,16 @@ export default async function View({
   if (!book || !book.expand) return null;
 
   const note = book.note || [];
+  const randomVariant = await getFormatVariants({ type: book.type });
 
   return (
     <div className="fixed inset-0 z-40 flex h-screen w-screen items-center justify-center backdrop-grayscale">
-      <ModalInfoBook book={book} note={note} isClosable={true} />
+      <ModalInfoBook
+        book={book}
+        note={note}
+        isClosable={true}
+        randomVariant={randomVariant}
+      />
     </div>
   );
 }

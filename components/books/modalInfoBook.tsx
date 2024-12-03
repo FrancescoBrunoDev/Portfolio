@@ -17,62 +17,11 @@ interface ModalInfoBookProps {
   book: Book.Book;
   note: Book.Note[];
   isClosable: boolean;
+  randomVariant?: {
+    label: string;
+    variant: string;
+  };
 }
-
-const formatVariants = [
-  {
-    type: "audiobook",
-    label: "📻",
-    variants: [
-      "Ear Candy",
-      "Audio Adventures",
-      "Sonic Stories",
-      "Listen & Learn",
-      "Sound Safari",
-      "Earworms",
-      "Audio Escapades",
-      "Talkie Treasures",
-      "Voice Voyages",
-      "Acoustic Expeditions",
-      "Audiobook Bliss",
-      "Voice-Printed Journeys",
-      "Auditory Escapes",
-      "Sonic Sagas",
-      "Listen & Lounge",
-      "Narrative Symphony",
-      "Earbud Escapades",
-      "Soundtrack of Imagination",
-      "Voice-Activated Thrills",
-      "Auditory Odyssey",
-    ],
-  },
-  {
-    type: "paper",
-    label: "📚",
-    variants: [
-      "Good Old Paper Book",
-      "Ink on Pages",
-      "Traditional Texts",
-      "Classic Novels",
-      "Page-Turners",
-      "Bookshelf Bliss",
-      "Paperback Paradise",
-      "Printed Prose",
-      "Hardcover Havens",
-      "Bibliophile's Delight",
-      "Page Perfection",
-      "Novel Nook",
-      "Paperback Pilgrimage",
-      "Classic Chapters",
-      "Readers' Retreat",
-      "Prose Portal",
-      "Inkbound Adventures",
-      "Paperbound Treasures",
-      "Literary Love Affair",
-      "Bookish Bliss",
-    ],
-  },
-];
 
 function ItemDetail({ title, value }: ItemDetailProps) {
   return (
@@ -88,23 +37,14 @@ export default function ModalInfoBook({
   book,
   note,
   isClosable,
+  randomVariant,
 }: ModalInfoBookProps) {
   const [currentPage, setCurrentPage] = useState(0);
   const router = useRouter();
+
   if (!book.expand?.book_info) return null;
   const infoBook = book.expand.book_info;
   const titleParts = infoBook.title?.match(/[^.!]+[.!]?/g) || [];
-  // Randomly select a variant
-  // Get the selected format or default to 'paper' if 'type' is not recognized
-  const selectedFormat =
-    formatVariants.find((format) => format.type === book.type) ||
-    formatVariants[0];
-
-  // Randomly select a variant
-  const randomVariant =
-    selectedFormat.variants[
-      Math.floor(Math.random() * selectedFormat.variants.length)
-    ];
 
   const handleNext = () => {
     if (currentPage < Object.keys(note).length - 1) {
@@ -124,6 +64,7 @@ export default function ModalInfoBook({
       initial={{ y: 10, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       exit={{ y: -10, opacity: 0 }}
+      transition={{ delay: 0.3 }}
     >
       <div className="relative m-2 h-[46rem] w-full bg-primary p-3 text-secondary md:max-w-md lg:m-0">
         {/* Buttons */}
@@ -188,7 +129,7 @@ export default function ModalInfoBook({
             <ItemDetail title="Language" value={infoBook.language.toString()} />
             <ItemDetail
               title="Format"
-              value={`${selectedFormat.label} ${randomVariant}`}
+              value={`${randomVariant?.label} ${randomVariant?.variant}`}
             />
 
             <ItemDetail

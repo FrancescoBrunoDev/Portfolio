@@ -1,5 +1,5 @@
 import ModalInfoBook from "@/components/books/modalInfoBook";
-import { fetchBook } from "@/components/books/fetchBooks";
+import { fetchBook, getFormatVariants } from "@/components/books/fetchBooks";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
@@ -20,6 +20,7 @@ export default async function View({
   if (!book || !book.expand) return null;
 
   const note = book.note || [];
+  const randomVariant = await getFormatVariants({ type: book.type });
 
   return (
     <div className="flex h-screen w-screen flex-col items-center justify-center gap-4">
@@ -29,7 +30,12 @@ export default async function View({
           Back to the my library
         </Button>
       </Link>
-      <ModalInfoBook book={book} note={note} isClosable={false} />
+      <ModalInfoBook
+        book={book}
+        note={note}
+        isClosable={false}
+        randomVariant={randomVariant}
+      />
     </div>
   );
 }

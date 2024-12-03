@@ -6,7 +6,7 @@ import { BookCopy, FireExtinguisher } from "lucide-react";
 export const dynamic = "force-dynamic";
 
 async function View() {
-  const data: Year[] = await fetchBooks();
+  const data: Book.Year[] = await fetchBooks();
 
   if ("error" in data) return <Error />;
 

@@ -2,10 +2,10 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function BookItem({ book }: { book: BookDetails }) {
+export default function BookItem({ book }: { book: Book.Book }) {
   if (!book || !book.expand) return null;
   const infoBooks = book.expand.book_info;
-  const note = book.note || [];
+  const note = book.note;
   const titleParts = infoBooks?.title?.match(/[^.!]+[.!]?/g) || [];
 
   const lenghtMainTitle = 50;
@@ -27,7 +27,7 @@ export default function BookItem({ book }: { book: BookDetails }) {
                   {index < infoBooks.authors.length - 1 && <br />}
                 </span>
               ))}
-              {note.length !== 0 && Object.keys(note).length > 1 && (
+              {note && (
                 <div className="pt-6">
                   <Image
                     width={300}

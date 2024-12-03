@@ -43,7 +43,7 @@ namespace Book {
     type: string;
     updated: string;
     year: number;
-    note: any[];
+    note: boolean | Note[];
   }
 }
 
