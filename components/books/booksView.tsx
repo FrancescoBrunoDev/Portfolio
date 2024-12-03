@@ -77,7 +77,7 @@ export default function BooksView({ booksFetch }: { booksFetch: Year[] }) {
                               key={`${year.year}-${month}`}
                               className="flex flex-col pl-1"
                             >
-                              <h2 className="h-6">{getMonthName(monthNum)}</h2>{" "}
+                              <h2 className="h-6 sticky left-0 w-fit">{getMonthName(monthNum)}</h2>{" "}
                               <div key={month} className="flex flex-row gap-2">
                                 {booksInMonth.map((book) => {
                                   if (!book.bookInfo) {
