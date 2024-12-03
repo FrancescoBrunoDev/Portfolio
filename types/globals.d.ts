@@ -1,58 +1,51 @@
-type Year = {
-  year: number;
-  bookDetails: BookDetails[];
-};
+namespace Book {
+  type Year = {
+    year: number;
+    bookDetails: BookDetails[];
+  };
 
-interface Note {
-  url: string;
-  name: string;
-  svg: string;
-}
-
-type BookJson = {
-  title: string;
-  notes?: note[];
-  ISBN13: number;
-  type?: string;
-  authors?: string[];
-  categories?: string[];
-  publishedDate?: string;
-  pageCount?: number;
-  language?: string;
-  infoLink?: string;
-  altNotes?: string;
-  tranlatedNotes?: string;
-  month?: number;
-};
-
-type BooksRecord = Record<string, BookJson[]>;
-
-type BookDetails = {
-  expand?: {
-    book_info: {
-      id: string;
-      title: string;
-      authors: string[];
-      publishedDate: string;
-      ISBN_13: number;
-      ISBN_10: number;
-      categories: string[];
-      pageCount: number;
-      infoLink: string;
-      imageLinks: {
-        smallThumbnail: string;
-        thumbnail: string;
-      };
-      language: string;
-    };
+  interface Note {
+    url: string;
+    name: string;
+    svg: string;
   }
-  note?: Note[];
-  type?: string;
-  altNotes?: string;
-  tranlatedNotes?: string;
-  month: number;
-  id: string;
-};
+
+  interface BookInfo {
+    ISBN_10: number;
+    ISBN_13: number;
+    authors: string[];
+    categories: string[];
+    collectionId: string;
+    collectionName: string;
+    created: string;
+    id: string;
+    imageLinks: Record<string, string>;
+    infoLink: string;
+    language: string;
+    pageCount: string;
+    publishedDate: string;
+    title: string;
+    updated: string;
+  }
+
+  interface Book {
+    altNotes: string;
+    book_info: string;
+    collectionId: string;
+    collectionName: string;
+    created: string;
+    expand: {
+      book_info: BookInfo;
+    };
+    id: string;
+    month: number;
+    tranlatedNotes: string;
+    type: string;
+    updated: string;
+    year: number;
+    note: any[];
+  }
+}
 
 interface MousePosition {
   x: number;
@@ -125,55 +118,4 @@ type Project = {
   priority: number;
 };
 
-interface GoogleBooksIndustryIdentifier {
-  type: "ISBN_10" | "ISBN_13" | "OTHER";
-  identifier: string;
-}
-
-interface GoogleBooksReadingModes {
-  text: boolean;
-  image: boolean;
-}
-
-interface GoogleBooksImageLinks {
-  smallThumbnail: string;
-  thumbnail: string;
-}
-
-interface GoogleBooksVolumeInfo {
-  title: string;
-  subtitle: string | null;
-  authors: string[];
-  publisher: string | null;
-  publishedDate: string;
-  industryIdentifiers: GoogleBooksIndustryIdentifier[];
-  readingModes: GoogleBooksReadingModes;
-  pageCount: number | null;
-  printType: string;
-  categories: string[];
-  maturityRating: "NOT_MATURE" | "MATURE";
-  allowAnonLogging: boolean;
-  contentVersion: string;
-  imageLinks: GoogleBooksImageLinks;
-  language: string;
-  previewLink: string;
-  infoLink: string;
-  canonicalVolumeLink: string;
-}
-
 type TypeOfBook = "audio" | "paper";
-
-interface GoogleBooksSaleInfo {
-  country: string;
-  saleability: "FOR_SALE" | "NOT_FOR_SALE";
-  isEbook: boolean;
-}
-
-interface GoogleBooksVolume {
-  kind: "books#volume";
-  id: string;
-  etag: string;
-  selfLink: string | null;
-  volumeInfo: GoogleBooksVolumeInfo;
-  saleInfo: GoogleBooksSaleInfo;
-}

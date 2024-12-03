@@ -5,7 +5,7 @@ import Link from "next/link";
 import BackgroundDots from "@/components/books/backgroundDots";
 import { useState } from "react";
 import { ChevronRight, ChevronLeft } from "lucide-react";
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
 
 interface ItemDetailProps {
   title: string;
@@ -14,13 +14,9 @@ interface ItemDetailProps {
 
 // make the interface for ItemDetail
 interface ModalInfoBookProps {
-  book: BookDetails;
-  titleParts: string[];
-  note: Note[];
-  type: string;
+  book: Book.Book;
+  note: Book.Note[];
   isClosable: boolean;
-  altNotes: string | undefined;
-  tranlatedNotes: string | undefined;
 }
 
 const formatVariants = [
@@ -91,18 +87,18 @@ function ItemDetail({ title, value }: ItemDetailProps) {
 export default function ModalInfoBook({
   book,
   note,
-  type,
-  titleParts,
   isClosable,
 }: ModalInfoBookProps) {
   const [currentPage, setCurrentPage] = useState(0);
-  const router = useRouter()
-  if(!book.expand?.book_info) return null
+  const router = useRouter();
+  if (!book.expand?.book_info) return null;
   const infoBook = book.expand.book_info;
+  const titleParts = infoBook.title?.match(/[^.!]+[.!]?/g) || [];
   // Randomly select a variant
   // Get the selected format or default to 'paper' if 'type' is not recognized
   const selectedFormat =
-    formatVariants.find((format) => format.type === type) || formatVariants[0];
+    formatVariants.find((format) => format.type === book.type) ||
+    formatVariants[0];
 
   // Randomly select a variant
   const randomVariant =
@@ -144,9 +140,9 @@ export default function ModalInfoBook({
           )}
           {isClosable && (
             <button
-            onClick={() => {
-              router.back()
-            }}
+              onClick={() => {
+                router.back();
+              }}
               className="hover:scale-105"
             >
               <Minimize2
