@@ -11,7 +11,7 @@ export default async function fetchBooksInfo() {
     }
 
     const dbBooks = await pb.collection("books").getFullList({
-      expand: "books_info",
+      expand: "book_info",
     });
 
     // Prima raggruppa i libri per anno
@@ -46,7 +46,7 @@ export default async function fetchBooksInfo() {
   }
 }
 function moveBooksInfoOutOfExpand(book: any) {
-  const bookInfo = book.expand?.books_info;
+  const bookInfo = book.expand?.book_info;
   delete book.books_info;
   delete book.expand;
   return { ...book, bookInfo };
