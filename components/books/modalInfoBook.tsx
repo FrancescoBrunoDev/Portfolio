@@ -122,10 +122,13 @@ export default function ModalInfoBook({
               title="Year of Publication"
               value={infoBook.publishedDate.toString()}
             />
-            <ItemDetail
-              title="Page Count"
-              value={infoBook.pageCount.toString()}
-            />
+            {Number(infoBook.pageCount) > 0 && (
+              <ItemDetail
+                title="Page Count"
+                value={infoBook.pageCount.toString()}
+              />
+            )}
+
             <ItemDetail title="Language" value={infoBook.language.toString()} />
             <ItemDetail
               title="Format"
