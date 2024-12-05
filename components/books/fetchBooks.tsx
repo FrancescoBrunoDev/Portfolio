@@ -130,12 +130,13 @@ async function getNotes(isbn: number) {
 
     const notes = await Promise.all(
       Array.from({ length: numberPages }, async (_, i) => {
-        const name = `page.${i + 1}.svg`;
-        const url = `${PATH_SVG_MAKER}/svg/${isbn}/${name}`;
+        const page = `page.${i + 1}.svg`;
+        const url = `${PATH_SVG_MAKER}/svg?isbn=${isbn}&page=${i + 1}`;
         const res = await fetch(url, { next: { revalidate: 3600 } });
+        console.log(res);
         if (!res.ok) return null;
         const svg = await res.text();
-        return { name, svg };
+        return { page, svg };
       }),
     );
 
