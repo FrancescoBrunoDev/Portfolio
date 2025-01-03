@@ -19,16 +19,15 @@ export default function TimelineSecondary({
       </div>
       <ul>
         {content.map((item) => {
-          let itemOrganisation = "";
-          let itemContent = "";
+          let itemOrganisation = item.expand.organizations[0].name;
+          let itemContent = item.description;
           let itemTitle = "";
-          if ("university" in item) {
-            itemOrganisation = item.university;
-            itemContent = item.rate ?? "";
+          if (item.collectionName === "education" && "degree" in item) {
             itemTitle = item.degree;
-          } else if ("organizations" in item) {
-            itemOrganisation = item.organizations[0].name;
-            itemContent = item.description;
+          } else if (
+            item.collectionName === "occupations" &&
+            "position" in item
+          ) {
             itemTitle = item.position;
           }
           const convertedStartDate = new Date(item.start_date);
@@ -58,8 +57,8 @@ export default function TimelineSecondary({
                     {item.end_date
                       ? ` - ${formattedEndDate}`
                       : title === "Certificates"
-                      ? ""
-                      : " - current"}
+                        ? ""
+                        : " - current"}
                   </span>
                 </div>
               </div>
@@ -78,7 +77,7 @@ export default function TimelineSecondary({
                   <p className="text-lg font-bold uppercase leading-5">
                     {itemTitle}
                   </p>
-                  <p className="text-xs font-light ">{itemContent}</p>
+                  <p className="text-xs font-light">{itemContent}</p>
                   {"url" in item && item.url && (
                     <Link href={item.url} className="text-xs font-light">
                       <div className="flex items-center">

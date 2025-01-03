@@ -60,42 +60,52 @@ interface WindowDimensions {
 type WorkExperience = {
   id: number;
   position: string;
-  organizations: [
-    {
-      name: string;
-    }
-  ];
+  expand: {
+    organizations: [
+      {
+        name: string;
+      },
+    ];
+  };
   employment_type: string | null;
   start_date: string;
   end_date: string;
   location: string | null;
   description: string;
   link: string | null;
-  tools?: [
-    {
-      name: string;
-    }
-  ];
+  tools?: string[];
 };
 
 type Education = {
+  collectionName: string;
   id: number;
+  expand: {
+    organizations: [
+      {
+        name: string;
+      },
+    ];
+  };
   university: string;
-  degree: string;
+  description: string;
   start_date: string;
   end_date?: string;
   rate?: string;
   url?: string;
+  degree: string;
 };
 
 type Internship = {
+  collectionName: string;
   id: number;
   position: string;
-  organizations: [
-    {
-      name: string;
-    }
-  ];
+  expand: {
+    organizations: [
+      {
+        name: string;
+      },
+    ];
+  };
   employment_type: string;
   start_date: string;
   end_date: string;

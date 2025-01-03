@@ -4,56 +4,42 @@ import { GraduationCap } from "lucide-react";
 import { PocketKnife } from "lucide-react";
 import { ScrollText } from "lucide-react";
 
-import { databases } from "@/lib/appwrite";
+import pb from "@/lib/pocketbase";
 
 export default async function About() {
-  const workExperience = await databases
-    .listDocuments(
-      process.env.APPWRITE_WORK_DATABASE_ID ?? "",
-      process.env.APPWRITE_WORK_POSITIONS_COLLECTION_ID ?? ""
-    )
-    .then((res) => res.documents as unknown as WorkExperience[]);
-  const education = await databases
-    .listDocuments(
-      process.env.APPWRITE_WORK_DATABASE_ID ?? "",
-      process.env.APPWRITE_EDUCATION_COLLECTION_ID ?? ""
-    )
-    .then((res) => res.documents as unknown as Education[]);
-  const intern = await databases
-    .listDocuments(
-      process.env.APPWRITE_WORK_DATABASE_ID ?? "",
-      process.env.APPWRITE_INTERNSHIPS_COLLECTION_ID ?? ""
-    )
-    .then((res) => res.documents as unknown as Internship[])
-    .then((intern) => {
-      intern.sort((a, b) => {
-        if (a.end_date < b.end_date) {
-          return 1;
-        }
-        if (a.end_date > b.end_date) {
-          return -1;
-        }
-        return 0;
-      });
-      return intern;
+  let workExperience2: WorkExperience[] = await pb
+    .collection("occupations")
+    .getFullList({
+      expand: "organizations",
+      filter: 'employment_types != "Internship"',
+      sort: "-start_date",
     });
-  const certificates = await databases
-    .listDocuments(
-      process.env.APPWRITE_WORK_DATABASE_ID ?? "",
-      process.env.APPWRITE_CERTIFICATES_COLLECTION_ID ?? ""
-    )
-    .then((res) => res.documents as unknown as Education[])
-    .then((certificates) => {
-      certificates.sort((a, b) => {
-        if (a.start_date < b.start_date) {
-          return 1;
-        }
-        if (a.start_date > b.start_date) {
-          return -1;
-        }
-        return 0;
-      });
-      return certificates;
+  // if workExperience2 as a work that is end_date="" should be placed at the top
+  workExperience2 = workExperience2.sort((a, b) => {
+    if (a.end_date === "" && b.end_date !== "") {
+      return -1;
+    }
+    if (a.end_date !== "" && b.end_date === "") {
+      return 1;
+    }
+    return 0;
+  });
+  const intern: Internship[] = await pb.collection("occupations").getFullList({
+    expand: "organizations",
+    filter: 'employment_types = "Internship"',
+    sort: "-end_date",
+  });
+  const education: Education[] = await pb.collection("education").getFullList({
+    sort: "-start_date",
+    expand: "organizations",
+    filter: 'type = "degree"',
+  });
+  const certificates: Education[] = await pb
+    .collection("education")
+    .getFullList({
+      sort: "-start_date",
+      expand: "organizations",
+      filter: 'type = "certificate"',
     });
 
   return (
@@ -61,7 +47,7 @@ export default async function About() {
       <div className="container">
         <div className="grid w-full gap-2 lg:grid-cols-9">
           <div className="grid h-fit grid-cols-1 lg:col-span-5">
-            <TimelineWork workExperience={workExperience} />
+            <TimelineWork workExperience={workExperience2} />
           </div>
           <div className="grid h-fit gap-2 pt-4 lg:col-span-4">
             <TimelineSecondary
