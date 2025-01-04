@@ -23,7 +23,6 @@ export default async function StravaInfo() {
       grant_type: "authorization_code",
     }),
   }).then((res) => res.json());
-  console.log(token);
 
   const activities = await fetch(
     `https://www.strava.com/api/v3/athlete/activities?before=${todayEpoch}&after=${startOfMonthEpoch}&per_page=100`,
@@ -32,7 +31,7 @@ export default async function StravaInfo() {
       headers: {
         Authorization: `Bearer ${token.access_token}`,
       },
-    }
+    },
   ).then((res) => res.json());
 
   const stats = await fetch(
@@ -42,9 +41,8 @@ export default async function StravaInfo() {
       headers: {
         Authorization: `Bearer ${token.access_token}`,
       },
-    }
+    },
   ).then((res) => res.json());
-  console.log(stats, "stats");
 
   const totalSeconds = stats.recent_run_totals.elapsed_time;
   const totalMinutes = Math.floor(totalSeconds / 60); // Convert seconds to minutes
