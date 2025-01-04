@@ -5,7 +5,12 @@ import * as fs from "fs-extra";
 import fsPromises from "fs/promises";
 import { join, dirname, extname, basename } from "path";
 import { fileURLToPath } from "url";
-import pb from "@/lib/pocketbase";
+import dotenv from "dotenv";
+import PocketBase from 'pocketbase';
+
+dotenv.config();
+
+const pb = new PocketBase(process.env.POCKETBASE_URL);
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
