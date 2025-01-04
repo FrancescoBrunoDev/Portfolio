@@ -88,7 +88,7 @@ export async function fetchBooks() {
       const enrichedDetails = await Promise.all(
         yearData.bookDetails.map(async (book) => {
           // it boolean
-          const note = book.expand?.book_note.metadata || false;
+          const note = book.expand?.book_note?.metadata || false;
           return { ...book, note };
         }),
       );
