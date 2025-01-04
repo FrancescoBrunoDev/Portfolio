@@ -27,7 +27,7 @@ export default async function View({
       <Link href={`/section/record/books`}>
         <Button className="text-md flex items-center">
           <ArrowLeft />
-          Back to the my library
+          Back to my library
         </Button>
       </Link>
       <ModalInfoBook
