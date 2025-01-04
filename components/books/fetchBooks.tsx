@@ -3,22 +3,6 @@ import pb from "@/lib/pocketbase";
 const PATH_SVG_MAKER = process.env.PATH_SVG_MAKER;
 const PATH_SVG_MAKER_KEY = process.env.PATH_SVG_MAKER_KEY;
 
-export async function fetchBookInfo(id: string) {
-  try {
-    if (!pb) {
-      throw new Error("PocketBase instance is not available");
-    }
-
-    const book = await pb.collection("books_info").getOne(id);
-    return book;
-  } catch (error) {
-    console.error("Error in fetchBookInfo:", error);
-    return {
-      error: "Failed to fetch book information. Please try again later.",
-    };
-  }
-}
-
 export async function fetchBook(id: string) {
   try {
     if (!pb) {
