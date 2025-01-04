@@ -4,18 +4,35 @@ import parse from "html-react-parser";
 import { Fingerprint } from "lucide-react";
 import pb from "@/lib/pocketbase";
 import { getMacroType } from "@/actions/actionsProjects";
+import type { Metadata, ResolvingMetadata } from "next";
 
-export default async function Project({params}: {params: Promise<{id: string}>}) {
-  const project: Project = await pb.collection("projects").getOne((await params).id);
+type Props = {
+  params: Promise<{ id: string }>;
+};
+
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const project = await pb
+    .collection("projects")
+    .getOne((await params).id, { requestKey: null });
+  const previusTitle = (await parent).title;
+  return {
+    title: `${project.title} ${previusTitle && " | " + previusTitle?.absolute}`,
+    description: project.description,
+  };
+}
+
+export default async function Project({ params }: Props) {
+  const project: Project = await pb
+    .collection("projects")
+    .getOne((await params).id);
   const macroType = await getMacroType({ type: project.type });
 
   return (
     <div className="relative min-h-screen w-screen overflow-hidden">
-      <Frame
-        projectId={project.id}
-        macroType={macroType}
-        link={project.link}
-      />
+      <Frame projectId={project.id} macroType={macroType} link={project.link} />
       {project.videoSrc && (
         <video
           src={project.videoSrc}

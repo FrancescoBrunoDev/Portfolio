@@ -1,11 +1,11 @@
 import ModalInfoBook from "@/components/books/modalInfoBook";
 import { fetchBook, getFormatVariants } from "@/components/books/fetchBooks";
 
-export default async function View({
-  params,
-}: {
+type Props = {
   params: Promise<{ id: string }>;
-}) {
+};
+
+export default async function View({ params }: Props) {
   const result = await fetchBook((await params).id);
 
   if ("error" in result) {

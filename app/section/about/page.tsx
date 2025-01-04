@@ -6,6 +6,14 @@ import { ScrollText } from "lucide-react";
 
 import pb from "@/lib/pocketbase";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About | Francesco Bruno",
+  description:
+    "A brief overview of my work experience, education, and certificates.",
+};
+
 export default async function About() {
   let workExperience2: WorkExperience[] = await pb
     .collection("occupations")

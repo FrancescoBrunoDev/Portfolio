@@ -5,6 +5,13 @@ import { BookCopy, FireExtinguisher } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Books | Francesco Bruno",
+  description: "A collection of books I've read over the years.",
+};
+
 async function View() {
   const data: Book.Year[] = await fetchBooks();
 

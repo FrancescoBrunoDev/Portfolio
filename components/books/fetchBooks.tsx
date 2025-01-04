@@ -11,6 +11,7 @@ export async function fetchBook(id: string) {
 
     const book = await pb.collection("books").getOne(id, {
       expand: "book_info,book_note",
+      requestKey: null,
     });
     // Fetch notes for the book
     if (!book || !book.expand) return book;

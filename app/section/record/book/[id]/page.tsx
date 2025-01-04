@@ -3,12 +3,33 @@ import { fetchBook, getFormatVariants } from "@/components/books/fetchBooks";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import type { Metadata, ResolvingMetadata } from "next";
 
-export default async function View({
-  params,
-}: {
+type Props = {
   params: Promise<{ id: string }>;
-}) {
+};
+
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const record = await fetchBook((await params).id);
+
+  if ("error" in record) {
+    console.error(record.error);
+    return {
+      title: "not found",
+    };
+  }
+  console.log(record);
+  const previusTitle = (await parent).title;
+  return {
+    title: `${record.expand?.book_info.title}  ${previusTitle && " | " + previusTitle?.absolute}`,
+    description: record.description,
+  };
+}
+
+export default async function View({ params }: Props) {
   const result = await fetchBook((await params).id);
 
   if ("error" in result) {
