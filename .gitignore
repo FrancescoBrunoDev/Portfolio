@@ -7,3 +7,5 @@ node_modules
 # Secrets
 .env
 .env.local
+
+.DS_Store
