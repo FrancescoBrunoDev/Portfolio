@@ -1,14 +1,31 @@
+import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function BookItem({ book }: { book: Book.Book }) {
   if (!book || !book.expand) return null;
+  const [sketch, setSketch] = useState({
+    src: "/books/sketches/1.svg",
+    rotate: 0,
+  });
   const infoBooks = book.expand.book_info;
   const note = book.note;
   const titleParts = infoBooks?.title?.match(/[^.!]+[.!]?/g) || [];
 
   const lenghtMainTitle = 50;
+
+  // take a random number beetwen 1 and 3 and use it witch img svg use
+  useEffect(() => {
+    const randomSketch = Math.floor(Math.random() * 3) + 1;
+    // rotate should be 0 or 180
+    const rotate = Math.random() < 0.5 ? 0 : 180;
+    setSketch({
+      src: `/books/sketches/${randomSketch}.svg`,
+      rotate,
+    });
+  }, []);
 
   return (
     <motion.div
@@ -30,10 +47,13 @@ export default function BookItem({ book }: { book: Book.Book }) {
               {note && (
                 <div className="pt-6">
                   <Image
+                    className={cn({
+                      "rotate-180": sketch.rotate === 180,
+                    })}
                     width={300}
                     height={300}
                     alt="sketch holdplace"
-                    src="/books/sketches/1.svg"
+                    src={sketch.src}
                   />
                 </div>
               )}
