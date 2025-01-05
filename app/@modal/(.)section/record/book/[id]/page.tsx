@@ -20,7 +20,7 @@ export default async function View({ params }: Props) {
   const randomVariant = await getFormatVariants({ type: book.type });
 
   return (
-    <div className="fixed inset-x-3 inset-y-0 z-40 flex items-center justify-center backdrop-grayscale">
+    <div className="fixed inset-0 z-40 flex items-center justify-center px-3 backdrop-grayscale sm:px-0">
       <ModalInfoBook
         book={book}
         note={note}
