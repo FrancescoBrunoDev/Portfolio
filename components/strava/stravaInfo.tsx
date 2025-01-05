@@ -1,67 +1,65 @@
-export default async function StravaInfo() {
-  // link per chiedere accesso https://www.strava.com/oauth/authorize?client_id=115520&redirect_uri=http://localhost:3000&response_type=code&scope=activity:read_all
+"use client";
+import { useState, useEffect } from "react";
+import { fetchStats, type StravaStats } from "@/actions/actionsStava";
+import { ExternalLink } from "lucide-react";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
 
-  // create the epoch timestamp of the strat of this month and of today
-  const today = new Date();
-  const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-  const startOfMonthEpoch = Math.round(startOfMonth.getTime() / 1000);
-  const todayEpoch = Math.round(today.getTime() / 1000);
+export default function StravaInfo({ className }: { className?: string }) {
+  const [isLoading, setIsLoading] = useState(true);
+  const [stats, setStats] = useState<StravaStats | null>(null);
 
-  const auth_link = "https://www.strava.com/api/v3/oauth/token";
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const result = await fetchStats();
+        setStats(result);
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Errore durante il recupero delle attività", error);
+      }
+    }
+    fetchData();
+  }, []);
+  console.log(stats);
 
-  const token = await fetch(auth_link, {
-    method: "POST",
-    headers: {
-      Accept: "application/json, text/plain, */*",
-      "Content-Type": "application/json",
-    },
+  function convertDistance(distance: number) {
+    return (distance / 1000).toFixed(2);
+  }
 
-    body: JSON.stringify({
-      client_id: "115520",
-      client_secret: "2f526d11901b9c2b90d693ef63699bbda8081087",
-      code: "43441f3780edfe9b61a6739dbb05520547b30d2a",
-      grant_type: "authorization_code",
-    }),
-  }).then((res) => res.json());
-
-  const activities = await fetch(
-    `https://www.strava.com/api/v3/athlete/activities?before=${todayEpoch}&after=${startOfMonthEpoch}&per_page=100`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token.access_token}`,
-      },
-    },
-  ).then((res) => res.json());
-
-  const stats = await fetch(
-    `https://www.strava.com/api/v3/athletes/43069646/stats`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token.access_token}`,
-      },
-    },
-  ).then((res) => res.json());
-
-  const totalSeconds = stats.recent_run_totals.elapsed_time;
-  const totalMinutes = Math.floor(totalSeconds / 60); // Convert seconds to minutes
-  const hours = Math.floor(totalMinutes / 60); // Calculate hours
-  const minutes = totalMinutes % 60; // Calculate remaining minutes
+  if (!stats) return null;
 
   return (
-    <div className="h-10 text-primary">
-      Last four weeks run:
-      <div className="flex gap-4">
-        <span>{stats.recent_run_totals.count} run</span>
-        <span>{Math.floor(stats.recent_run_totals.distance / 1000)} km</span>
-        <span>
-          {hours} hours {minutes} minutes
-        </span>
-        <span>
-          {Math.floor(stats.recent_run_totals.elevation_gain)} m elevation gain
-        </span>
-      </div>
+    <div
+      className={cn(
+        "relative flex w-fit flex-col border-2 border-primary p-2 pt-3",
+        className,
+      )}
+    >
+      <Link href="https://www.strava.com/athletes/43069646" target="_blank">
+        <h2 className="absolute -top-[0.9rem] flex items-center gap-1 bg-background px-2 font-semibold hover:font-bold">
+          Strava Numbers <ExternalLink strokeWidth={2.75} size={18} />
+        </h2>
+      </Link>
+      {isLoading && <div>LOADING</div>}
+      {stats && (
+        <ul className="list-inside list-disc">
+          <li>
+            <span>total runs: {stats.all_run_totals.count}</span>
+            {" | "}
+            <span>
+              distance: {convertDistance(stats.all_run_totals.distance)} km
+            </span>
+          </li>
+          <li>
+            <span>last 4 weeks runs: {stats.recent_run_totals.count}</span>
+            {" | "}
+            <span>
+              distance: {convertDistance(stats.recent_run_totals.distance)} km
+            </span>
+          </li>
+        </ul>
+      )}
     </div>
   );
 }
