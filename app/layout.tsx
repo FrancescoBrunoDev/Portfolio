@@ -1,7 +1,7 @@
 import "@/styles/globals.css";
 import { outfit } from "@/components/text";
-import Cursor from "@/components/cursor";
 import Nav from "@/components/nav";
+import AnimatedCursor from "react-animated-cursor";
 
 export const metadata = {
   title: "Francesco Bruno",
@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={"" + outfit.className}>
         <Nav />
-        <Cursor />
+        <AnimatedCursor innerSize={16} outerSize={8} trailingSpeed={3} />
         <>{children}</>
         <>{modal}</>
       </body>

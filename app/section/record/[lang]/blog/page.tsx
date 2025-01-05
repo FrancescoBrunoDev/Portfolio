@@ -46,7 +46,7 @@ export default async function Page({
               return (
                 <Link
                   key={article.id}
-                  href={`/section/record/${lang}/blog/${md.id}/${article.slug}`}
+                  href={`/section/record/${lang}/blog/${article.slug}`}
                   className="inline-flex items-center gap-2 transition-all duration-100 ease-in-out hover:font-semibold"
                 >
                   <span className="h-fit text-4xl">{md.title}</span>
