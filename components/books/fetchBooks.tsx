@@ -53,6 +53,7 @@ export async function fetchBooks() {
     expand: "book_info,book_note",
     fields:
       "id,month,year,expand.book_info.title,expand.book_info.authors,expand.book_info.ISBN_13,expand.book_note.metadata",
+    requestKey: null,
   });
 
   // Prima raggruppa i libri per anno
