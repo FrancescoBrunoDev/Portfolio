@@ -81,7 +81,7 @@ export default async function BlogPost({ params }: Props) {
 
     return (
       <div className="isolate">
-        <div className="from-background-blog via-background-blog pointer-events-none fixed inset-0 -z-10 h-screen bg-gradient-to-t via-90% to-background to-95%" />
+        <div className="from-background-blog via-background-blog pointer-events-none fixed inset-0 -z-10 h-screen bg-linear-to-t via-90% to-background to-95%" />
         <article className="prose lg:prose-lg prose-headings:text-primary container pt-20">
           <h1>{record.title}</h1>
           <MDXClient source={mdxSource} />

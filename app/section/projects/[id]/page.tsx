@@ -45,7 +45,7 @@ export default async function Project({ params }: Props) {
       <div className="container flex min-h-screen items-center px-10 pb-10 pt-14 text-primary">
         <div className="w-full px-2 lg:px-10">
           <p className="flex items-baseline">
-            <Fingerprint className="mr-0.5 h-3 w-3 stroke-[3]" />
+            <Fingerprint className="mr-0.5 h-3 w-3 stroke-3" />
             {project.id} • {macroType}/{project.type}
           </p>
           <h1 className="text-4xl font-bold uppercase lg:text-8xl">

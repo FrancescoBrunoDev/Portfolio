@@ -51,7 +51,7 @@ export default function SearchBox({
         <Book strokeWidth={2.75} className="h-full w-fit text-primary" />
         <span className="text-2xl">/</span>
         <input
-          className="h-full w-full border-b-[2.75px] border-primary bg-transparent px-1 font-semibold placeholder:invisible placeholder:text-primary/50 focus:outline-none"
+          className="h-full w-full border-b-[2.75px] border-primary bg-transparent px-1 font-semibold placeholder:invisible placeholder:text-primary/50 focus:outline-hidden"
           type="text"
           placeholder="Search"
           onInput={handleInput}

@@ -82,7 +82,7 @@ export default function TimelineSecondary({
                     <Link href={item.url} className="text-xs font-light">
                       <div className="flex items-center">
                         <span>to the certificate</span>
-                        <Award className="h-5 w-5 stroke-[3]" />
+                        <Award className="h-5 w-5 stroke-3" />
                       </div>
                     </Link>
                   )}

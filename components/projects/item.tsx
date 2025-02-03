@@ -12,7 +12,7 @@ export default function ProjectItem({ project }: { project: Project }) {
       <div className="absolute z-10 h-full w-full bg-primary p-3 opacity-100 transition-opacity duration-300 hover:opacity-30">
         <div className="flex h-full items-start lg:items-end">
           <div className="hidden rotate-180 flex-col items-center gap-1 lg:flex">
-            <Fingerprint className="mr-0.5 h-3 w-3 rotate-90 stroke-background stroke-[3]" />
+            <Fingerprint className="mr-0.5 h-3 w-3 rotate-90 stroke-background stroke-3" />
             <span className="vertical-text text-xs text-background">
               {project.id}
             </span>
