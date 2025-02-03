@@ -22,7 +22,7 @@ export default function SpecialContent({
             height="450px"
             sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation"
             allow="autoplay *; encrypted-media *; clipboard-write"
-            className="w-full"
+            className="pointer-events-auto w-full"
           ></iframe>
         </div>
       )}
