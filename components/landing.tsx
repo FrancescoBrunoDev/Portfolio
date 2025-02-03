@@ -2,9 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { AtSign } from "lucide-react";
-import { Linkedin } from "lucide-react";
-import { Github } from "lucide-react";
+import { AtSign, Linkedin, Github } from "lucide-react";
 import { BgLanding } from "@/components/bgLanding";
 
 export default function Landing() {
@@ -31,48 +29,48 @@ export default function Landing() {
   return (
     <>
       <div
-        className="absolute z-10 flex h-screen w-screen items-center text-primary backdrop-blur-2xl"
+        className="text-primary absolute z-10 flex h-screen w-screen items-center backdrop-blur-2xl"
         onMouseMove={handleMouseMove}
       >
         <div className="container">
           <div className="w-full">
-            <div className="flex flex-col-reverse lg:flex-row lg:justify-between">
-              <h1 className="text-5xl font-bold uppercase sm:text-8xl md:text-9xl">
+            <div className="flex flex-col-reverse xl:flex-row xl:justify-between">
+              <h1 className="text-5xl font-bold tracking-tight uppercase sm:text-8xl md:text-9xl">
                 Francesco
                 <br />
                 Bruno
               </h1>
               <div className="z-10 flex items-center space-x-4">
-                <div className="flex items-center space-x-4 text-base md:text-lg lg:flex-col lg:items-end lg:space-x-0 lg:text-right">
+                <div className="text- flex items-center space-x-4 md:text-lg xl:flex-col xl:items-end xl:space-x-0 xl:text-right">
                   <span>Münster. DE</span>
-                  <span className="hidden lg:block">Tel. +39 3485796611</span>
+                  <span className="hidden xl:block">Tel. +39 3485796611</span>
                   <Link
                     href="mailto:francesco.bruno001@gmail.com"
                     className="transition-all duration-100 ease-in-out hover:font-semibold"
                   >
-                    <span className="hidden lg:block">
+                    <span className="hidden xl:block">
                       {" "}
                       francesco.bruno001@gmail.com
                     </span>
-                    <AtSign className="block h-5 w-5 hover:bg-secondary md:h-6 md:w-6 lg:hidden" />
+                    <AtSign className="hover:bg-secondary block h-5 w-5 md:h-6 md:w-6 xl:hidden" />
                   </Link>
                   <Link
                     href="https://github.com/FrancescoBrunoDev"
                     className="transition-all duration-100 ease-in-out hover:font-semibold"
                   >
-                    <span className="hidden lg:block">
+                    <span className="hidden xl:block">
                       github.com/FrancescoBrunoDev
                     </span>
-                    <Github className="block h-5 w-5 hover:bg-secondary md:h-6 md:w-6 lg:hidden" />
+                    <Github className="hover:bg-secondary block h-5 w-5 md:h-6 md:w-6 xl:hidden" />
                   </Link>
                   <Link
                     href="https://www.linkedin.com/in/francesco--bruno/"
                     className="transition-all duration-100 ease-in-out hover:font-semibold"
                   >
-                    <span className="hidden lg:block">
+                    <span className="hidden xl:block">
                       linkedin.com/in/francesco--bruno/
                     </span>
-                    <Linkedin className="block h-5 w-5 hover:bg-secondary md:h-6 md:w-6 lg:hidden" />
+                    <Linkedin className="hover:bg-secondary block h-5 w-5 md:h-6 md:w-6 xl:hidden" />
                   </Link>
                 </div>
               </div>

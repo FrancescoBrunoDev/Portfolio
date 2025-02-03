@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Page() {
   return (
-    <div className="container relative flex h-screen items-center text-primary">
+    <div className="text-primary relative container flex h-screen items-center">
       {/* <div className="container absolute inset-x-0 top-20 z-0 flex justify-end">
         <StravaInfo className="h-fit" />
       </div> */}
@@ -14,6 +14,12 @@ export default function Page() {
             className="tracking-wider transition-all duration-100 ease-in-out hover:font-semibold"
           >
             Books /
+          </Link>
+          <Link
+            href="/section/record/en/blog/"
+            className="tracking-wider transition-all duration-100 ease-in-out hover:font-semibold"
+          >
+            Blog
           </Link>
         </div>
       </div>

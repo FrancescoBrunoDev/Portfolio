@@ -7,8 +7,8 @@ export default function TimelineWork({
   workExperience: WorkExperience[];
 }) {
   return (
-    <div className="rounded-xl bg-background p-4 text-primary shadow-2xl shadow-ring transition-all duration-200 hover:scale-[1.002]">
-      <div className="flex justify-between border-b-2 border-primary">
+    <div className="bg-background text-primary shadow-ring rounded p-4 shadow-2xl transition-all duration-200 hover:scale-[1.002]">
+      <div className="border-primary flex justify-between border-b-2">
         <h1 className="text-2xl font-black uppercase">Work Experience</h1>
         <Briefcase className="h-8 w-8" />
       </div>
@@ -28,10 +28,10 @@ export default function TimelineWork({
               key={work.id}
               className="grid grid-cols-1 text-start md:grid-cols-10"
             >
-              <div className="col-span-7 grid grid-cols-12 border-l-2 border-primary pt-1 md:col-span-3 md:border-l-0 md:border-none">
+              <div className="border-primary col-span-7 grid grid-cols-12 border-l-2 pt-1 md:col-span-3 md:border-l-0 md:border-none">
                 <div className="col-span-1 block md:hidden" />
                 <div className="col-span-11 flex flex-col pr-2 text-xl font-black uppercase md:translate-x-0">
-                  <span className="break-words text-xl font-black uppercase leading-5">
+                  <span className="text-xl leading-5 font-black break-words uppercase">
                     {!isSequentialExperience
                       ? work.expand.organizations[0].name
                       : null}
@@ -39,7 +39,7 @@ export default function TimelineWork({
                 </div>
               </div>
 
-              <div className="col-span-7 grid grid-cols-12 border-l-2 border-primary">
+              <div className="border-primary col-span-7 grid grid-cols-12 border-l-2">
                 <svg className="col-span-1 mt-[6px] h-5 w-5 translate-x-[-8px] translate-y-[2px]">
                   <circle
                     cx="7"
@@ -51,7 +51,7 @@ export default function TimelineWork({
                   />
                 </svg>
                 <div className="col-span-11 flex flex-col pt-1">
-                  <p className="text-lg font-bold uppercase leading-5">
+                  <p className="text-lg leading-5 font-bold uppercase">
                     {work.position}
                   </p>
                   <span className="text-xs">
