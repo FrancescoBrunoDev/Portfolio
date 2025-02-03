@@ -6,7 +6,7 @@ export default function ProjectItem({ project }: { project: Project }) {
   return (
     <Link
       href={`/section/projects/${project.id}`}
-      className="border-primary lg:hover:text-primary relative z-0 h-full w-32 shrink-0 translate-x-0 border-2 transition-all duration-300 ease-in-out lg:border-none lg:text-transparent lg:hover:z-10 lg:hover:mr-6 lg:hover:translate-x-6"
+      className="border-primary lg:hover:text-primary relative z-0 h-full w-32 shrink-0 translate-x-0 rounded border-2 transition-all duration-300 ease-in-out lg:border-none lg:text-transparent lg:hover:z-10 lg:hover:mr-6 lg:hover:translate-x-6"
     >
       <div className="bg-primary absolute z-10 h-full w-full rounded p-3 opacity-100 transition-opacity duration-300 hover:opacity-30">
         <div className="flex h-full items-start lg:items-end">
