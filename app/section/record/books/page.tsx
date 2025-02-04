@@ -12,6 +12,8 @@ export const metadata: Metadata = {
   description: "A collection of books I've read over the years.",
 };
 
+const ITEMS_PER_PAGE = 20;
+
 async function View() {
   const data: Book.Year[] = await fetchBooks();
 
@@ -24,8 +26,8 @@ function LoadingBooks() {
   return (
     <div className="flex h-screen w-screen items-center justify-center">
       <div className="flex flex-col items-center gap-4">
-        <BookCopy className="h-24 w-24 animate-pulse stroke-primary stroke-[2.5]" />
-        <h2 className="w-44 text-center text-xl text-primary">
+        <BookCopy className="stroke-primary h-24 w-24 animate-pulse stroke-[2.5]" />
+        <h2 className="text-primary w-44 text-center text-xl">
           Just a tick, I'll grab the books from the shelves.
         </h2>
       </div>
@@ -37,8 +39,8 @@ function Error() {
   return (
     <div className="flex h-screen w-screen items-center justify-center">
       <div className="flex flex-col items-center gap-4">
-        <FireExtinguisher className="h-24 w-24 stroke-primary stroke-[2.5]" />
-        <h2 className="w-44 text-center text-xl text-primary">
+        <FireExtinguisher className="stroke-primary h-24 w-24 stroke-[2.5]" />
+        <h2 className="text-primary w-44 text-center text-xl">
           Oops! Something went wrong. Please try again later.
         </h2>
       </div>
