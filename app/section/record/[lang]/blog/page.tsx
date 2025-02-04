@@ -1,9 +1,8 @@
-// import StravaInfo from "@/components/strava/stravaInfo";
 import Link from "next/link";
 import pb from "@/lib/pocketbase";
 import { redirect } from "next/navigation";
 import { format, parseISO } from "date-fns";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
+
 import { LOCALES, SupportedLang, allowedLangs, getLocale } from "@/lib/locales";
 
 interface Article {
@@ -30,11 +29,12 @@ export default async function Page({
   if (!allowedLangs.includes(lang)) {
     redirect("/section/record/en/blog/");
   }
-  console.log(lang);
+
   const articles: Article[] = await pb.collection("articles").getFullList({
     filter: `published = true`,
     expand: "markdowns",
   });
+
   return (
     <div className="text-primary flex h-screen w-screen items-center">
       <div className="container">
@@ -83,9 +83,6 @@ export default async function Page({
             })}
           </div>
         </div>
-      </div>
-      <div className="fixed inset-x-0 bottom-4 flex justify-center">
-        <LanguageSwitcher />
       </div>
     </div>
   );
