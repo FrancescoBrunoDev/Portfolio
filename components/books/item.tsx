@@ -35,9 +35,9 @@ export default function BookItem({ book }: { book: Book.Book }) {
       transition={{ duration: 0.1 }}
     >
       <Link href={`/section/record/book/${book.id}`}>
-        <div className="relative z-0 h-56 w-32 shrink-0 translate-x-0 overflow-visible border-2 border-primary transition-all duration-200 ease-in-out hover:scale-[1.025]">
-          <div className="h-full w-full bg-primary p-3 opacity-100 transition-opacity duration-300">
-            <div className="flex h-full flex-col text-left text-background">
+        <div className="border-primary relative z-0 h-56 w-32 shrink-0 translate-x-0 overflow-visible rounded border-2 transition-all duration-200 ease-in-out hover:scale-103">
+          <div className="bg-primary h-full w-full p-3 opacity-100 transition-opacity duration-300">
+            <div className="text-background flex h-full flex-col text-left">
               {infoBooks.authors?.map((author, index) => (
                 <span key={index} className="leading-tight">
                   {author}
@@ -59,7 +59,7 @@ export default function BookItem({ book }: { book: Book.Book }) {
               )}
             </div>
           </div>
-          <div className="absolute bottom-0 left-0 right-0 z-10 break-words border-t-2 border-primary bg-background p-2 text-left text-base font-semibold uppercase">
+          <div className="border-primary bg-background absolute right-0 bottom-0 left-0 z-10 rounded-xs border-t-2 p-2 text-left text-base font-semibold break-words uppercase">
             <div className="text-sm">
               {titleParts[0] && titleParts[0].length > lenghtMainTitle
                 ? `${titleParts[0].substring(0, lenghtMainTitle)}...`

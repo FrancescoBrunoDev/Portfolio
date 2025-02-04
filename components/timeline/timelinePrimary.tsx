@@ -7,7 +7,7 @@ export default function TimelineWork({
   workExperience: WorkExperience[];
 }) {
   return (
-    <div className="bg-background text-primary shadow-ring rounded p-4 shadow-2xl transition-all duration-200 hover:scale-[1.002]">
+    <div className="bg-background text-primary shadow-ring rounded p-4 shadow-2xl transition-all duration-200 hover:scale-101">
       <div className="border-primary flex justify-between border-b-2">
         <h1 className="text-2xl font-black uppercase">Work Experience</h1>
         <Briefcase className="h-8 w-8" />

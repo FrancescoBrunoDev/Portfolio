@@ -66,9 +66,9 @@ export default function ModalInfoBook({
       exit={{ y: -10, opacity: 0 }}
       transition={{ delay: 0.3 }}
     >
-      <div className="relative h-[80dvh] max-h-[46rem] w-full bg-primary p-3 text-secondary md:max-w-md lg:m-0">
+      <div className="bg-primary text-secondary relative h-[80dvh] max-h-[46rem] w-full rounded p-3 md:max-w-md lg:m-0">
         {/* Buttons */}
-        <div className="absolute right-4 top-6 flex gap-2">
+        <div className="absolute top-6 right-4 flex gap-2">
           {infoBook.infoLink && (
             <button className="hover:scale-105">
               <Link href={infoBook.infoLink} target="_blank">
@@ -95,9 +95,9 @@ export default function ModalInfoBook({
         </div>
         <div className="flex h-full flex-col gap-6">
           {/* authors book */}
-          <div className="flex flex-col pr-20 text-left text-background">
+          <div className="text-background flex flex-col pr-20 text-left">
             {infoBook.authors.map((author, index) => (
-              <span key={index} className="text-4xl font-bold leading-tight">
+              <span key={index} className="text-4xl leading-tight font-bold">
                 {author}
                 {index < infoBook.authors.length - 1 && <br />}
               </span>
@@ -110,7 +110,7 @@ export default function ModalInfoBook({
               {infoBook.categories.map((category, index) => (
                 <span
                   key={index}
-                  className="h-fit rounded-full bg-background px-1 pb-[0.10rem] text-xs leading-tight text-primary"
+                  className="bg-background text-primary h-fit rounded-full px-1 pb-[0.10rem] text-xs leading-tight"
                 >
                   {category}
                 </span>
@@ -156,10 +156,10 @@ export default function ModalInfoBook({
           </div>
         </div>
         {/* title book */}
-        <div className="absolute bottom-0 left-0 right-0 z-10">
+        <div className="absolute right-0 bottom-0 left-0 z-10">
           {note.length !== 0 && Object.keys(note).length > 1 ? (
             <div className="-top-20 z-50 mb-1 flex w-full justify-center px-3 opacity-20 transition-opacity hover:opacity-100">
-              <div className="flex justify-center rounded-lg bg-background px-3 text-primary">
+              <div className="bg-background text-primary flex justify-center rounded-lg px-3">
                 <button
                   className="transition-all disabled:opacity-50"
                   onClick={handlePrevious}
@@ -180,7 +180,7 @@ export default function ModalInfoBook({
               </div>
             </div>
           ) : null}
-          <div className="border-4 border-t-0 border-primary bg-background p-3 text-left font-semibold text-primary">
+          <div className="border-primary bg-background text-primary rounded border-4 border-t-0 p-3 text-left font-semibold">
             <div className="text-4xl uppercase">{titleParts[0]}</div>
             <div className="max-h-36text-2xl">{titleParts[1]}</div>
           </div>
