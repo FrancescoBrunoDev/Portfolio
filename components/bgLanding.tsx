@@ -13,7 +13,7 @@ export const BgLanding: React.FC<BgLandingProps> = ({
   const [randomNum, setRandomNum] = useState(0);
   const [direction, setDirection] = useState(0);
   const [desiredDirection, setDesiredDirection] = useState(
-    getInitialDirection()
+    getInitialDirection(),
   );
   const [centerX, setCenterX] = useState(0);
   const [centerY, setCenterY] = useState(0);
@@ -25,7 +25,7 @@ export const BgLanding: React.FC<BgLandingProps> = ({
 
   // Aggiorna il numero casuale e la direzione
   useEffect(() => {
-    const interval = setInterval(updateRandomNumAndDirection, 100);
+    const interval = setInterval(updateRandomNumAndDirection, 150);
     return () => clearInterval(interval);
   }, [direction, desiredDirection]);
 
@@ -34,15 +34,23 @@ export const BgLanding: React.FC<BgLandingProps> = ({
   const movement = getMovement(radius);
 
   return (
-    <div className="absolute bottom-0 left-0 right-0 top-0 z-0 flex h-screen w-screen items-center justify-center">
+    <div className="absolute top-0 right-0 bottom-0 left-0 z-0 flex h-screen w-screen items-center justify-center will-change-transform">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 1 }}
+        style={{ willChange: "transform" }}
       >
-        <svg width={windowDimensions.width} height={windowDimensions.height}>
+        <svg
+          width={windowDimensions.width}
+          height={windowDimensions.height}
+          style={{
+            transform: "translateZ(0)",
+            willChange: "transform",
+          }}
+        >
           <circle
-            className="transition-all duration-100 ease-in-out"
+            className="transition-all duration-150 ease-out"
             cx={getCircleX(movement)}
             cy={getCircleY(movement)}
             r={radius + randomNum}
@@ -71,14 +79,14 @@ export const BgLanding: React.FC<BgLandingProps> = ({
     }
     setDirection(
       (prevDirection) =>
-        prevDirection + (desiredDirection - prevDirection) * 0.1
+        prevDirection + (desiredDirection - prevDirection) * 0.1,
     );
   }
 
   function getDistanceFromCenter() {
     return Math.sqrt(
       Math.pow(mousePosition.x - centerX, 2) +
-        Math.pow(mousePosition.y - centerY, 2)
+        Math.pow(mousePosition.y - centerY, 2),
     );
   }
 
@@ -87,7 +95,7 @@ export const BgLanding: React.FC<BgLandingProps> = ({
   }
 
   function getMovement(radius: number): number {
-    return radius / 5000;
+    return radius / 7500;
   }
 
   function getCircleX(movement: number): number {

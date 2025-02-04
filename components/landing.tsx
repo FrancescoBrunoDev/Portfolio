@@ -29,10 +29,11 @@ export default function Landing() {
   return (
     <>
       <div
-        className="text-primary absolute z-10 flex h-screen w-screen items-center backdrop-blur-2xl"
+        className="text-primary absolute z-10 flex h-screen w-screen items-center"
         onMouseMove={handleMouseMove}
       >
-        <div className="container">
+        <div className="absolute inset-0 backdrop-blur-2xl" />
+        <div className="relative container">
           <div className="w-full">
             <div className="flex flex-col-reverse xl:flex-row xl:justify-between">
               <h1 className="text-5xl font-bold tracking-tight uppercase sm:text-8xl md:text-9xl">
