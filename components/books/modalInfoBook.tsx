@@ -106,7 +106,7 @@ export default function ModalInfoBook({
           {/* details book */}
           <div className="flex flex-wrap text-sm">
             <div className="flex items-center gap-1">
-              <div className="font-bold">Cathegories</div>
+              <div className="font-bold">Categories</div>
               {infoBook.categories.map((category, index) => (
                 <span
                   key={index}
