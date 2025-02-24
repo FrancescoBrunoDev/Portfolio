@@ -12,8 +12,6 @@ export const metadata: Metadata = {
   description: "A collection of books I've read over the years.",
 };
 
-const ITEMS_PER_PAGE = 20;
-
 async function View() {
   const data: Book.Year[] = await fetchBooks();
 

@@ -2,11 +2,8 @@ import { redirect } from "next/navigation";
 import pb from "@/lib/pocketbase";
 import type { Metadata, ResolvingMetadata } from "next";
 import { serialize } from "next-mdx-remote/serialize";
-import MDXClient from "./MDXClient";
-import { ArrowLeft } from "lucide-react";
-import Link from "next/link";
-import { format, parseISO } from "date-fns";
-import { LOCALES, SupportedLang, allowedLangs, getLocale } from "@/lib/locales";
+import { SupportedLang, allowedLangs } from "@/lib/locales";
+import { Article } from "@/components/blog/article";
 
 type Props = {
   params: Promise<{ lang: string; slug: string }>;
@@ -66,7 +63,8 @@ export default async function BlogPost({ params }: Props) {
         expand: "markdowns",
       });
 
-    if (!record || !record.published) {
+    if (!record) {
+      // TODO change this back to (!record || !record.published)
       redirect(`/section/record/${lang}/blog/`);
     }
 
@@ -85,28 +83,11 @@ export default async function BlogPost({ params }: Props) {
     return (
       <div className="isolate">
         <div className="from-background-blog via-background-blog to-background pointer-events-none fixed inset-0 -z-10 h-screen bg-linear-to-t via-90% to-95%" />
-        <article className="prose lg:prose-lg prose-headings:text-primary prose-p:text-primary-prose prose-p:text-justify container mx-auto py-20">
-          <Link
-            href={`/section/record/${lang}/blog`}
-            className="text-primary group inline-flex items-center gap-1 pb-6 text-xl font-bold no-underline transition-all hover:-translate-x-2 hover:font-black"
-          >
-            <ArrowLeft size={24} className="stroke-3 group-hover:stroke-4" />
-            Back
-          </Link>
-          <div>
-            <span className="text-primary">
-              {format(
-                parseISO(record.created),
-                LOCALES[lang as SupportedLang].dateFormat.replace(
-                  "${timePreposition}",
-                  LOCALES[lang as SupportedLang].timePreposition,
-                ),
-                { locale: getLocale(lang) },
-              )}
-            </span>
-          </div>
-          <MDXClient source={mdxSource} />
-        </article>
+        <Article
+          lang={lang as SupportedLang}
+          record={record}
+          mdxSource={mdxSource}
+        />
       </div>
     );
   } catch (error) {
