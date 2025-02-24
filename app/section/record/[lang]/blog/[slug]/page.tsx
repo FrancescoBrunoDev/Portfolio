@@ -85,7 +85,7 @@ export default async function BlogPost({ params }: Props) {
     return (
       <div className="isolate">
         <div className="from-background-blog via-background-blog to-background pointer-events-none fixed inset-0 -z-10 h-screen bg-linear-to-t via-90% to-95%" />
-        <article className="prose lg:prose-lg prose-headings:text-primary prose-p:text-primary-prose container mx-auto py-20">
+        <article className="prose lg:prose-lg prose-headings:text-primary prose-p:text-primary-prose prose-p:text-justify container mx-auto py-20">
           <Link
             href={`/section/record/${lang}/blog`}
             className="text-primary group inline-flex items-center gap-1 pb-6 text-xl font-bold no-underline transition-all hover:-translate-x-2 hover:font-black"
