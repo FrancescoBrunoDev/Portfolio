@@ -63,8 +63,7 @@ export default async function BlogPost({ params }: Props) {
         expand: "markdowns",
       });
 
-    if (!record) {
-      // TODO change this back to (!record || !record.published)
+    if (!record || !record.published) {
       redirect(`/section/record/${lang}/blog/`);
     }
 
