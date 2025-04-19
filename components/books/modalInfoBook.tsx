@@ -110,7 +110,7 @@ export default function ModalInfoBook({
               {infoBook.categories.map((category, index) => (
                 <span
                   key={index}
-                  className="bg-background text-primary h-fit rounded-full px-1 pb-[0.10rem] text-xs leading-tight"
+                  className="bg-background text-primary h-fit rounded-full px-1 pb-[0.10rem] text-xs leading-tight text-nowrap"
                 >
                   {category}
                 </span>
