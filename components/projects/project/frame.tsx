@@ -5,6 +5,7 @@ interface FrameProps {
   projectId: string;
   link: string | null;
   macroType: "dev" | "other";
+  title?: string;
 }
 
 interface AdjacentIds {
@@ -17,7 +18,8 @@ interface AdjacentIds {
 export default async function Frame({
   projectId,
   link,
-  macroType
+  macroType,
+  title
 }: FrameProps) {
   const adjacentIds: AdjacentIds = await getAdjacentIds(projectId);
 
@@ -53,7 +55,7 @@ export default async function Frame({
       </Link>
       <div className="fixed bottom-0 z-10 h-20 w-full translate-y-10 bg-background transition-all ease-in-out hover:translate-y-8">
         {!link ? null : (
-          <Link href={link} target="_blank">
+          <Link href={link} target="_blank" data-umami-event={"Click Project Link " + title}>
             <div className="flex justify-center pt-1 text-xl text-primary">
               to the website
             </div>

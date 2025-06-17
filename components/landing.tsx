@@ -48,6 +48,7 @@ export default function Landing() {
                   <Link
                     href="mailto:francesco.bruno001@gmail.com"
                     className="transition-all duration-100 ease-in-out hover:font-semibold"
+                    data-umami-event="Click Email Link"
                   >
                     <span className="hidden xl:block">
                       {" "}
@@ -58,6 +59,7 @@ export default function Landing() {
                   <Link
                     href="https://github.com/FrancescoBrunoDev"
                     className="transition-all duration-100 ease-in-out hover:font-semibold"
+                    data-umami-event="Click GitHub Link"
                   >
                     <span className="hidden xl:block">
                       github.com/FrancescoBrunoDev
@@ -67,6 +69,7 @@ export default function Landing() {
                   <Link
                     href="https://www.linkedin.com/in/francesco--bruno/"
                     className="transition-all duration-100 ease-in-out hover:font-semibold"
+                    data-umami-event="Click LinkedIn Link"
                   >
                     <span className="hidden xl:block">
                       linkedin.com/in/francesco--bruno/

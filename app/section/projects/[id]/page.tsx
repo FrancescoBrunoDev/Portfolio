@@ -32,7 +32,7 @@ export default async function Project({ params }: Props) {
 
   return (
     <div className="relative min-h-screen w-screen overflow-hidden">
-      <Frame projectId={project.id} macroType={macroType} link={project.link} />
+      <Frame projectId={project.id} macroType={macroType} link={project.link} title={project.title} />
       {project.videoSrc && (
         <video
           src={project.videoSrc}
