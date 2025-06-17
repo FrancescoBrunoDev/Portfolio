@@ -21,7 +21,7 @@ export default function RootLayout({
       <head>
         <Script
           defer
-          src="http://umami-w4w0gwowc4kgg4gogs0o8sok.francesco-bruno.com/script.js"
+          src="https://umami-w4w0gwowc4kgg4gogs0o8sok.francesco-bruno.com/script.js"
           data-website-id="689235d0-8491-4c50-9aaa-54ea7018115a"
         />
       </head>
