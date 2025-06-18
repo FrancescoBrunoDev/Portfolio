@@ -1,7 +1,6 @@
 import "@/styles/globals.css";
 import { outfit } from "@/components/text";
 import Nav from "@/components/nav";
-import AnimatedCursorWrapper from "@/components/AnimatedCursorWrapper";
 import Script from "next/script";
 
 export const metadata = {
@@ -27,7 +26,6 @@ export default function RootLayout({
       </head>
       <body className={outfit.className}>
         <Nav />
-        <AnimatedCursorWrapper />
         {children}
         {modal}
       </body>
