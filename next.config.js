@@ -9,6 +9,7 @@ const nextConfig = {
         port: "",
         pathname: "/books/**",
       },
+      new URL("https://pb-pf.francesco-bruno.com/api/files/**"),
     ],
   },
   async redirects() {

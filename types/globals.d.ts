@@ -118,8 +118,8 @@ type Project = {
   hidden: boolean;
   title: string;
   description: string;
-  imageSrc: string;
-  videoSrc: string;
+  imageFile: string;
+  videoFile: string;
   scoreImg: null | string;
   type: string;
   link: string | null;

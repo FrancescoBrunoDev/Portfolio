@@ -29,20 +29,26 @@ export default async function Project({ params }: Props) {
     .collection("projects")
     .getOne((await params).id);
   const macroType = await getMacroType({ type: project.type });
+  const videoUrl = pb.files.getURL(project, project.videoFile);
 
   return (
     <div className="relative min-h-screen w-screen overflow-hidden">
-      <Frame projectId={project.id} macroType={macroType} link={project.link} title={project.title} />
-      {project.videoSrc && (
+      <Frame
+        projectId={project.id}
+        macroType={macroType}
+        link={project.link}
+        title={project.title}
+      />
+      {project.videoFile && (
         <video
-          src={project.videoSrc}
+          src={videoUrl}
           autoPlay
           loop
           muted
           className="fixed -z-30 min-h-screen min-w-full overflow-hidden object-cover"
         />
       )}
-      <div className="container flex min-h-screen items-center px-10 pb-10 pt-14 text-primary">
+      <div className="text-primary container flex min-h-screen items-center px-10 pt-14 pb-10">
         <div className="w-full px-2 lg:px-10">
           <p className="flex items-baseline">
             <Fingerprint className="mr-0.5 h-3 w-3 stroke-3" />
@@ -51,7 +57,7 @@ export default async function Project({ params }: Props) {
           <h1 className="text-4xl font-bold uppercase lg:text-8xl">
             {project.title}
           </h1>
-          <p className="hyphens-none text-lg font-normal sm:hyphens-auto md:hyphens-auto lg:w-3/4">
+          <p className="text-lg font-normal hyphens-none sm:hyphens-auto md:hyphens-auto lg:w-3/4">
             {parse(project.description)}
           </p>
           <SpecialContetent
