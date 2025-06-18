@@ -10,6 +10,7 @@ const nextConfig = {
         pathname: "/books/**",
       },
       new URL("https://pb-pf.francesco-bruno.com/api/files/**"),
+      new URL("http://raspberrypi2:8063/api/files/**"),
     ],
   },
   async redirects() {
