@@ -46,13 +46,13 @@ export default function Landing() {
                   <span>Münster. DE</span>
                   <span className="hidden xl:block">Tel. +39 3485796611</span>
                   <Link
-                    href="mailto:francesco.bruno001@gmail.com"
+                    href="mailto:francesco@francesco-bruno.com"
                     className="transition-all duration-100 ease-in-out hover:font-semibold"
                     data-umami-event="Click Email Link"
                   >
                     <span className="hidden xl:block">
                       {" "}
-                      francesco.bruno001@gmail.com
+                      francesco@francesco-bruno.com
                     </span>
                     <AtSign className="hover:bg-secondary block h-5 w-5 md:h-6 md:w-6 xl:hidden" />
                   </Link>
