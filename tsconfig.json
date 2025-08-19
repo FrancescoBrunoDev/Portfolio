@@ -13,7 +13,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true,
+  // Disable incremental to avoid tsbuildinfo file mounts in some build environments (Coolify/Nixpacks)
+  "incremental": false,
     "plugins": [
       {
         "name": "next"
