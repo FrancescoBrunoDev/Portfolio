@@ -15,7 +15,7 @@
   "postCreateCommand": "yarn install && yarn run installPackages",
   "customizations": {
     "vscode": {
-      "extensions": ["esbenp.prettier-vscode"]
+      "extensions": ["esbenp.prettier-vscode", "bradlc.vscode-tailwindcss"]
     }
   }
 

@@ -32,8 +32,21 @@ export default async function Page({
 
   const articles: Article[] = await pb.collection("articles").getFullList({
     filter: `published = true`,
-    expand: "markdowns",
   });
+
+  // for each article
+  const mdByArticleId = new Map(
+    await Promise.all(
+      articles.map(async (article) => {
+        const getUrlMD = await fetch(
+          `https://n8n.francesco-bruno.com/webhook/getMarkdown?title=${article.slug}&lang=${lang}`,
+          {},
+        ).then((res) => res.json());
+
+        return [article.id, getUrlMD.data] as const;
+      }),
+    ),
+  );
 
   return (
     <div className="text-primary flex h-screen w-screen items-center">
@@ -41,12 +54,19 @@ export default async function Page({
         <div className="w-full">
           <div className="flex flex-col justify-center gap-4 pt-10 font-normal lg:justify-normal">
             {articles.map((article) => {
-              const md = article.expand?.markdowns.find(
-                (markdown: { lang: string; title: string }) =>
-                  markdown.lang === lang,
+              const md = mdByArticleId.get(article.id);
+              const title = md?.title || article.slug;
+
+              // Prefer langs from fetched markdown metadata; fallback to PB expand
+              const langsRaw: string[] =
+                (Array.isArray(md?.lang)
+                  ? md.lang
+                  : article.expand?.markdowns?.map((m) => m.lang)) ?? [];
+
+              const displayLangs = Array.from(new Set(langsRaw)).filter((l) =>
+                allowedLangs.includes(l as SupportedLang),
               );
 
-              if (!md) return null;
               return (
                 <Link
                   key={article.id}
@@ -55,7 +75,7 @@ export default async function Page({
                 >
                   <div className="flex flex-col">
                     <span className="h-fit text-4xl font-semibold group-hover:font-black">
-                      {md.title}
+                      {title}
                     </span>
                     <span className="h-fit text-lg">
                       {format(
@@ -69,12 +89,12 @@ export default async function Page({
                     </span>
                   </div>
                   <div className="inline-flex gap-2">
-                    {article.expand?.markdowns.map((markdown) => (
+                    {displayLangs.map((l) => (
                       <span
                         className="group-hover:bg-background group-hover:text-primary bg-primary/20 text-primary-prose rounded-full px-3 py-1 text-sm uppercase transition-colors"
-                        key={markdown.id}
+                        key={l}
                       >
-                        {markdown.lang}
+                        {l}
                       </span>
                     ))}
                   </div>

@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import pb from "@/lib/pocketbase";
 import type { Metadata, ResolvingMetadata } from "next";
 import { serialize } from "next-mdx-remote/serialize";
+import remarkGfm from "remark-gfm";
 import { SupportedLang, allowedLangs } from "@/lib/locales";
 import { Article } from "@/components/blog/article";
 
@@ -27,18 +28,18 @@ export async function generateMetadata(
       .collection("articles")
       .getFirstListItem(`slug = "${slug}"`, {
         requestKey: null,
-        expand: "markdowns",
       });
 
-    const md = record.expand?.markdowns.find(
-      (markdown: Markdown) => markdown.lang === lang,
-    );
+    const md = await fetch(
+      `https://n8n.francesco-bruno.com/webhook/getMarkdown?title=${slug}&lang=${lang}`,
+      {},
+    ).then((res) => res.json());
 
     const parentData = await parent;
     const previousTitle = parentData.title?.absolute;
 
     return {
-      title: md?.title + (previousTitle ? ` | ${previousTitle}` : ""),
+      title: md?.data.title + (previousTitle ? ` | ${previousTitle}` : ""),
       description: record.description,
     };
   } catch (error) {
@@ -59,25 +60,26 @@ export default async function BlogPost({ params }: Props) {
   try {
     const record = await pb
       .collection("articles")
-      .getFirstListItem(`slug = "${slug}"`, {
-        expand: "markdowns",
-      });
+      .getFirstListItem(`slug = "${slug}"`);
 
-    if (!record || !record.published) {
-      redirect(`/section/record/${lang}/blog/`);
-    }
+    const getUrlMD = await fetch(
+      `https://n8n.francesco-bruno.com/webhook/getMarkdown?title=${slug}&lang=${lang}`,
+      {},
+    ).then((res) => res.json());
 
-    const md = record.expand?.markdowns.find(
-      (markdown: Markdown) => markdown.lang === lang,
-    );
-
-    if (!md) {
+    // If the webhook result is different from "success"
+    if (!getUrlMD.result || getUrlMD.result !== "success") {
       redirect(`/section/record/en/blog/${slug}`);
     }
 
-    const urlMd = pb.files.getURL(md, md.file);
-    const sourceMd = await fetch(urlMd).then((res) => res.text());
-    const mdxSource = await serialize(sourceMd);
+    const temporaryUrl = getUrlMD.data.temporary_url;
+
+    const sourceMd = await fetch(temporaryUrl).then((res) => res.text());
+    const mdxSource = await serialize(sourceMd, {
+      mdxOptions: {
+        remarkPlugins: [remarkGfm],
+      },
+    });
 
     return (
       <div className="isolate">

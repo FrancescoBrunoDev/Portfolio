@@ -24,7 +24,7 @@ export const Article = ({
 }) => {
   return (
     <ReferenceProvider>
-      <article className="prose lg:prose-lg prose-headings:text-primary prose-p:text-primary-prose prose-p:text-justify container mx-auto py-20">
+      <article className="prose lg:prose-lg prose-headings:text-primary prose-p:text-primary-prose prose-p:text-justify prose-blockquote:not-italic prose-blockquote:font-normal prose-blockquote:text-sm prose-blockquote:border-border prose-li:text-primary-prose container mx-auto py-20">
         <Link
           href={`/section/record/${lang}/blog`}
           className="text-primary group inline-flex items-center gap-1 pb-6 text-xl font-bold no-underline transition-all hover:-translate-x-2 hover:font-black"

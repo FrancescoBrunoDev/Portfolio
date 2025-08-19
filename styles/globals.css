@@ -87,7 +87,6 @@
     border-color: var(--color-gray-200, currentColor);
   }
 }
-
 @utility no-scrollbar {
   /* Hide scrollbar for Chrome, Safari and Opera */
   &::-webkit-scrollbar {
@@ -196,5 +195,95 @@
   /* Firefox */
   * {
     scrollbar-width: thin;
+  }
+}
+
+/* Override prose default link underline for footnotes and render inline “[1]” */
+@layer utilities {
+  .prose {
+    sup {
+      vertical-align: baseline;
+      font-size: inherit;
+      line-height: inherit;
+    }
+
+    a {
+      color: var(--color-primary-prose);
+    }
+
+    /* Inline footnote references */
+    sup > a[href^="#user-content-fn-"],
+    a.footnote-ref,
+    a[data-footnote-ref],
+    a[id^="user-content-fnref-"] {
+      text-decoration: none;
+      color: var(--color-primary-prose);
+      font-size: var(--text-xs);
+      white-space: nowrap;
+      font-style: normal;
+    }
+    /* Show as [1] using pseudo elements */
+    sup > a[href^="#user-content-fn-"]::before,
+    a.footnote-ref::before,
+    a[data-footnote-ref]::before,
+    a[id^="user-content-fnref-"]::before {
+      content: "[";
+      margin-right: 0.1em;
+    }
+    sup > a[href^="#user-content-fn-"]::after,
+    a.footnote-ref::after,
+    a[data-footnote-ref]::after,
+    a[id^="user-content-fnref-"]::after {
+      content: "]";
+      margin-left: 0.1em;
+    }
+    sup > a[href^="#user-content-fn-"]:hover,
+    a.footnote-ref:hover,
+    a[data-footnote-ref]:hover,
+    a[id^="user-content-fnref-"]:hover {
+      text-decoration: underline;
+    }
+
+    /* Backrefs inside the footnotes list */
+    section.footnotes a.footnote-backref,
+    section.footnotes a[data-footnote-backref],
+    section[data-footnotes] a.footnote-backref,
+    section[data-footnotes] a[data-footnote-backref] {
+      text-decoration: none;
+    }
+    section.footnotes a.footnote-backref:hover,
+    section.footnotes a[data-footnote-backref]:hover,
+    section[data-footnotes] a.footnote-backref:hover,
+    section[data-footnotes] a[data-footnote-backref]:hover {
+      text-decoration: underline;
+    }
+
+    /* Footnotes section block */
+    hr.footnotes-sep {
+      display: none;
+    }
+    section.footnotes,
+    section[data-footnotes] {
+      margin-top: 2.5rem; /* mt-10 */
+      padding-top: 1.5rem; /* pt-6 */
+      border-top: 1px solid var(--color-border);
+      color: var(--color-muted-foreground);
+      font-size: var(--text-sm);
+    }
+    section.footnotes > ol,
+    section[data-footnotes] > ol {
+      list-style: decimal;
+      padding-left: 1.5rem; /* pl-6 */
+      margin-top: 1rem; /* mt-4 */
+    }
+    section.footnotes li,
+    section[data-footnotes] li {
+      margin-bottom: 0.5rem; /* mb-2 */
+    }
+    section.footnotes li p,
+    section[data-footnotes] li p {
+      margin-top: 0.25rem; /* my-1 */
+      margin-bottom: 0.25rem;
+    }
   }
 }
