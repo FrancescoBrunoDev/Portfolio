@@ -32,6 +32,8 @@ export default async function Page({
 
   const articles: Article[] = await pb.collection("articles").getFullList({
     filter: `published = true`,
+    // ordinali al contrario
+    sort: "-created",
   });
 
   // for each article
