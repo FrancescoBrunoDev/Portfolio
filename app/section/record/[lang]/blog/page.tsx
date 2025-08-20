@@ -2,7 +2,7 @@ import Link from "next/link";
 import pb from "@/lib/pocketbase";
 import { redirect } from "next/navigation";
 import { format, parseISO } from "date-fns";
-
+import { getMarkdown } from "@/lib/utils";
 import { LOCALES, SupportedLang, allowedLangs, getLocale } from "@/lib/locales";
 
 interface Article {
@@ -40,12 +40,13 @@ export default async function Page({
   const mdByArticleId = new Map(
     await Promise.all(
       articles.map(async (article) => {
-        const getUrlMD = await fetch(
-          `https://n8n.francesco-bruno.com/webhook/getMarkdown?title=${article.slug}&lang=${lang}`,
-          {},
-        ).then((res) => res.json());
+        const mdData = await getMarkdown({
+          slug: article.slug,
+          lang,
+          getMd: false,
+        });
 
-        return [article.id, getUrlMD.data] as const;
+        return [article.id, mdData.data] as const;
       }),
     ),
   );
@@ -56,18 +57,26 @@ export default async function Page({
         <div className="w-full">
           <div className="flex flex-col justify-center gap-4 pt-10 font-normal lg:justify-normal">
             {articles.map((article) => {
-              const md = mdByArticleId.get(article.id);
-              const title = md?.title || article.slug;
+              const mdData = mdByArticleId.get(article.id);
+              const title = mdData?.title || article.slug;
 
               // Prefer langs from fetched markdown metadata; fallback to PB expand
-              const langsRaw: string[] =
-                (Array.isArray(md?.lang)
-                  ? md.lang
-                  : article.expand?.markdowns?.map((m) => m.lang)) ?? [];
+              const langsRaw: string[] = Array.isArray(mdData?.lang)
+                ? (mdData.lang as string[])
+                : [];
 
-              const displayLangs = Array.from(new Set(langsRaw)).filter((l) =>
+              let displayLangs = Array.from(new Set(langsRaw)).filter((l) =>
                 allowedLangs.includes(l as SupportedLang),
               );
+
+              // order lang must always be en, it, <other langs>
+              displayLangs = displayLangs.sort((a, b) => {
+                if (a === "en") return -1;
+                if (b === "en") return 1;
+                if (a === "it") return -1;
+                if (b === "it") return 1;
+                return 0;
+              });
 
               return (
                 <Link

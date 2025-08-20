@@ -5,6 +5,7 @@ import { serialize } from "next-mdx-remote/serialize";
 import remarkGfm from "remark-gfm";
 import { SupportedLang, allowedLangs } from "@/lib/locales";
 import { Article } from "@/components/blog/article";
+import { getMarkdown } from "@/lib/utils";
 
 type Props = {
   params: Promise<{ lang: string; slug: string }>;
@@ -30,10 +31,7 @@ export async function generateMetadata(
         requestKey: null,
       });
 
-    const md = await fetch(
-      `https://n8n.francesco-bruno.com/webhook/getMarkdown?title=${slug}&lang=${lang}`,
-      {},
-    ).then((res) => res.json());
+    const md = await getMarkdown({ slug, lang, getMd: false });
 
     const parentData = await parent;
     const previousTitle = parentData.title?.absolute;
@@ -62,20 +60,16 @@ export default async function BlogPost({ params }: Props) {
       .collection("articles")
       .getFirstListItem(`slug = "${slug}"`);
 
-    const getUrlMD = await fetch(
-      `https://n8n.francesco-bruno.com/webhook/getMarkdown?title=${slug}&lang=${lang}`,
-      {},
-    ).then((res) => res.json());
+    const urlMD = await getMarkdown({ slug, lang, getMd: true });
 
     // If the webhook result is different from "success"
-    if (!getUrlMD.result || getUrlMD.result !== "success") {
+    if (!urlMD.result || urlMD.result !== "success") {
       redirect(`/section/record/en/blog/${slug}`);
     }
 
-    const temporaryUrl = getUrlMD.data.temporary_url;
+    const md = urlMD.data.md;
 
-    const sourceMd = await fetch(temporaryUrl).then((res) => res.text());
-    const mdxSource = await serialize(sourceMd, {
+    const mdxSource = await serialize(md, {
       mdxOptions: {
         remarkPlugins: [remarkGfm],
       },
