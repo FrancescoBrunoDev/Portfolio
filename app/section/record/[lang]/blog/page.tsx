@@ -5,17 +5,9 @@ import { format, parseISO } from "date-fns";
 import { getMarkdown } from "@/lib/utils";
 import { LOCALES, SupportedLang, allowedLangs, getLocale } from "@/lib/locales";
 
-interface Article {
+export interface Article {
   id: string;
   slug: string;
-  expand: {
-    markdowns: {
-      id: string;
-      lang: string;
-      title: string;
-      created: string;
-    }[];
-  };
   created: string;
 }
 

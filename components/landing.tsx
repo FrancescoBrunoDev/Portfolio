@@ -1,11 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import Link from "next/link";
 import { AtSign, Linkedin, Github } from "lucide-react";
 import { BgLanding } from "@/components/bgLanding";
+import LastArticle from "@/components/firstScreen/lastArticle";
+import { RecordModel } from "pocketbase";
 
-export default function Landing() {
+export default function Landing({
+  lastArticle,
+}: {
+  lastArticle: { record: RecordModel; title: string };
+}) {
   const [mousePosition, setMousePosition] = useState<MousePosition>({
     x: 0,
     y: 0,
@@ -92,12 +98,15 @@ export default function Landing() {
               >
                 Projects /
               </Link>
-              <Link
-                href="/section/record/"
-                className="tracking-wider transition-all duration-100 ease-in-out hover:font-semibold"
-              >
-                Record
-              </Link>
+              <div className="flex flex-col md:flex-row">
+                <Link
+                  href="/section/record/"
+                  className="tracking-wider transition-all duration-100 ease-in-out hover:font-semibold"
+                >
+                  <span>Record</span>
+                </Link>
+                <LastArticle lastArticle={lastArticle} />
+              </div>
             </div>
           </div>
         </div>
