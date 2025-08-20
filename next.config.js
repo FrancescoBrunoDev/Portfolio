@@ -17,6 +17,11 @@ const nextConfig = {
         source: "/udemy/:path",
         destination: "https://www.udemy.com/certificate/:path",
         permanent: false
+      },
+      {
+        source: '/slash-page',
+        destination: '/',
+        permanent: true
       }
     ];
   },
