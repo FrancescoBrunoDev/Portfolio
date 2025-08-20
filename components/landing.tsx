@@ -10,7 +10,7 @@ import { RecordModel } from "pocketbase";
 export default function Landing({
   lastArticle,
 }: {
-  lastArticle: { record: RecordModel; title: string };
+  lastArticle?: { record: RecordModel; title: string };
 }) {
   const [mousePosition, setMousePosition] = useState<MousePosition>({
     x: 0,
@@ -105,7 +105,9 @@ export default function Landing({
                 >
                   <span>Record</span>
                 </Link>
-                <LastArticle lastArticle={lastArticle} />
+                {lastArticle ? (
+                  <LastArticle lastArticle={lastArticle} />
+                ) : null}
               </div>
             </div>
           </div>
