@@ -5,6 +5,7 @@ import pb from "@/lib/pocketbase";
 
 export default function ProjectItem({ project }: { project: Project }) {
   let imageUrl = pb.files.getURL(project, project.imageFile || "");
+  console.log(imageUrl);
   return (
     <Link
       href={`/section/projects/${project.id}`}
@@ -26,7 +27,7 @@ export default function ProjectItem({ project }: { project: Project }) {
           src={imageUrl}
           alt={project.title}
           fill={true}
-          sizes="40vw"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="z-0 rounded object-cover"
         />
       )}
