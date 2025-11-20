@@ -50,7 +50,6 @@ export default function Landing({
               <div className="z-10 flex items-center space-x-4">
                 <div className="text- flex items-center space-x-4 md:text-lg xl:flex-col xl:items-end xl:space-x-0 xl:text-right">
                   <span>Münster. DE</span>
-                  <span className="hidden xl:block">Tel. +39 3485796611</span>
                   <Link
                     href="mailto:francesco@francesco-bruno.com"
                     className="transition-all duration-100 ease-in-out hover:font-semibold"
