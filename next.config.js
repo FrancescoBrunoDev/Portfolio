@@ -4,6 +4,7 @@ const nextConfig = {
   images: {
     remotePatterns: [new URL("https://pb-pf.francesco-bruno.com/api/files/**")],
   },
+  allowedDevOrigins: ["172.17.0.2"],
   async redirects() {
     return [
       {

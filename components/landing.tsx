@@ -2,7 +2,8 @@
 
 import { useEffect, useState, Suspense } from "react";
 import Link from "next/link";
-import { AtSign, Linkedin, Github } from "lucide-react";
+import { AtSign } from "lucide-react";
+import { SiGithub } from "@icons-pack/react-simple-icons";
 import { BgLanding } from "@/components/bgLanding";
 import LastArticle from "@/components/firstScreen/lastArticle";
 import { RecordModel } from "pocketbase";
@@ -69,7 +70,7 @@ export default function Landing({
                     <span className="hidden xl:block">
                       github.com/FrancescoBrunoDev
                     </span>
-                    <Github className="hover:bg-secondary block h-5 w-5 md:h-6 md:w-6 xl:hidden" />
+                    <SiGithub className="hover:bg-secondary block h-5 w-5 md:h-6 md:w-6 xl:hidden" />
                   </Link>
                   <Link
                     href="https://www.linkedin.com/in/francesco--bruno/"
@@ -79,7 +80,7 @@ export default function Landing({
                     <span className="hidden xl:block">
                       linkedin.com/in/francesco--bruno/
                     </span>
-                    <Linkedin className="hover:bg-secondary block h-5 w-5 md:h-6 md:w-6 xl:hidden" />
+                    <span className="block xl:hidden">linkedin</span>
                   </Link>
                 </div>
               </div>
@@ -104,9 +105,7 @@ export default function Landing({
                 >
                   <span>Record</span>
                 </Link>
-                {lastArticle ? (
-                  <LastArticle lastArticle={lastArticle} />
-                ) : null}
+                {lastArticle ? <LastArticle lastArticle={lastArticle} /> : null}
               </div>
             </div>
           </div>
