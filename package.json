@@ -19,13 +19,8 @@
     "@radix-ui/react-radio-group": "^1.3.8",
     "@radix-ui/react-select": "^2.2.6",
     "@radix-ui/react-slot": "^1.2.4",
-<<<<<<< HEAD
     "@tailwindcss/postcss": "^4.2.2",
     "@types/node": "25.5.2",
-=======
-    "@tailwindcss/postcss": "^4.2.2",
-    "@types/node": "25.5.2",
->>>>>>> d93d9cb (upgrade dependencies and switch to simple-icons for social links)
     "@types/react": "npm:types-react@19.0.0-rc.1",
     "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
     "@types/react-window": "^2.0.0",
