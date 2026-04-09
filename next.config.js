@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: "standalone", // Required for Docker build
   // trailingSlash: true, // Disabled: conflicts with intercepting routes in Next.js 16
   images: {
     remotePatterns: [new URL("https://pb-pf.francesco-bruno.com/api/files/**")],

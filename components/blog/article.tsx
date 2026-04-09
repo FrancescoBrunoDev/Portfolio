@@ -8,7 +8,7 @@ import { LOCALES, SupportedLang, allowedLangs, getLocale } from "@/lib/locales";
 import { ArrowLeft } from "lucide-react";
 import { RecordModel } from "pocketbase";
 import MDXClient from "@/app/section/record/[lang]/blog/[slug]/MDXClient";
-import { MDXRemoteSerializeResult } from "next-mdx-remote/dist/types";
+import type { MDXRemoteSerializeResult } from "next-mdx-remote";
 
 export const Article = ({
   lang,
