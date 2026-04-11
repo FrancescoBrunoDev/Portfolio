@@ -1,4 +1,4 @@
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import pb from "@/lib/pocketbase";
 import type { Metadata, ResolvingMetadata } from "next";
 import { serialize } from "next-mdx-remote/serialize";
@@ -62,9 +62,8 @@ export default async function BlogPost({ params }: Props) {
 
     const urlMD = await getMarkdown({ slug, lang, getMd: true });
 
-    // If the webhook result is different from "success"
-    if (!urlMD.result || urlMD.result !== "success") {
-      redirect(`/section/record/en/blog/${slug}`);
+    if (!urlMD || !urlMD.result || urlMD.result !== "success") {
+      notFound();
     }
 
     const md = urlMD.data.md;
@@ -85,7 +84,7 @@ export default async function BlogPost({ params }: Props) {
         />
       </div>
     );
-  } catch (error) {
-    redirect(`/section/record/${lang}/blog/`);
+  } catch (_error) {
+    notFound();
   }
 }
