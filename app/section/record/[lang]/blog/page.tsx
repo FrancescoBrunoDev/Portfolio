@@ -36,9 +36,9 @@ export default async function Page({
           slug: article.slug,
           lang,
           getMd: false,
-        });
+        }).catch(() => null);
 
-        return [article.id, mdData.data] as const;
+        return [article.id, mdData?.data ?? null] as const;
       }),
     ),
   );
