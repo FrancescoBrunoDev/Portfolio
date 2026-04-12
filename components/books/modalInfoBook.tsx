@@ -17,10 +17,6 @@ interface ModalInfoBookProps {
   book: Book.Book;
   note: Book.Note[];
   isClosable: boolean;
-  randomVariant?: {
-    label: string;
-    variant: string;
-  };
 }
 
 function ItemDetail({ title, value }: ItemDetailProps) {
@@ -37,7 +33,6 @@ export default function ModalInfoBook({
   book,
   note,
   isClosable,
-  randomVariant,
 }: ModalInfoBookProps) {
   const [currentPage, setCurrentPage] = useState(0);
   const router = useRouter();
@@ -129,10 +124,7 @@ export default function ModalInfoBook({
               />
             )}
             <ItemDetail title="Language" value={infoBook.language.toString()} />
-            <ItemDetail
-              title="Format"
-              value={`${randomVariant?.label} ${randomVariant?.variant}`}
-            />
+            <ItemDetail title="Format" value={book.type} />
             <ItemDetail
               title={infoBook.ISBN_13 ? "ISBN-13" : "ISBN-10"}
               value={String(infoBook.ISBN_13) || String(infoBook.ISBN_10)}

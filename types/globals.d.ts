@@ -128,4 +128,4 @@ type Project = {
   priority: number;
 };
 
-type TypeOfBook = "audio" | "paper";
+type TypeOfBook = "audiobook" | "paper" | "ebook";

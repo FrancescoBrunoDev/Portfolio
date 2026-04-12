@@ -1,5 +1,5 @@
 import ModalInfoBook from "@/components/books/modalInfoBook";
-import { fetchBook, getFormatVariants } from "@/components/books/fetchBooks";
+import { fetchBook } from "@/components/books/fetchBooks";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
@@ -41,22 +41,16 @@ export default async function View({ params }: Props) {
   if (!book || !book.expand) return null;
 
   const note = book.note || [];
-  const randomVariant = await getFormatVariants({ type: book.type });
 
   return (
-    <div className="fixed inset-x-3 bottom-0 top-10 flex flex-col items-center justify-center gap-4 md:inset-y-0">
+    <div className="fixed inset-x-3 top-10 bottom-0 flex flex-col items-center justify-center gap-4 md:inset-y-0">
       <Link href={`/section/record/books`}>
         <Button className="text-md flex items-center">
           <ArrowLeft />
           Back to my library
         </Button>
       </Link>
-      <ModalInfoBook
-        book={book}
-        note={note}
-        isClosable={false}
-        randomVariant={randomVariant}
-      />
+      <ModalInfoBook book={book} note={note} isClosable={false} />
     </div>
   );
 }
