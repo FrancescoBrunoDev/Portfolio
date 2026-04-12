@@ -81,7 +81,7 @@ export default async function BlogPost({ params }: Props) {
 
     const availableLangs = (Array.isArray(metadata?.lang) ? metadata.lang : [])
       .filter((l: unknown): l is string => typeof l === "string")
-      .filter((l) => allowedLangs.includes(l as SupportedLang));
+      .filter((l: string) => allowedLangs.includes(l as SupportedLang));
 
     return (
       <div className="flex h-screen w-screen items-center justify-center">
@@ -94,7 +94,7 @@ export default async function BlogPost({ params }: Props) {
             <div className="flex flex-col items-center gap-2">
               <p className="text-primary-prose text-sm">Available in:</p>
               <div className="flex gap-2">
-                {availableLangs.map((l) => (
+                {availableLangs.map((l: string) => (
                   <Link key={l} href={`/section/record/${l}/blog/${slug}`}>
                     <Button>{l.toUpperCase()}</Button>
                   </Link>
