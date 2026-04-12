@@ -25,7 +25,7 @@ export default function BooksView({ booksFetch }: { booksFetch: Book.Year[] }) {
       "October",
       "November",
       "December",
-      "🔖 Currently Reading",
+      "Currently Reading",
     ];
     return monthNames[month];
   }
