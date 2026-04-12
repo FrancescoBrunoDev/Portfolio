@@ -4,10 +4,10 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { serialize } from "next-mdx-remote/serialize";
 import remarkGfm from "remark-gfm";
 import { SupportedLang, allowedLangs } from "@/lib/locales";
-import { Article } from "@/components/blog/article";
 import { getMarkdown } from "@/lib/utils";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import BlogPostClient from "./BlogPostClient";
 
 type Props = {
   params: Promise<{ lang: string; slug: string }>;
@@ -119,13 +119,32 @@ export default async function BlogPost({ params }: Props) {
       },
     });
 
+    const languageCheck = await Promise.all(
+      allowedLangs.map(async (l) => {
+        const mdData = await getMarkdown({ slug, lang: l, getMd: false });
+        return { lang: l as SupportedLang, hasContent: !!mdData?.data?.lang };
+      }),
+    );
+
+    const languagePriority = (lang: SupportedLang) => {
+      if (lang === "en") return 0;
+      if (lang === "it") return 1;
+      return 2;
+    };
+
+    const availableLanguages = languageCheck
+      .filter((item) => item.hasContent)
+      .map((item) => item.lang)
+      .sort((a, b) => languagePriority(a) - languagePriority(b));
+
     return (
       <div className="isolate">
         <div className="from-background-blog via-background-blog to-background pointer-events-none fixed inset-0 -z-10 h-screen bg-linear-to-t via-90% to-95%" />
-        <Article
+        <BlogPostClient
           lang={lang as SupportedLang}
           record={record}
           mdxSource={mdxSource}
+          availableLanguages={availableLanguages}
         />
       </div>
     );
