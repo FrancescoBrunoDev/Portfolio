@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, Suspense } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import Link from "next/link";
 import { AtSign } from "lucide-react";
 import { SiGithub } from "@icons-pack/react-simple-icons";
@@ -22,6 +22,10 @@ export default function Landing({
     height: 0,
   });
 
+  // rAF throttling: evita re-render a ogni pixel di movimento mouse
+  const mouseRef = useRef({ x: 0, y: 0 });
+  const rafRef = useRef<number | null>(null);
+
   useEffect(() => {
     setWindowDimensions({
       width: window.innerWidth,
@@ -29,9 +33,15 @@ export default function Landing({
     });
   }, []);
 
-  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
-    setMousePosition({ x: event.clientX, y: event.clientY });
-  };
+  const handleMouseMove = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
+    mouseRef.current = { x: event.clientX, y: event.clientY };
+    if (rafRef.current === null) {
+      rafRef.current = requestAnimationFrame(() => {
+        setMousePosition({ ...mouseRef.current });
+        rafRef.current = null;
+      });
+    }
+  }, []);
 
   return (
     <>
