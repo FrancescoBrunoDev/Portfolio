@@ -39,7 +39,7 @@ export async function generateMetadata(
     const previousTitle = parentData.title?.absolute;
 
     return {
-      title: md?.data.title + (previousTitle ? ` | ${previousTitle}` : ""),
+      title: (md?.data?.title ?? "") + (previousTitle ? ` | ${previousTitle}` : ""),
       description: record.description,
     };
   } catch (_error) {
@@ -111,7 +111,7 @@ export default async function BlogPost({ params }: Props) {
   }
 
   try {
-    const md = urlMD.data.md;
+    const md = urlMD.data?.md ?? "";
 
     const mdxSource = await serialize(md, {
       mdxOptions: {
