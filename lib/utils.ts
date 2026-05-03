@@ -8,8 +8,8 @@ export function cn(...inputs: ClassValue[]) {
 // ─── kDrive API client ───────────────────────────────────────────
 
 const KDRIVE_API_TOKEN = process.env.KDRIVE_API_TOKEN
-const KDRIVE_DRIVE_ID = "1373752"
-const BLOG_ROOT_DIR_ID = "17569"
+const KDRIVE_DRIVE_ID = process.env.KDRIVE_DRIVE_ID
+const BLOG_ROOT_DIR_ID = process.env.BLOG_ROOT_DIR_ID
 const KDRIVE_API_BASE = "https://api.infomaniak.com"
 
 /**
@@ -110,6 +110,10 @@ export async function getMarkdown({
   lang: string
   getMd: boolean
 }): Promise<MarkdownResult> {
+  if (!KDRIVE_DRIVE_ID || !BLOG_ROOT_DIR_ID) {
+    throw new Error("KDRIVE_DRIVE_ID and BLOG_ROOT_DIR_ID environment variables are required")
+  }
+
   try {
     // 1. List all blog post directories under the root
     const blogItems = await listDirectory(BLOG_ROOT_DIR_ID)
