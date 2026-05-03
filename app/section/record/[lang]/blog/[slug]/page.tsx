@@ -4,7 +4,7 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { serialize } from "next-mdx-remote/serialize";
 import remarkGfm from "remark-gfm";
 import { SupportedLang, allowedLangs } from "@/lib/locales";
-import { getMarkdown } from "@/lib/utils";
+import { getMarkdown, type MarkdownResult } from "@/lib/utils";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import BlogPostClient from "./BlogPostClient";
@@ -73,13 +73,13 @@ export default async function BlogPost({ params }: Props) {
   if (!urlMD || urlMD.result !== "success") {
     // Article exists but isn't available in the requested language.
     // Try each allowed language to fetch available-langs metadata.
-    let metadata = null;
+    let metadata: MarkdownResult = null;
     for (const l of allowedLangs) {
       metadata = await getMarkdown({ slug, lang: l, getMd: false });
-      if (metadata?.lang) break;
+      if (metadata?.data?.lang) break;
     }
 
-    const availableLangs = (Array.isArray(metadata?.lang) ? metadata.lang : [])
+    const availableLangs = (Array.isArray(metadata?.data?.lang) ? metadata.data.lang : [])
       .filter((l: unknown): l is string => typeof l === "string")
       .filter((l: string) => allowedLangs.includes(l as SupportedLang));
 
