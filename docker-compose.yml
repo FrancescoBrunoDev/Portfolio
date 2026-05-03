@@ -5,6 +5,7 @@ services:
       dockerfile: Dockerfile
       args:
         - POCKETBASE_URL
+        - KDRIVE_API_TOKEN
     environment:
       - PORT=${PORT:-3000}
     ports:

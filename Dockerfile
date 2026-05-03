@@ -23,6 +23,9 @@ RUN corepack enable && corepack prepare yarn@1.22.22 --activate
 ARG POCKETBASE_URL
 ENV POCKETBASE_URL=$POCKETBASE_URL
 
+ARG KDRIVE_API_TOKEN
+ENV KDRIVE_API_TOKEN=$KDRIVE_API_TOKEN
+
 # Copy dependencies from deps stage
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
@@ -39,6 +42,10 @@ WORKDIR /app
 
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
+
+# Runtime secrets (set via docker-compose / Coolify env vars)
+ARG KDRIVE_API_TOKEN
+ENV KDRIVE_API_TOKEN=$KDRIVE_API_TOKEN
 
 # Create non-root user
 RUN addgroup --system --gid 1001 nodejs
