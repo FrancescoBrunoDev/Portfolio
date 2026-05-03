@@ -79,29 +79,17 @@ async function downloadFile(fileId: number): Promise<string> {
 
 // ─── Public API ──────────────────────────────────────────────────
 
-export interface MarkdownMetadata {
-  result: "success"
-  data: {
-    title: string
-    lang: string[]
-  }
+export interface MarkdownData {
+  md?: string
+  title?: string
+  lang?: string[]
 }
 
-export interface MarkdownContent {
-  result: "success"
-  data: {
-    md: string
-    title: string
-    lang: string[]
-  }
-}
-
-export type MarkdownResult =
-  | MarkdownMetadata
-  | MarkdownContent
-  | { result: string }
-  | { results: string }
-  | null
+export type MarkdownResult = {
+  result?: string
+  results?: string
+  data?: MarkdownData
+} | null
 
 /**
  * Fetch markdown content or metadata for a blog post directly from kDrive.
