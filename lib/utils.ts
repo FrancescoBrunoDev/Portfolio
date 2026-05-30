@@ -101,6 +101,47 @@ export type MarkdownResult = {
  * @param getMd - If `true`, downloads and returns the raw markdown content.
  *                If `false`, returns only metadata (title + available languages).
  */
+/**
+ * Batch-fetch metadata for ALL blog posts in a single pass.
+ *
+ * Instead of calling `getMarkdown` N times (2N API calls),
+ * this lists the blog root once and then lists each post directory once,
+ * returning a slug -> metadata map.
+ */
+export async function getAllBlogMetadata(): Promise<Map<string, { title: string; lang: string[] }>> {
+  if (!KDRIVE_DRIVE_ID || !BLOG_ROOT_DIR_ID) {
+    throw new Error("KDRIVE_DRIVE_ID and BLOG_ROOT_DIR_ID environment variables are required")
+  }
+
+  const blogItems = await listDirectory(BLOG_ROOT_DIR_ID)
+  const postDirs = blogItems.filter((item) => item.type === "dir")
+
+  // List files inside each post directory in parallel
+  const dirFileLists = await Promise.all(
+    postDirs.map(async (dir) => {
+      const files = await listDirectory(dir.id)
+      return { slug: dir.name, files }
+    }),
+  )
+
+  const metadataMap = new Map<string, { title: string; lang: string[] }>()
+
+  for (const { slug, files } of dirFileLists) {
+    const mdFiles = files.filter(
+      (f): f is KDriveItem & { type: "file" } =>
+        f.type === "file" && f.name.endsWith(".md"),
+    )
+    const allLangs = [...new Set(mdFiles.map((f) => f.name.slice(0, 2)))]
+
+    // Use the first available file to extract the title (strip lang prefix + extension)
+    const title = mdFiles[0]?.name.slice(3).replace(/\.[^.]+$/, "") ?? slug
+
+    metadataMap.set(slug, { title, lang: allLangs })
+  }
+
+  return metadataMap
+}
+
 export async function getMarkdown({
   slug,
   lang,

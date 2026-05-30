@@ -2,7 +2,7 @@ import Link from "next/link";
 import pb from "@/lib/pocketbase";
 import { redirect } from "next/navigation";
 import { format, parseISO } from "date-fns";
-import { getMarkdown } from "@/lib/utils";
+import { getAllBlogMetadata } from "@/lib/utils";
 import { LOCALES, SupportedLang, allowedLangs, getLocale } from "@/lib/locales";
 
 export interface Article {
@@ -28,25 +28,16 @@ export default async function Page({
     sort: "-created",
   });
 
-  // for each article
-  const mdByArticleId = new Map(
-    await Promise.all(
-      articles.map(async (article) => {
-        const mdData = await getMarkdown({
-          slug: article.slug,
-          lang,
-          getMd: false,
-        }).catch(() => null);
-
-        return [article.id, mdData?.data ?? null] as const;
-      }),
-    ),
-  );
+  // Fetch all blog metadata in one batch instead of N sequential calls
+  const metadataBySlug = await getAllBlogMetadata().catch(() => new Map());
 
   // Filter to only articles that have content for this language
   const articlesWithContent = articles.filter((article) => {
-    const mdData = mdByArticleId.get(article.id);
-    return mdData != null;
+    const metadata = metadataBySlug.get(article.slug)
+    return (
+      metadata != null &&
+      metadata.lang.some((l) => allowedLangs.includes(l as SupportedLang))
+    )
   });
 
   return (
@@ -55,12 +46,12 @@ export default async function Page({
         <div className="w-full">
           <div className="flex flex-col justify-center gap-4 pt-10 font-normal lg:justify-normal">
             {articlesWithContent.map((article) => {
-              const mdData = mdByArticleId.get(article.id);
-              const title = mdData?.title || article.slug;
+              const metadata = metadataBySlug.get(article.slug)
+              const title = metadata?.title || article.slug;
 
               // Prefer langs from fetched markdown metadata; fallback to PB expand
-              const langsRaw: string[] = Array.isArray(mdData?.lang)
-                ? (mdData.lang as string[])
+              const langsRaw: string[] = Array.isArray(metadata?.lang)
+                ? (metadata.lang as string[])
                 : [];
 
               let displayLangs = Array.from(new Set(langsRaw)).filter((l) =>
