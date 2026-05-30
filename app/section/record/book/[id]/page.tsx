@@ -21,7 +21,6 @@ export async function generateMetadata(
       title: "not found",
     };
   }
-  console.log(record);
   const previusTitle = (await parent).title;
   return {
     title: `${record.expand?.book_info.title}  ${previusTitle && " | " + previusTitle?.absolute}`,

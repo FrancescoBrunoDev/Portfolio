@@ -72,7 +72,6 @@ export async function fetchStats() {
 
     // if stravaData.items is empty, fetch new data
     if (!stravaData.items.length) {
-        console.log("fetching new data");
         const data: StravaData = await pb.collection("strava_info").getOne("wkiprs54th2y531");
         const { newToken } = await refreshAccessToken({ data });
         const resStats = await fetch(
@@ -83,7 +82,6 @@ export async function fetchStats() {
         removeOldStatistcs();
         pb.authStore.clear();
     } else {
-        console.log("using cached data");
         stats = stravaData.items[0];
     }
 

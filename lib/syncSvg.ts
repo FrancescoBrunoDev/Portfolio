@@ -93,7 +93,6 @@ async function convertPdfsToSvgs({ sourceFolder, destinationFolder }: { sourceFo
             const ext = extname(file);
             if (ext === ".pdf") {
                 const baseName = basename(file, ".pdf");
-                console.log(`Converto id ${baseName}`);
                 // Convert PDF to PNGs
                 await convertPdfToPngs({ filePath, destinationFolder, baseName });
                 // Convert PNGs to SVGs using potrace
@@ -118,7 +117,6 @@ async function convertPdfsToSvgs({ sourceFolder, destinationFolder }: { sourceFo
                         }
                     }
                 }
-                console.log(`${baseName} convertito in SVG`);
             }
         }
     } catch (error) {
@@ -133,24 +131,19 @@ async function getPdfFromPb(): Promise<void> {
     // download pdfs
     for (const record of records) {
         if (record.svg && record.svg.length > 0) {
-            console.log(`get) Record ${record.id} already contains svg files`);
             continue;
         }
-        console.log(`get) Record ${record.id} does not contain svg files`);
         const { id, pdf } = record;
         const pdfPath = join(__dirname, `../public/books/temp/pdf/${id}.pdf`);
         const fileExists = await fs.pathExists(pdfPath);
         if (!fileExists) {
-            console.log(`Il file ${pdfPath} non esiste.`);
             try {
                 const url = pb.files.getURL(record, record.pdf);
-                console.log(url);
                 // download file and save it
                 const response = await fetch(url);
                 const buffer = await response.arrayBuffer();
                 // use the id as filename
                 await fs.writeFile(pdfPath, Buffer.from(buffer));
-                console.log(`File ${pdfPath} scaricato con successo.`);
             } catch (error) {
                 console.error(`Errore durante il download del file ${pdfPath}: ${error}`);
             }
@@ -164,7 +157,6 @@ async function saveOnPb(): Promise<void> {
     for (const record of records) {
         // if already contains svg files, skip
         if (record.svg && record.svg.length > 0) {
-            console.log(`update) Record ${record.id} already contains svg files`);
             continue;
         }
         const { id } = record;
@@ -191,7 +183,6 @@ async function saveOnPb(): Promise<void> {
 
             // Aggiorna il record
             await pb.collection('books_note').update(id, formData);
-            console.log(`Record ${id} aggiornato con successo`);
         } catch (error) {
             console.error(`Errore nell'aggiornamento del record ${id}:`, error);
         }
