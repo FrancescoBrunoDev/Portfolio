@@ -1,5 +1,5 @@
 import Landing from "@/components/landing";
-import SelfHosted from "@/components/seltHosted";
+import SelfHosted from "@/components/selfHosted";
 import { getMarkdown } from "@/lib/utils";
 import pb from "@/lib/pocketbase";
 import type { RecordModel } from "pocketbase";

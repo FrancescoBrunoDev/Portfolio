@@ -83,6 +83,7 @@ export const BgLanding = memo<BgLandingProps>(
             }}
           >
             <motion.circle
+              initial={{ cx: circleX, cy: circleY, r: radius + randomNum }}
               animate={{ cx: circleX, cy: circleY, r: radius + randomNum }}
               transition={{ type: "spring", stiffness: 120, damping: 14, mass: 0.5 }}
               stroke="hsl(var(--primary))"

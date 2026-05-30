@@ -4,8 +4,7 @@ import { Fingerprint } from "lucide-react";
 import pb from "@/lib/pocketbase";
 
 export default function ProjectItem({ project }: { project: Project }) {
-  let imageUrl = pb.files.getURL(project, project.imageFile || "");
-  console.log(imageUrl);
+  const imageUrl = pb.files.getURL(project, project.imageFile || "");
   return (
     <Link
       href={`/section/projects/${project.id}`}

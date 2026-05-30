@@ -21,7 +21,6 @@ export default function StravaInfo({ className }: { className?: string }) {
     }
     fetchData();
   }, []);
-  console.log(stats);
 
   function convertDistance(distance: number) {
     return (distance / 1000).toFixed(2);
