@@ -142,6 +142,54 @@ export async function getAllBlogMetadata(): Promise<Map<string, { title: string;
   return metadataMap
 }
 
+/**
+ * Strip Obsidian vault metadata that may be injected at the top of exported .md files.
+ *
+ * Removes lines matching:
+ *   source_url: ...
+ *   ingested: ...
+ *   sha256: ...
+ *
+ * Only strips from the leading block so we don't accidentally remove legitimate content
+ * that happens to contain those strings later in the document.
+ */
+function stripObsidianMetadata(md: string): string {
+  const metadataKeys = ["source_url", "ingested", "sha256"]
+  const lines = md.split(/\n/)
+  let cleanIndex = 0
+
+  while (cleanIndex < lines.length) {
+    const line = lines[cleanIndex]
+    const trimmed = line.trim()
+
+    // Stop when we hit a blank line, a heading, or actual content
+    if (
+      trimmed === "" ||
+      trimmed.startsWith("#") ||
+      trimmed.startsWith("---")
+    ) {
+      break
+    }
+
+    const isMetadata = metadataKeys.some((key) =>
+      trimmed.startsWith(`${key}:`),
+    )
+
+    if (!isMetadata) {
+      break
+    }
+
+    cleanIndex++
+  }
+
+  // Preserve a single blank line after the metadata block if there was one
+  const remaining = lines.slice(cleanIndex)
+  if (remaining.length > 0 && remaining[0].trim() === "") {
+    return remaining.slice(1).join("\n")
+  }
+  return remaining.join("\n")
+}
+
 export async function getMarkdown({
   slug,
   lang,
@@ -195,9 +243,10 @@ export async function getMarkdown({
     if (getMd) {
       // 7a. Download and return the actual markdown content
       const content = await downloadFile(matchingFile.id)
+      const cleaned = stripObsidianMetadata(content)
       return {
         result: "success",
-        data: { md: content, title, lang: allLangs },
+        data: { md: cleaned, title, lang: allLangs },
       }
     }
 
