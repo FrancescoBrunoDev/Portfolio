@@ -1,3 +1,5 @@
+"use client";
+
 import { SupportedLang } from "@/lib/locales";
 import { useReferences } from "@/lib/ReferenceContext";
 
