@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "postinstall": "patch-package",
     "installPackagesForSyncSvg": "sudo apt-get update && sudo apt-get install -y unzip curl graphicsmagick",
     "syncSvg": "yarn run installPackagesForSyncSvg && npx tsx lib/syncSvg.ts"
   },
@@ -53,7 +54,8 @@
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.19",
     "prettier": "^3.8.2",
-    "prettier-plugin-tailwindcss": "^0.7.2"
+    "prettier-plugin-tailwindcss": "^0.7.2",
+    "patch-package": "^8.0.1"
   },
   "resolutions": {
     "@types/react": "npm:types-react@19.0.0-rc.1",

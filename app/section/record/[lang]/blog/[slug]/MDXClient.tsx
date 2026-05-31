@@ -11,5 +11,5 @@ type MDXClientProps = {
 };
 
 export default function MDXClient({ source }: MDXClientProps) {
-  return <MDXRemote {...source} components={components} lazy />;
+  return <MDXRemote {...source} components={components} />;
 }
