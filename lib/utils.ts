@@ -145,10 +145,11 @@ export async function getAllBlogMetadata(): Promise<Map<string, { title: string;
 /**
  * Strip Obsidian vault metadata that may be injected at the top of exported .md files.
  *
- * Removes lines matching:
- *   source_url: ...
- *   ingested: ...
- *   sha256: ...
+ * Handles two formats:
+ * 1. Plain text metadata lines at the top of the file
+ * 2. YAML frontmatter blocks (--- delimited) containing Obsidian metadata
+ *
+ * Obsidian metadata keys: source_url, ingested, sha256
  *
  * Only strips from the leading block so we don't accidentally remove legitimate content
  * that happens to contain those strings later in the document.
@@ -156,13 +157,13 @@ export async function getAllBlogMetadata(): Promise<Map<string, { title: string;
 function stripObsidianMetadata(md: string): string {
   const metadataKeys = ["source_url", "ingested", "sha256"]
   const lines = md.split(/\n/)
-  let cleanIndex = 0
 
+  // First pass: try stripping plain-text metadata lines from the top
+  let cleanIndex = 0
   while (cleanIndex < lines.length) {
     const line = lines[cleanIndex]
     const trimmed = line.trim()
 
-    // Stop when we hit a blank line, a heading, or actual content
     if (
       trimmed === "" ||
       trimmed.startsWith("#") ||
@@ -182,12 +183,41 @@ function stripObsidianMetadata(md: string): string {
     cleanIndex++
   }
 
-  // Preserve a single blank line after the metadata block if there was one
-  const remaining = lines.slice(cleanIndex)
-  if (remaining.length > 0 && remaining[0].trim() === "") {
-    return remaining.slice(1).join("\n")
+  if (cleanIndex > 0) {
+    const remaining = lines.slice(cleanIndex)
+    if (remaining.length > 0 && remaining[0].trim() === "") {
+      return remaining.slice(1).join("\n")
+    }
+    return remaining.join("\n")
   }
-  return remaining.join("\n")
+
+  // Second pass: check for YAML frontmatter block containing Obsidian metadata
+  if (lines[0]?.trim() === "---") {
+    let closingIndex = 1
+    while (closingIndex < lines.length) {
+      if (lines[closingIndex].trim() === "---") {
+        break
+      }
+      closingIndex++
+    }
+
+    if (closingIndex < lines.length) {
+      const frontmatterContent = lines.slice(1, closingIndex).join("\n")
+      const hasObsidianMetadata = metadataKeys.some((key) =>
+        frontmatterContent.includes(`${key}:`),
+      )
+
+      if (hasObsidianMetadata) {
+        const afterFrontmatter = lines.slice(closingIndex + 1)
+        if (afterFrontmatter.length > 0 && afterFrontmatter[0].trim() === "") {
+          return afterFrontmatter.slice(1).join("\n")
+        }
+        return afterFrontmatter.join("\n")
+      }
+    }
+  }
+
+  return md
 }
 
 export async function getMarkdown({
