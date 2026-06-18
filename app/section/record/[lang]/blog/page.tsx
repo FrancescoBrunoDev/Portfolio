@@ -29,7 +29,7 @@ export default async function Page({
   });
 
   // Fetch all blog metadata in one batch instead of N sequential calls
-  const metadataBySlug = await getAllBlogMetadata().catch(() => new Map());
+  const metadataBySlug = await getAllBlogMetadata().catch(() => new Map<string, { title: string; lang: string[] }>());
 
   // Filter to only articles that have content for this language
   const articlesWithContent = articles.filter((article) => {
