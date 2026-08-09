@@ -311,3 +311,22 @@
     }
   }
 }
+
+@keyframes book-modal-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.book-modal-enter {
+  animation: book-modal-enter 180ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .book-modal-enter {
+    animation: none;
+  }
+}

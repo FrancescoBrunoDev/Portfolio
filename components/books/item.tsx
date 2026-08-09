@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -28,12 +27,7 @@ export default function BookItem({ book }: { book: Book.Book }) {
   }, []);
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.2, ease: "easeOut" }}
-    >
+    <div>
       <Link href={`/section/record/book/${book.id}`}>
         <div className="border-primary relative z-0 h-56 w-32 shrink-0 translate-x-0 overflow-visible rounded border-2 transition-all duration-200 ease-in-out hover:scale-103">
           <div className="bg-primary h-full w-full p-3 opacity-100 transition-opacity duration-300">
@@ -69,6 +63,6 @@ export default function BookItem({ book }: { book: Book.Book }) {
           </div>
         </div>
       </Link>
-    </motion.div>
+    </div>
   );
 }

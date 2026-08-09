@@ -1,6 +1,5 @@
 "use client";
 import { Minimize2, ExternalLink } from "lucide-react";
-import { motion } from "framer-motion";
 import Link from "next/link";
 import BackgroundDots from "@/components/books/backgroundDots";
 import { useState } from "react";
@@ -54,13 +53,7 @@ export default function ModalInfoBook({
   };
 
   return (
-    <motion.div
-      key="modal"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.2, ease: "easeOut" }}
-    >
+    <div className="book-modal-enter">
       <div className="bg-primary text-secondary relative h-[80dvh] max-h-[46rem] w-full rounded p-3 md:max-w-md lg:m-0">
         {/* Buttons */}
         <div className="absolute top-6 right-4 flex gap-2">
@@ -185,6 +178,6 @@ export default function ModalInfoBook({
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
