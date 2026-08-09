@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 
 export default function Error() {
   return (
-    <div className="flex h-screen w-screen items-center justify-center">
+    <div className="flex h-screen w-full items-center justify-center">
       <div className="flex flex-col items-center gap-4 ">
         <Brain className="h-24 w-24 stroke-primary stroke-[2.5]" />
         <h2 className="text-center w-44 text-xl text-primary">

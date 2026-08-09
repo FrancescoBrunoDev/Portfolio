@@ -31,7 +31,7 @@ export default function BooksView({ booksFetch }: { booksFetch: Book.Year[] }) {
   }
 
   return (
-    <div className="no-scrollbar text-primary h-screen w-screen items-center overflow-x-hidden overscroll-x-contain pt-32">
+    <div className="no-scrollbar text-primary h-screen w-full items-center overflow-x-hidden overscroll-x-contain pt-32">
       <SearchBox
         books={books}
         setFilteredData={setFilteredData}

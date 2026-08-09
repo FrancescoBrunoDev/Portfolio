@@ -22,7 +22,7 @@ async function View() {
 
 function LoadingBooks() {
   return (
-    <div className="flex h-screen w-screen items-center justify-center">
+    <div className="flex h-screen w-full items-center justify-center">
       <div className="flex flex-col items-center gap-4">
         <BookCopy className="stroke-primary h-24 w-24 animate-pulse stroke-[2.5]" />
         <h2 className="text-primary w-44 text-center text-xl">
@@ -35,7 +35,7 @@ function LoadingBooks() {
 
 function Error() {
   return (
-    <div className="flex h-screen w-screen items-center justify-center">
+    <div className="flex h-screen w-full items-center justify-center">
       <div className="flex flex-col items-center gap-4">
         <FireExtinguisher className="stroke-primary h-24 w-24 stroke-[2.5]" />
         <h2 className="text-primary w-44 text-center text-xl">

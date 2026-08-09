@@ -84,7 +84,7 @@ export default async function BlogPost({ params }: Props) {
       .filter((l: string) => allowedLangs.includes(l as SupportedLang));
 
     return (
-      <div className="flex h-screen w-screen items-center justify-center">
+      <div className="flex h-screen w-full items-center justify-center">
         <div className="flex flex-col items-center gap-6 text-center">
           <p className="text-primary text-xl">
             This article is not available in{" "}

@@ -29,8 +29,8 @@ export default async function Page() {
   }
 
   return (
-    <div className="text-primary h-screen w-screen items-center pt-12">
-      <div className="container grid h-full w-screen grid-rows-2 gap-10 py-8">
+    <div className="text-primary h-screen w-full items-center pt-12">
+      <div className="container grid h-full w-full grid-rows-2 gap-10 py-8">
         <div className="flex h-full flex-col content-stretch overflow-hidden lg:flex-row lg:items-center">
           <div className="flex h-1/3 items-center pr-10 text-8xl font-semibold uppercase lg:h-auto">
             Dev

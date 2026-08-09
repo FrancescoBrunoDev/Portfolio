@@ -41,7 +41,7 @@ export default async function Page({
   });
 
   return (
-    <div className="text-primary flex h-screen w-screen items-center">
+    <div className="text-primary flex h-screen w-full items-center">
       <div className="container">
         <div className="w-full">
           <div className="flex flex-col justify-center gap-4 pt-10 font-normal lg:justify-normal">

@@ -51,7 +51,7 @@ export default async function About() {
     });
 
   return (
-    <div className="flex w-screen shrink-0 snap-center snap-always items-center py-14 lg:h-screen lg:py-10">
+    <div className="flex w-full shrink-0 snap-center snap-always items-center py-14 lg:h-screen lg:py-10">
       <div className="container">
         <div className="grid w-full gap-2 lg:grid-cols-9">
           <div className="grid h-fit grid-cols-1 lg:col-span-5">

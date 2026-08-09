@@ -27,7 +27,7 @@ export default function Nav() {
   ];
   return (
     <AnimatePresence>
-      <header className="fixed z-20 h-14 w-screen bg-background py-3 text-primary">
+      <header className="fixed z-20 h-14 w-full bg-background py-3 text-primary">
         <div className="container">
           <motion.div
             key="navbar"

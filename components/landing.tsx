@@ -46,7 +46,7 @@ export default function Landing({
   return (
     <>
       <div
-        className="text-primary absolute z-10 flex h-screen w-screen items-center"
+        className="text-primary absolute z-10 flex h-screen w-full items-center"
         onMouseMove={handleMouseMove}
       >
         <div className="absolute inset-0 backdrop-blur-2xl" />

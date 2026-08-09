@@ -67,7 +67,7 @@ export const BgLanding = memo<BgLandingProps>(
       randomNum;
 
     return (
-      <div className="absolute top-0 right-0 bottom-0 left-0 z-0 flex h-screen w-screen items-center justify-center will-change-transform">
+      <div className="absolute top-0 right-0 bottom-0 left-0 z-0 flex h-screen w-full items-center justify-center will-change-transform">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

@@ -32,7 +32,7 @@ export default async function Project({ params }: Props) {
   const videoUrl = pb.files.getURL(project, project.videoFile);
 
   return (
-    <div className="relative min-h-screen w-screen overflow-hidden">
+    <div className="relative min-h-screen w-full overflow-hidden">
       <Frame
         projectId={project.id}
         macroType={macroType}
