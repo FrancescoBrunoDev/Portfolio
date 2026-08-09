@@ -29,10 +29,11 @@ export default function BookItem({ book }: { book: Book.Book }) {
 
   return (
     <motion.div
+      layoutId={`book-card-${book.id}`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.1 }}
+      transition={{ duration: 0.2, ease: "easeOut" }}
     >
       <Link href={`/section/record/book/${book.id}`}>
         <div className="border-primary relative z-0 h-56 w-32 shrink-0 translate-x-0 overflow-visible rounded border-2 transition-all duration-200 ease-in-out hover:scale-103">

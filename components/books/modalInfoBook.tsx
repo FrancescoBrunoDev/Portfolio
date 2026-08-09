@@ -56,10 +56,17 @@ export default function ModalInfoBook({
   return (
     <motion.div
       key="modal"
-      initial={{ y: 10, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      exit={{ y: -10, opacity: 0 }}
-      transition={{ delay: 0.3 }}
+      layoutId={`book-card-${book.id}`}
+      initial={{ y: 12, scale: 0.98, opacity: 0 }}
+      animate={{ y: 0, scale: 1, opacity: 1 }}
+      exit={{ y: -8, scale: 0.98, opacity: 0 }}
+      transition={{
+        type: "spring",
+        stiffness: 320,
+        damping: 30,
+        mass: 0.8,
+      }}
+      style={{ willChange: "transform, opacity" }}
     >
       <div className="bg-primary text-secondary relative h-[80dvh] max-h-[46rem] w-full rounded p-3 md:max-w-md lg:m-0">
         {/* Buttons */}
