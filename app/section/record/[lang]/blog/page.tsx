@@ -36,7 +36,7 @@ export default async function Page({
     const metadata = metadataBySlug.get(article.slug)
     return (
       metadata != null &&
-      metadata.lang.some((l) => allowedLangs.includes(l as SupportedLang))
+      metadata.lang.includes(lang)
     )
   });
 
