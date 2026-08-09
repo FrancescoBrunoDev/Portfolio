@@ -56,37 +56,35 @@ export default function ModalInfoBook({
   return (
     <motion.div
       key="modal"
-      layoutId={`book-card-${book.id}`}
-      initial={{ y: 12, scale: 0.98, opacity: 0 }}
-      animate={{ y: 0, scale: 1, opacity: 1 }}
-      exit={{ y: -8, scale: 0.98, opacity: 0 }}
-      transition={{
-        type: "spring",
-        stiffness: 320,
-        damping: 30,
-        mass: 0.8,
-      }}
-      style={{ willChange: "transform, opacity" }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2, ease: "easeOut" }}
     >
       <div className="bg-primary text-secondary relative h-[80dvh] max-h-[46rem] w-full rounded p-3 md:max-w-md lg:m-0">
         {/* Buttons */}
         <div className="absolute top-6 right-4 flex gap-2">
           {infoBook.infoLink && (
-            <button className="hover:scale-105">
-              <Link href={infoBook.infoLink} target="_blank">
-                <ExternalLink
-                  strokeWidth={2.75}
-                  className="stroke-secondar place-self-end"
-                />
-              </Link>
-            </button>
+            <Link
+              href={infoBook.infoLink}
+              target="_blank"
+              aria-label="Open book information"
+              className="cursor-pointer transition-transform duration-150 ease-out hover:scale-105"
+            >
+              <ExternalLink
+                strokeWidth={2.75}
+                className="stroke-secondar place-self-end"
+              />
+            </Link>
           )}
           {isClosable && (
             <button
+              type="button"
               onClick={() => {
                 router.back();
               }}
-              className="hover:scale-105"
+              aria-label="Close book details"
+              className="cursor-pointer transition-transform duration-150 ease-out hover:scale-105"
             >
               <Minimize2
                 strokeWidth={2.75}
@@ -160,7 +158,8 @@ export default function ModalInfoBook({
             <div className="-top-20 z-50 mb-1 flex w-full justify-center px-3 opacity-20 transition-opacity hover:opacity-100">
               <div className="bg-background text-primary flex justify-center rounded-lg px-3">
                 <button
-                  className="transition-all disabled:opacity-50"
+                  type="button"
+                  className="cursor-pointer transition-opacity disabled:cursor-not-allowed disabled:opacity-50"
                   onClick={handlePrevious}
                   disabled={currentPage === 0}
                 >
@@ -170,7 +169,8 @@ export default function ModalInfoBook({
                   {currentPage + 1}/{Object.keys(note).length}
                 </span>
                 <button
-                  className="transition-all disabled:opacity-50"
+                  type="button"
+                  className="cursor-pointer transition-opacity disabled:cursor-not-allowed disabled:opacity-50"
                   onClick={handleNext}
                   disabled={currentPage === Object.keys(note).length - 1}
                 >

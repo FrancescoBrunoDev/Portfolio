@@ -29,7 +29,6 @@ export default function BookItem({ book }: { book: Book.Book }) {
 
   return (
     <motion.div
-      layoutId={`book-card-${book.id}`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
