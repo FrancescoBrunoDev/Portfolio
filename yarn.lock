@@ -4626,10 +4626,10 @@ pngjs@^3.0.0, pngjs@^3.3.3:
   resolved "https://registry.yarnpkg.com/pngjs/-/pngjs-3.4.0.tgz#99ca7d725965fb655814eaf65f38f12bbdbf555f"
   integrity sha512-NCrCHhWmnQklfH4MtJMRjZ2a8c80qXeMlQMv2uVp9ISJMTt562SbGd6n2oq0PaPgKm7Z6pL9E2UlLIhC+SHL3w==
 
-pocketbase@^0.26.8:
-  version "0.26.8"
-  resolved "https://registry.yarnpkg.com/pocketbase/-/pocketbase-0.26.8.tgz#1b800b5f69f2ab08c3e3da45fce25f45c6724c45"
-  integrity sha512-aQ/ewvS7ncvAE8wxoW10iAZu6ElgbeFpBhKPnCfvRovNzm2gW8u/sQNPGN6vNgVEagz44kK//C61oKjfa+7Low==
+pocketbase@^0.27.1:
+  version "0.27.1"
+  resolved "https://registry.yarnpkg.com/pocketbase/-/pocketbase-0.27.1.tgz#3572490991b5fd8146770e49fed475a43e48daa8"
+  integrity sha512-5WXhgCZzkm34eLbsuKv5jlGace4NIu43jk8CHxXn2dlSflrLkso/M8eNwoq6J4INVeZ6fP3nIbO+wm9PI5kGnA==
 
 possible-typed-array-names@^1.0.0:
   version "1.1.0"

@@ -27,7 +27,7 @@
     "lucide-react": "^1.8.0",
     "next": "^16.2.12",
     "next-mdx-remote": "^6.0.0",
-    "pocketbase": "^0.26.8",
+    "pocketbase": "^0.27.1",
     "postcss": "^8.5.25",
     "react": "19.2.5",
     "react-dom": "19.2.5",
