@@ -1,4 +1,4 @@
-import { getAdjacentIds } from "@/actions/actionsProjects";
+import { getAdjacentIds } from "@/lib/projects";
 import Link from "next/link";
 
 interface FrameProps {
@@ -9,8 +9,8 @@ interface FrameProps {
 }
 
 interface AdjacentIds {
-  prev: string;
-  next: string;
+  prev?: string;
+  next?: string;
   prevUsesAnotherArray: boolean;
   nextUsesAnotherArray: boolean;
 }
@@ -19,43 +19,45 @@ export default async function Frame({
   projectId,
   link,
   macroType,
-  title
+  title,
 }: FrameProps) {
   const adjacentIds: AdjacentIds = await getAdjacentIds(projectId);
+
+  const otherMacroType = macroType === "dev" ? "other" : "dev";
 
   return (
     <nav>
       <Link
-        className="fixed right-0 z-10 h-full w-20 translate-x-10 bg-background transition-all ease-in-out hover:translate-x-8"
+        className="fixed left-0 z-10 h-full w-20 -translate-x-10 bg-background transition-all ease-in-out hover:-translate-x-8"
         href={`/section/projects/${adjacentIds.prev}`}
       >
-        <div className="relative flex h-full w-20 items-center text-clip">
-          <div className="vertical-text fixed left-2 text-center text-lg text-primary">
+        <div className="flex h-full w-20 items-center text-clip">
+          <div className="vertical-text fixed right-2 rotate-180 text-center text-lg text-primary">
             {adjacentIds.prevUsesAnotherArray
-              ? `to ${
-                  macroType === "dev" ? "other" : "dev"
-                } projects`
-              : "next"}
+              ? `to ${otherMacroType} projects`
+              : "prev"}
           </div>
         </div>
       </Link>
       <Link
-        className="fixed left-0 z-10 h-full w-20 -translate-x-10 bg-background transition-all ease-in-out hover:-translate-x-8"
+        className="fixed right-0 z-10 h-full w-20 translate-x-10 bg-background transition-all ease-in-out hover:translate-x-8"
         href={`/section/projects/${adjacentIds.next}`}
       >
-        <div className="flex h-full w-20 items-center text-clip">
-          <div className="vertical-text fixed right-2 rotate-180 text-center text-lg text-primary">
+        <div className="relative flex h-full w-20 items-center text-clip">
+          <div className="vertical-text fixed left-2 text-center text-lg text-primary">
             {adjacentIds.nextUsesAnotherArray
-              ? `to ${
-                macroType === "dev" ? "other" : "dev"
-                } projects`
-              : "prev"}
+              ? `to ${otherMacroType} projects`
+              : "next"}
           </div>
         </div>
       </Link>
       <div className="fixed bottom-0 z-10 h-20 w-full translate-y-10 bg-background transition-all ease-in-out hover:translate-y-8">
         {!link ? null : (
-          <Link href={link} target="_blank" data-umami-event={"Click Project Link " + title}>
+          <Link
+            href={link}
+            target="_blank"
+            data-umami-event={"Click Project Link " + title}
+          >
             <div className="flex justify-center pt-1 text-xl text-primary">
               to the website
             </div>

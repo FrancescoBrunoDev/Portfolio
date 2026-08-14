@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { LOCALES, SupportedLang } from "@/lib/locales";
 
 type LanguageSwitcherProps = {
@@ -12,7 +12,8 @@ export default function LanguageSwitcher({
   availableLanguages,
 }: LanguageSwitcherProps) {
   const pathname = usePathname();
-  const currentLang = pathname.split("/")[3];
+  const params = useParams<{ lang?: string }>();
+  const currentLang = params.lang;
 
   const languagesToShow =
     availableLanguages ?? (Object.keys(LOCALES) as SupportedLang[]);
@@ -27,7 +28,11 @@ export default function LanguageSwitcher({
         {languagesToShow.map((lang) => (
           <Link
             key={lang}
-            href={pathname.replace(`/${currentLang}/`, `/${lang}/`)}
+            href={
+              currentLang
+                ? pathname.replace(`/${currentLang}/`, `/${lang}/`)
+                : pathname
+            }
             className={`rounded-full px-3 py-1 text-sm transition-colors ${
               currentLang === lang
                 ? "bg-primary text-background"

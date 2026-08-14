@@ -2,16 +2,16 @@
 import { Minimize2, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import BackgroundDots from "@/components/books/backgroundDots";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ChevronRight, ChevronLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
+import DOMPurify from "isomorphic-dompurify";
 
 interface ItemDetailProps {
   title: string;
   value: string;
 }
 
-// make the interface for ItemDetail
 interface ModalInfoBookProps {
   book: Book.Book;
   note: Book.Note[];
@@ -36,12 +36,23 @@ export default function ModalInfoBook({
   const [currentPage, setCurrentPage] = useState(0);
   const router = useRouter();
 
+  useEffect(() => {
+    if (!isClosable) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        router.back();
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [isClosable, router]);
+
   if (!book.expand?.book_info) return null;
   const infoBook = book.expand.book_info;
   const titleParts = infoBook.title?.match(/[^.!]+[.!]?/g) || [];
 
   const handleNext = () => {
-    if (currentPage < Object.keys(note).length - 1) {
+    if (currentPage < note.length - 1) {
       setCurrentPage(currentPage + 1);
     }
   };
@@ -66,7 +77,7 @@ export default function ModalInfoBook({
             >
               <ExternalLink
                 strokeWidth={2.75}
-                className="stroke-secondar place-self-end"
+                className="stroke-secondary place-self-end"
               />
             </Link>
           )}
@@ -81,7 +92,7 @@ export default function ModalInfoBook({
             >
               <Minimize2
                 strokeWidth={2.75}
-                className="stroke-secondar place-self-end"
+                className="stroke-secondary place-self-end"
               />
             </button>
           )}
@@ -140,14 +151,16 @@ export default function ModalInfoBook({
             {note?.length !== 0 && (
               <div
                 className="w-full max-w-md px-6"
-                dangerouslySetInnerHTML={{ __html: note[currentPage].svg }}
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(note[currentPage].svg),
+                }}
               />
             )}
           </div>
         </div>
         {/* title book */}
         <div className="absolute right-0 bottom-0 left-0 z-10">
-          {note.length !== 0 && Object.keys(note).length > 1 ? (
+          {note.length > 1 ? (
             <div className="-top-20 z-50 mb-1 flex w-full justify-center px-3 opacity-20 transition-opacity hover:opacity-100">
               <div className="bg-background text-primary flex justify-center rounded-lg px-3">
                 <button
@@ -159,13 +172,13 @@ export default function ModalInfoBook({
                   <ChevronLeft />
                 </button>
                 <span className="w-20 text-center text-xl font-bold">
-                  {currentPage + 1}/{Object.keys(note).length}
+                  {currentPage + 1}/{note.length}
                 </span>
                 <button
                   type="button"
                   className="cursor-pointer transition-opacity disabled:cursor-not-allowed disabled:opacity-50"
                   onClick={handleNext}
-                  disabled={currentPage === Object.keys(note).length - 1}
+                  disabled={currentPage === note.length - 1}
                 >
                   <ChevronRight />
                 </button>
@@ -174,7 +187,7 @@ export default function ModalInfoBook({
           ) : null}
           <div className="border-primary bg-background text-primary rounded border-4 border-t-0 p-3 text-left font-semibold">
             <div className="text-4xl uppercase">{titleParts[0]}</div>
-            <div className="max-h-36text-2xl">{titleParts[1]}</div>
+            <div className="max-h-36 text-2xl">{titleParts[1]}</div>
           </div>
         </div>
       </div>

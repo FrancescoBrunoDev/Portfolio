@@ -14,11 +14,11 @@ export default function SpecialContent({
 }: Props) {
   return (
     <>
-      {type === "podcast" && (
+      {type === "podcast" && secondaryLink && (
         <div className="w-full pt-2 md:w-1/2">
           <iframe
             id="embedPlayer"
-            src={secondaryLink!}
+            src={secondaryLink}
             height="450px"
             sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation"
             allow="autoplay *; encrypted-media *; clipboard-write"

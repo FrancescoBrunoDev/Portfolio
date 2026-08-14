@@ -1,9 +1,10 @@
-import SpecialContetent from "@/components/projects/project/specialContent";
+import SpecialContent from "@/components/projects/project/specialContent";
 import Frame from "@/components/projects/project/frame";
 import parse from "html-react-parser";
+import DOMPurify from "isomorphic-dompurify";
 import { Fingerprint } from "lucide-react";
 import pb from "@/lib/pocketbase";
-import { getMacroType } from "@/actions/actionsProjects";
+import { getMacroType } from "@/lib/projects";
 import type { Metadata, ResolvingMetadata } from "next";
 
 type Props = {
@@ -14,20 +15,25 @@ export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  const project = await pb
-    .collection("projects")
-    .getOne((await params).id, { requestKey: null });
-  const previusTitle = (await parent).title;
-  return {
-    title: `${project.title} ${previusTitle && " | " + previusTitle?.absolute}`,
-    description: project.description,
-  };
+  try {
+    const project = await pb
+      .collection("projects")
+      .getOne((await params).id, { requestKey: null });
+    const previousTitle = (await parent).title?.absolute;
+
+    return {
+      title: `${project.title}${previousTitle ? ` | ${previousTitle}` : ""}`,
+      description: project.description,
+    };
+  } catch (_err) {
+    return { title: "Project", description: "Project details" };
+  }
 }
 
 export default async function Project({ params }: Props) {
   const project: Project = await pb
     .collection("projects")
-    .getOne((await params).id);
+    .getOne((await params).id, { requestKey: null });
   const macroType = await getMacroType({ type: project.type });
   const videoUrl = pb.files.getURL(project, project.videoFile);
 
@@ -45,6 +51,7 @@ export default async function Project({ params }: Props) {
           autoPlay
           loop
           muted
+          playsInline
           className="fixed -z-30 min-h-screen min-w-full overflow-hidden object-cover"
         />
       )}
@@ -58,9 +65,9 @@ export default async function Project({ params }: Props) {
             {project.title}
           </h1>
           <p className="text-lg font-normal hyphens-none sm:hyphens-auto md:hyphens-auto lg:w-3/4">
-            {parse(project.description)}
+            {parse(DOMPurify.sanitize(project.description))}
           </p>
-          <SpecialContetent
+          <SpecialContent
             type={project.type}
             secondaryLink={project.secondaryLink}
             title={project.title}

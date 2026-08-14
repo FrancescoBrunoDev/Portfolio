@@ -10,7 +10,7 @@ export const BgLanding = memo<BgLandingProps>(
   ({ mouseRef, windowDimensions }) => {
     const circleRef = useRef<SVGCircleElement>(null);
     const directionRef = useRef(0);
-    const desiredDirectionRef = useRef(Math.random() > 0.5 ? 1 : -1);
+    const desiredDirectionRef = useRef(0);
     const randomRef = useRef(0);
     const displayRef = useRef({ x: 0, y: 0, r: 0 });
     const lastTimeRef = useRef(0);
@@ -22,6 +22,13 @@ export const BgLanding = memo<BgLandingProps>(
 
       const { width, height } = windowDimensions;
       if (width === 0 || height === 0) return;
+
+      // Prime the clock on the first frame so the initial delta isn't huge
+      if (lastTimeRef.current === 0) {
+        lastTimeRef.current = time;
+        desiredDirectionRef.current = Math.random() > 0.5 ? 1 : -1;
+        return;
+      }
 
       const delta = time - lastTimeRef.current;
       // Random walk: direzione aggiornata solo ogni ~150ms

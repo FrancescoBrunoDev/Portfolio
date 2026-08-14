@@ -1,18 +1,16 @@
 namespace Book {
   type Year = {
-    year: number;
-    bookDetails: BookDetails[];
+    year: number | string;
+    bookDetails: Book.Book[];
   };
 
   interface Note {
-    url: string;
-    name: string;
     svg: string;
   }
 
   interface BookInfo {
-    ISBN_10: number;
-    ISBN_13: number;
+    ISBN_10: string;
+    ISBN_13: string;
     authors: string[];
     categories: string[];
     collectionId: string;
@@ -29,8 +27,6 @@ namespace Book {
   }
 
   interface Book {
-    altNotes: string;
-    book_info: string;
     collectionId: string;
     collectionName: string;
     created: string;
@@ -39,7 +35,6 @@ namespace Book {
     };
     id: string;
     month: number;
-    tranlatedNotes: string;
     type: string;
     updated: string;
     year: number;
@@ -58,7 +53,7 @@ interface WindowDimensions {
 }
 
 type WorkExperience = {
-  id: number;
+  id: string;
   position: string;
   expand: {
     organizations: [
@@ -78,7 +73,7 @@ type WorkExperience = {
 
 type Education = {
   collectionName: string;
-  id: number;
+  id: string;
   expand: {
     organizations: [
       {
@@ -97,7 +92,7 @@ type Education = {
 
 type Internship = {
   collectionName: string;
-  id: number;
+  id: string;
   position: string;
   expand: {
     organizations: [

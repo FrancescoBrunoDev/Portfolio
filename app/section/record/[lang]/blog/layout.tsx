@@ -10,7 +10,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const isBlogPost = pathname.split("/").length > 5;
+  // /section/record/<lang>/blog/<slug> has 5 meaningful segments vs 4 for the list
+  const isBlogPost = pathname.split("/").filter(Boolean).length > 4;
 
   if (isBlogPost) {
     return <>{children}</>;

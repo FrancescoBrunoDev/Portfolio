@@ -3,7 +3,7 @@
 import { SupportedLang } from "@/lib/locales";
 import { useReferences } from "@/lib/ReferenceContext";
 
-const stringBibliograpy = {
+const stringBibliography = {
   en: "Bibliography",
   it: "Bibliografia",
 };
@@ -22,7 +22,7 @@ export default function Bibliography({
       {children}
       {references.length > 0 && (
         <>
-          <h2>{stringBibliograpy[lang]}</h2>
+          <h2>{stringBibliography[lang]}</h2>
           {references.map((ref) => (
             <p key={ref.number} id={`reference-${ref.number}`}>
               {ref.number}. {formatAPA(ref)}

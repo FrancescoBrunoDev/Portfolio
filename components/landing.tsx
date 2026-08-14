@@ -48,8 +48,8 @@ export default function Landing({
                 Bruno
               </h1>
               <div className="z-10 flex items-center space-x-4">
-                <div className="text- flex items-center space-x-4 md:text-lg xl:flex-col xl:items-end xl:space-x-0 xl:text-right">
-                  <span>Münster. DE</span>
+                <div className="flex items-center space-x-4 md:text-lg xl:flex-col xl:items-end xl:space-x-0 xl:text-right">
+                  <span>Münster. DE</span>
                   <Link
                     href="mailto:francesco@francesco-bruno.com"
                     className="transition-all duration-100 ease-in-out hover:font-semibold"

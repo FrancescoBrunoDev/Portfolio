@@ -36,10 +36,10 @@ export default async function View({ params }: Props) {
     return null;
   }
 
-  const book: any = result;
+  const book = result as unknown as Book.Book;
   if (!book || !book.expand) return null;
 
-  const note = book.note || [];
+  const note = Array.isArray(book.note) ? book.note : [];
 
   return (
     <div className="fixed inset-x-3 top-10 bottom-0 flex flex-col items-center justify-center gap-4 md:inset-y-0">

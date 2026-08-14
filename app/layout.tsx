@@ -1,5 +1,5 @@
 import "@/styles/globals.css";
-import { outfit } from "@/components/text";
+import { mainFont } from "@/components/text";
 import Nav from "@/components/nav";
 import Script from "next/script";
 
@@ -26,7 +26,7 @@ export default function RootLayout({
           />
         )}
       </head>
-      <body className={outfit.className}>
+      <body className={mainFont.className}>
         <Nav />
         {children}
         {modal}

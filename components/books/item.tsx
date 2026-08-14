@@ -4,27 +4,28 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function BookItem({ book }: { book: Book.Book }) {
-  if (!book || !book.expand) return null;
   const [sketch, setSketch] = useState({
     src: "/books/sketches/1.svg",
     rotate: 0,
   });
-  const infoBooks = book.expand.book_info;
-  const note = book.note;
-  const titleParts = infoBooks?.title?.match(/[^.!]+[.!]?/g) || [];
 
-  const lenghtMainTitle = 50;
-
-  // take a random number beetwen 1 and 3 and use it witch img svg use
+  // Pick a random placeholder sketch once, after mount (server renders a stable default).
   useEffect(() => {
     const randomSketch = Math.floor(Math.random() * 3) + 1;
-    // rotate should be 0 or 180
     const rotate = Math.random() < 0.5 ? 0 : 180;
     setSketch({
       src: `/books/sketches/${randomSketch}.svg`,
       rotate,
     });
   }, []);
+
+  if (!book?.expand?.book_info) return null;
+
+  const infoBooks = book.expand.book_info;
+  const note = book.note;
+  const titleParts = infoBooks?.title?.match(/[^.!]+[.!]?/g) || [];
+
+  const lengthMainTitle = 50;
 
   return (
     <div>
@@ -46,7 +47,7 @@ export default function BookItem({ book }: { book: Book.Book }) {
                     })}
                     width={300}
                     height={300}
-                    alt="sketch holdplace"
+                    alt="sketch placeholder"
                     src={sketch.src}
                   />
                 </div>
@@ -55,8 +56,8 @@ export default function BookItem({ book }: { book: Book.Book }) {
           </div>
           <div className="border-primary bg-background absolute right-0 bottom-0 left-0 z-10 rounded-xs border-t-2 p-2 text-left text-base font-semibold break-words uppercase">
             <div className="text-sm">
-              {titleParts[0] && titleParts[0].length > lenghtMainTitle
-                ? `${titleParts[0].substring(0, lenghtMainTitle)}...`
+              {titleParts[0] && titleParts[0].length > lengthMainTitle
+                ? `${titleParts[0].substring(0, lengthMainTitle)}...`
                 : titleParts[0]}
             </div>
             <div className="truncate text-xs lowercase">{titleParts[1]}</div>

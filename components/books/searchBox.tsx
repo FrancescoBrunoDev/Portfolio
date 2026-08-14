@@ -13,36 +13,26 @@ export default function SearchBox({
   setIsFiltering,
 }: SearchBoxProps) {
   function handleInput(event: FormEvent<HTMLInputElement>) {
-    const input = (event.target as HTMLInputElement).value.toLocaleLowerCase();
-    const filteredData = Object.values(books)
+    const input = (event.target as HTMLInputElement).value.toLowerCase();
+    const filteredData = books
       .map((year) => {
         const filteredBookDetails = year.bookDetails.filter(({ expand }) => {
           return (
-            expand.book_info?.title?.toLocaleLowerCase().includes(input) ||
+            expand.book_info?.title?.toLowerCase().includes(input) ||
             (Array.isArray(expand.book_info?.authors) &&
-              expand.book_info.authors[0]?.toLocaleLowerCase().includes(input))
+              expand.book_info.authors[0]?.toLowerCase().includes(input))
           );
         });
 
         if (filteredBookDetails.length > 0) {
-          // Include the year if it has matching book details
           return { ...year, bookDetails: filteredBookDetails };
-        } else {
-          // Exclude the year if it has no matching book details
-          return null;
         }
+        return null;
       })
-      .filter((year) => year !== null);
+      .filter((year): year is Book.Year => year !== null);
 
-    setFilteredData(
-      filteredData.filter((year) => year !== null) as Book.Year[],
-    );
-
-    if (input.length > 0) {
-      setIsFiltering(true);
-    } else {
-      setIsFiltering(false);
-    }
+    setFilteredData(filteredData);
+    setIsFiltering(input.length > 0);
   }
 
   return (

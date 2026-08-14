@@ -20,8 +20,10 @@ export default function TimelineWork({
               workExperience[index - 1].expand.organizations[0].name;
           const convertedStartDate = new Date(work.start_date);
           const formattedStartDate = `${convertedStartDate.getMonth() + 1}.${convertedStartDate.getFullYear()}`;
-          const convertedEndDate = new Date(work.end_date);
-          const formattedEndDate = `${convertedEndDate.getMonth() + 1}.${convertedEndDate.getFullYear()}`;
+          const convertedEndDate = work.end_date ? new Date(work.end_date) : null;
+          const formattedEndDate = convertedEndDate
+            ? `${convertedEndDate.getMonth() + 1}.${convertedEndDate.getFullYear()}`
+            : "";
 
           return (
             <li

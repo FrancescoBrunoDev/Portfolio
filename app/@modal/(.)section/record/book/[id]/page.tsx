@@ -13,13 +13,18 @@ export default async function View({ params }: Props) {
     return null;
   }
 
-  const book: any = result;
+  const book = result as unknown as Book.Book;
   if (!book || !book.expand) return null;
 
-  const note = book.note || [];
+  const note = Array.isArray(book.note) ? book.note : [];
 
   return (
-    <div className="fixed inset-0 z-40 flex items-center justify-center px-3 backdrop-grayscale sm:px-0">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label="Book details"
+      className="fixed inset-0 z-40 flex items-center justify-center px-3 backdrop-grayscale sm:px-0"
+    >
       <ModalInfoBook book={book} note={note} isClosable={true} />
     </div>
   );

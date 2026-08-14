@@ -16,11 +16,7 @@ export default async function Home() {
 
     const record = article?.items?.[0];
     if (record?.slug) {
-      const mdData = await getMarkdown({
-        slug: record.slug,
-        lang: "en",
-        getMd: false,
-      });
+      const mdData = await getMarkdown(record.slug, "en", false);
 
       const title = mdData?.data?.title as string | undefined;
       if (title) {

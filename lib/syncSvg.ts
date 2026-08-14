@@ -1,3 +1,5 @@
+// Maintenance script: regenerates book-note SVGs from PocketBase PDFs.
+// Requires graphicsmagick (+ unzip/curl) on the host. Run with `yarn syncSvg`.
 import potrace from "potrace";
 import { fromPath } from "pdf2pic";
 import { PdfCounter } from "page-count";

@@ -1,5 +1,5 @@
 import ProjectItem from "@/components/projects/item";
-import pb from "@/lib/pocketbase";
+import { getProjects } from "@/lib/projects";
 
 export const dynamic = "force-dynamic";
 
@@ -14,18 +14,9 @@ export default async function Page() {
   let devProjects: Project[] = [];
   let otherProjects: Project[] = [];
   try {
-    devProjects = await pb.collection("projects").getFullList({
-      sort: "-priority",
-      filter: "hidden=false && type='website'",
-      fields: "title,id,imageFile,collectionId,collectionName",
-    });
-    otherProjects = await pb.collection("projects").getFullList({
-      sort: "-priority",
-      filter: "hidden=false && type!='website'",
-      fields: "title,id,imageFile,collectionId,collectionName",
-    });
+    ({ dev: devProjects, other: otherProjects } = await getProjects());
   } catch (error) {
-    console.error("Errore durante il recupero dei progetti:", error);
+    console.error("Error while fetching the projects:", error);
   }
 
   return (

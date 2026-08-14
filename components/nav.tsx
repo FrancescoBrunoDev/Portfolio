@@ -2,7 +2,7 @@
 
 import React from "react";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import Logo from "@/components/logo";
 
@@ -26,36 +26,32 @@ export default function Nav() {
     },
   ];
   return (
-    <AnimatePresence>
-      <header className="fixed z-20 h-14 w-full bg-background py-3 text-primary">
-        <div className="container">
-          <motion.div
-            key="navbar"
-            initial={{ y: -5, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 10, opacity: 0 }}
-          >
-            <div className="flex items-center justify-between">
-              <Link href={"/"}>
-                <Logo />
-              </Link>
-              <div className="flex justify-around gap-4">
-                {sections.map((section, index) => (
-                  <React.Fragment key={section.href}>
-                    <Link
-                      className="transition-all duration-100 ease-in-out hover:font-semibold"
-                      href={section.href}
-                    >
-                      {section.name}
-                    </Link>
-                    {index < sections.length - 1 && <span>/</span>}
-                  </React.Fragment>
-                ))}
-              </div>
+    <header className="fixed z-20 h-14 w-full bg-background py-3 text-primary">
+      <div className="container">
+        <motion.div
+          initial={{ y: -5, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+        >
+          <div className="flex items-center justify-between">
+            <Link href={"/"}>
+              <Logo />
+            </Link>
+            <div className="flex justify-around gap-4">
+              {sections.map((section, index) => (
+                <React.Fragment key={section.href}>
+                  <Link
+                    className="transition-all duration-100 ease-in-out hover:font-semibold"
+                    href={section.href}
+                  >
+                    {section.name}
+                  </Link>
+                  {index < sections.length - 1 && <span>/</span>}
+                </React.Fragment>
+              ))}
             </div>
-          </motion.div>
-        </div>
-      </header>
-    </AnimatePresence>
+          </div>
+        </motion.div>
+      </div>
+    </header>
   );
 }

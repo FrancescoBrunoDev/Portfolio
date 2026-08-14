@@ -1,5 +1,5 @@
 import TimelineWork from "@/components/timeline/timelinePrimary";
-import TimelineSecondary from "@/components/timeline/timelineSecondaty";
+import TimelineSecondary from "@/components/timeline/timelineSecondary";
 import { GraduationCap } from "lucide-react";
 import { PocketKnife } from "lucide-react";
 import { ScrollText } from "lucide-react";
@@ -7,6 +7,8 @@ import { ScrollText } from "lucide-react";
 import pb from "@/lib/pocketbase";
 
 import type { Metadata } from "next";
+
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "About | Francesco Bruno",

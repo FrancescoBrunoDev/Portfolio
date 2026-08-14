@@ -5,9 +5,7 @@ import SearchBox from "@/components/books/searchBox";
 import { useState } from "react";
 
 export default function BooksView({ booksFetch }: { booksFetch: Book.Year[] }) {
-  const books = booksFetch;
-
-  const [filteredData, setFilteredData] = useState<Book.Year[]>(books);
+  const [filteredData, setFilteredData] = useState<Book.Year[]>(booksFetch);
   const [isFiltering, setIsFiltering] = useState(false);
 
   function getMonthName(month: number) {
@@ -33,17 +31,28 @@ export default function BooksView({ booksFetch }: { booksFetch: Book.Year[] }) {
   return (
     <div className="no-scrollbar text-primary h-screen w-full items-center overflow-x-hidden overscroll-x-contain pt-32">
       <SearchBox
-        books={books}
+        books={booksFetch}
         setFilteredData={setFilteredData}
         setIsFiltering={setIsFiltering}
       />
       <div className="container grid w-full gap-2 py-8">
-        {Object.values(filteredData)
-          .sort((a, b) => b.year - a.year)
+        {[...filteredData]
+          .sort((a, b) => Number(b.year) - Number(a.year))
           .map((year) => {
+            const booksByMonth = new Map<number, Book.Book[]>();
+            for (const book of year.bookDetails) {
+              const month = book.month;
+              const list = booksByMonth.get(month) ?? [];
+              list.push(book);
+              booksByMonth.set(month, list);
+            }
+            const months = Array.from(booksByMonth.entries()).sort(
+              (a, b) => b[0] - a[0],
+            );
+
             return (
               <div
-                key={year.year}
+                key={String(year.year)}
                 className="no-scrollbar h-full flex-row content-stretch items-center gap-4 overflow-x-scroll"
               >
                 <div className="h-full">
@@ -57,41 +66,27 @@ export default function BooksView({ booksFetch }: { booksFetch: Book.Year[] }) {
                       </span>
                     </div>
                     <div className="flex h-full w-full gap-2 overflow-x-auto pb-4 lg:h-full">
-                      {Object.entries<Book.Book[]>(
-                        year.bookDetails
-                          .slice()
-                          .reduce((acc: any, book: Book.Book) => {
-                            const month = book.month;
-                            if (!acc[month]) {
-                              acc[month] = [] as Book.Book[];
-                            }
-                            acc[month].push(book);
-                            return acc;
-                          }, []),
-                      )
-                        .reverse()
-                        .map(([month, booksInMonth]) => {
-                          const monthNum = parseInt(month);
-                          return (
-                            <div
-                              key={`${year.year}-${month}`}
-                              className="flex flex-col pl-1"
-                            >
-                              <h2 className="sticky left-0 h-6 w-fit">
-                                {getMonthName(monthNum)}
-                              </h2>{" "}
-                              <div key={month} className="flex flex-row gap-2">
-                                {booksInMonth.map((book) => {
-                                  if (!book.expand?.book_info) {
-                                    return null;
-                                  }
-
-                                  return <BookItem key={book.id} book={book} />;
-                                })}
-                              </div>
+                      {months.map(([month, booksInMonth]) => {
+                        const monthNum = Number(month);
+                        return (
+                          <div
+                            key={`${String(year.year)}-${month}`}
+                            className="flex flex-col pl-1"
+                          >
+                            <h2 className="sticky left-0 h-6 w-fit">
+                              {getMonthName(monthNum)}
+                            </h2>{" "}
+                            <div className="flex flex-row gap-2">
+                              {booksInMonth.map((book) => {
+                                if (!book.expand?.book_info) {
+                                  return null;
+                                }
+                                return <BookItem key={book.id} book={book} />;
+                              })}
                             </div>
-                          );
-                        })}
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                 </div>

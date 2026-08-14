@@ -4,7 +4,7 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { serialize } from "next-mdx-remote/serialize";
 import remarkGfm from "remark-gfm";
 import { SupportedLang, allowedLangs } from "@/lib/locales";
-import { getMarkdown, type MarkdownResult } from "@/lib/utils";
+import { getMarkdown, getAllBlogMetadata } from "@/lib/utils";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import BlogPostClient from "./BlogPostClient";
@@ -13,33 +13,27 @@ type Props = {
   params: Promise<{ lang: string; slug: string }>;
 };
 
-type Markdown = {
-  lang: string;
-  title: string;
-  file: string;
-};
-
 export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  // Await the params
   const { slug, lang } = await params;
 
   try {
     const record = await pb
       .collection("articles")
-      .getFirstListItem(`slug = "${slug}"`, {
+      .getFirstListItem(pb.filter("slug = {:slug}", { slug }), {
         requestKey: null,
       });
 
-    const md = await getMarkdown({ slug, lang, getMd: false });
+    const md = await getMarkdown(slug, lang, false);
 
     const parentData = await parent;
     const previousTitle = parentData.title?.absolute;
 
     return {
-      title: (md?.data?.title ?? "") + (previousTitle ? ` | ${previousTitle}` : ""),
+      title:
+        (md?.data?.title ?? "") + (previousTitle ? ` | ${previousTitle}` : ""),
       description: record.description,
     };
   } catch (_error) {
@@ -60,7 +54,7 @@ export default async function BlogPost({ params }: Props) {
   // Verify the article exists; 404 if not
   const record = await pb
     .collection("articles")
-    .getFirstListItem(`slug = "${slug}"`)
+    .getFirstListItem(pb.filter("slug = {:slug}", { slug }))
     .catch(() => null);
 
   if (!record) {
@@ -68,20 +62,17 @@ export default async function BlogPost({ params }: Props) {
   }
 
   // Fetch the markdown for the requested language
-  const urlMD = await getMarkdown({ slug, lang, getMd: true });
+  const urlMD = await getMarkdown(slug, lang, true);
 
   if (!urlMD || urlMD.result !== "success") {
     // Article exists but isn't available in the requested language.
-    // Try each allowed language to fetch available-langs metadata.
-    let metadata: MarkdownResult = null;
-    for (const l of allowedLangs) {
-      metadata = await getMarkdown({ slug, lang: l, getMd: false });
-      if (metadata?.data?.lang) break;
-    }
+    const metadata = await getAllBlogMetadata().catch(
+      () => new Map<string, { title: string; lang: string[] }>(),
+    );
 
-    const availableLangs = (Array.isArray(metadata?.data?.lang) ? metadata.data.lang : [])
-      .filter((l: unknown): l is string => typeof l === "string")
-      .filter((l: string) => allowedLangs.includes(l as SupportedLang));
+    const availableLangs = (metadata.get(slug)?.lang ?? []).filter(
+      (l: string) => allowedLangs.includes(l as SupportedLang),
+    );
 
     return (
       <div className="flex h-screen w-full items-center justify-center">
@@ -119,22 +110,14 @@ export default async function BlogPost({ params }: Props) {
       },
     });
 
-    const languageCheck = await Promise.all(
-      allowedLangs.map(async (l) => {
-        const mdData = await getMarkdown({ slug, lang: l, getMd: false });
-        return { lang: l as SupportedLang, hasContent: !!mdData?.data?.lang };
-      }),
-    );
-
     const languagePriority = (lang: SupportedLang) => {
       if (lang === "en") return 0;
       if (lang === "it") return 1;
       return 2;
     };
 
-    const availableLanguages = languageCheck
-      .filter((item) => item.hasContent)
-      .map((item) => item.lang)
+    const availableLanguages = (urlMD.data?.lang ?? [])
+      .filter((l): l is SupportedLang => allowedLangs.includes(l as SupportedLang))
       .sort((a, b) => languagePriority(a) - languagePriority(b));
 
     return (

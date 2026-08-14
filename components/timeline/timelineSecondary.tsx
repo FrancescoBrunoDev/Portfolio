@@ -19,8 +19,8 @@ export default function TimelineSecondary({
       </div>
       <ul>
         {content.map((item) => {
-          let itemOrganisation = item.expand.organizations[0].name;
-          let itemContent = item.description;
+          const itemOrganisation = item.expand.organizations[0].name;
+          const itemContent = item.description;
           let itemTitle = "";
           if (item.collectionName === "education" && "degree" in item) {
             itemTitle = item.degree;
@@ -35,8 +35,8 @@ export default function TimelineSecondary({
             convertedStartDate.getMonth() + 1
           }.${convertedStartDate.getFullYear()}`;
           let formattedEndDate = "";
-          if ("end_date" in item) {
-            const convertedEndDate = new Date(item.end_date!);
+          if ("end_date" in item && item.end_date) {
+            const convertedEndDate = new Date(item.end_date);
             formattedEndDate = `${
               convertedEndDate.getMonth() + 1
             }.${convertedEndDate.getFullYear()}`;

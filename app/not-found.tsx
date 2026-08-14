@@ -8,7 +8,7 @@ export default function Error() {
       <div className="flex flex-col items-center gap-4 ">
         <Brain className="h-24 w-24 stroke-primary stroke-[2.5]" />
         <h2 className="text-center w-44 text-xl text-primary">
-          Whether it's a happy accident or a testament to your brilliant mind
+          Whether it&apos;s a happy accident or a testament to your brilliant mind
           (♥), care to return to the working portfolio?
         </h2>
         <Link href="/">

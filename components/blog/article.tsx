@@ -1,10 +1,10 @@
 "use client";
 
 import { ReferenceProvider } from "@/lib/ReferenceContext";
-import Bibliography from "@/components/blog/bibliograpghy";
+import Bibliography from "@/components/blog/bibliography";
 import Link from "next/link";
 import { format, parseISO } from "date-fns";
-import { LOCALES, SupportedLang, allowedLangs, getLocale } from "@/lib/locales";
+import { LOCALES, SupportedLang, getLocale } from "@/lib/locales";
 import { ArrowLeft } from "lucide-react";
 import { RecordModel } from "pocketbase";
 import MDXClient from "@/app/section/record/[lang]/blog/[slug]/MDXClient";

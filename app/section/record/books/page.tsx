@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 async function View() {
-  const data: Book.Year[] = await fetchBooks();
+  const data = await fetchBooks();
 
   if ("error" in data) return <Error />;
 
@@ -26,7 +26,7 @@ function LoadingBooks() {
       <div className="flex flex-col items-center gap-4">
         <BookCopy className="stroke-primary h-24 w-24 animate-pulse stroke-[2.5]" />
         <h2 className="text-primary w-44 text-center text-xl">
-          Just a tick, I'll grab the books from the shelves.
+          Just a tick, I&apos;ll grab the books from the shelves.
         </h2>
       </div>
     </div>
@@ -49,7 +49,7 @@ function Error() {
 export default async function Page() {
   return (
     <Suspense fallback={<LoadingBooks />}>
-      <View />;
+      <View />
     </Suspense>
   );
 }
