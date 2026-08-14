@@ -1,73 +1,77 @@
-import { memo, useState, useRef } from "react";
+import { memo, useRef } from "react";
 import { motion, useAnimationFrame } from "framer-motion";
 
 interface BgLandingProps {
-  mousePosition: MousePosition;
+  mouseRef: { current: MousePosition };
   windowDimensions: WindowDimensions;
 }
 
 export const BgLanding = memo<BgLandingProps>(
-  ({ mousePosition, windowDimensions }) => {
-    const [randomNum, setRandomNum] = useState(0);
+  ({ mouseRef, windowDimensions }) => {
+    const circleRef = useRef<SVGCircleElement>(null);
     const directionRef = useRef(0);
-    const desiredDirectionRef = useRef(0);
+    const desiredDirectionRef = useRef(Math.random() > 0.5 ? 1 : -1);
+    const randomRef = useRef(0);
+    const displayRef = useRef({ x: 0, y: 0, r: 0 });
     const lastTimeRef = useRef(0);
 
-    // Init sicuro lato client (SSR-safe)
-    if (typeof window !== "undefined" && desiredDirectionRef.current === 0) {
-      desiredDirectionRef.current = Math.random() > 0.5 ? 1 : -1;
-    }
-
-    // Oscillazione via rAF invece di setInterval: sincronizzato col paint del browser
+    // Scrive cx/cy/r direttamente sul DOM via rAF: zero re-render di React
     useAnimationFrame((time) => {
-      const delta = time - lastTimeRef.current;
-      // ~150ms tra un tick e l'altro
-      if (delta < 150) return;
-      lastTimeRef.current = time;
+      const circle = circleRef.current;
+      if (!circle) return;
 
-      setRandomNum((prev) => {
-        const dir = directionRef.current;
+      const { width, height } = windowDimensions;
+      if (width === 0 || height === 0) return;
+
+      const delta = time - lastTimeRef.current;
+      // Random walk: direzione aggiornata solo ogni ~150ms
+      if (delta >= 150) {
+        lastTimeRef.current = time;
         if (Math.random() < 0.05) {
           desiredDirectionRef.current = -desiredDirectionRef.current;
         }
         directionRef.current =
-          dir + (desiredDirectionRef.current - dir) * 0.1;
-        return prev + dir * 0.1;
-      });
+          directionRef.current +
+          (desiredDirectionRef.current - directionRef.current) * 0.1;
+        randomRef.current += directionRef.current * 0.1;
+      }
+
+      const centerX = width / 2;
+      const centerY = height / 2;
+      const mouse = mouseRef.current;
+      const dist = Math.sqrt(
+        Math.pow(mouse.x - centerX, 2) + Math.pow(mouse.y - centerY, 2),
+      );
+
+      const radius = Math.max(
+        100,
+        Math.min(150, 150 - (dist / centerX) * 5),
+      );
+      const movement = radius / 7500;
+
+      const targetX =
+        width / 1.3 + movement * (mouse.x - centerX) + randomRef.current;
+      const targetY =
+        height / 1.4 + movement * (mouse.y - centerY) + randomRef.current;
+      const targetR = radius + randomRef.current;
+
+      // Lerp verso il target ogni frame: smoothness senza spring/re-render
+      displayRef.current.x += (targetX - displayRef.current.x) * 0.2;
+      displayRef.current.y += (targetY - displayRef.current.y) * 0.2;
+      displayRef.current.r += (targetR - displayRef.current.r) * 0.2;
+
+      circle.setAttribute("cx", String(displayRef.current.x));
+      circle.setAttribute("cy", String(displayRef.current.y));
+      circle.setAttribute("r", String(displayRef.current.r));
     });
 
-    // Derivato da windowDimensions (già SSR-safe dal parent)
-    const centerX = windowDimensions.width / 2;
-    const centerY = windowDimensions.height / 2;
-
     // Guard: niente da renderizzare finché le dimensioni non sono note
-    if (centerX === 0 || centerY === 0) {
+    if (windowDimensions.width === 0 || windowDimensions.height === 0) {
       return <div className="absolute inset-0 z-0" />;
     }
 
-    const dist = Math.sqrt(
-      Math.pow(mousePosition.x - centerX, 2) +
-        Math.pow(mousePosition.y - centerY, 2),
-    );
-
-    const radius = Math.max(
-      100,
-      Math.min(150, 150 - (dist / (centerX || 1)) * 5),
-    );
-    const movement = radius / 7500;
-
-    const circleX =
-      windowDimensions.width / 1.3 +
-      movement * (mousePosition.x - centerX) +
-      randomNum;
-
-    const circleY =
-      windowDimensions.height / 1.4 +
-      movement * (mousePosition.y - centerY) +
-      randomNum;
-
     return (
-      <div className="absolute top-0 right-0 bottom-0 left-0 z-0 flex h-screen w-full items-center justify-center will-change-transform">
+      <div className="absolute top-0 right-0 bottom-0 left-0 z-0 flex h-screen w-full items-center justify-center">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -82,10 +86,8 @@ export const BgLanding = memo<BgLandingProps>(
               willChange: "transform",
             }}
           >
-            <motion.circle
-              initial={{ cx: circleX, cy: circleY, r: radius + randomNum }}
-              animate={{ cx: circleX, cy: circleY, r: radius + randomNum }}
-              transition={{ type: "spring", stiffness: 120, damping: 14, mass: 0.5 }}
+            <circle
+              ref={circleRef}
               stroke="hsl(var(--primary))"
               strokeWidth={20}
               fill="transparent"

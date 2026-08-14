@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import { AtSign } from "lucide-react";
 import { SiGithub } from "@icons-pack/react-simple-icons";
@@ -13,18 +13,13 @@ export default function Landing({
 }: {
   lastArticle?: { record: RecordModel; title: string };
 }) {
-  const [mousePosition, setMousePosition] = useState<MousePosition>({
-    x: 0,
-    y: 0,
-  });
   const [windowDimensions, setWindowDimensions] = useState<WindowDimensions>({
     width: 0,
     height: 0,
   });
 
-  // rAF throttling: evita re-render a ogni pixel di movimento mouse
-  const mouseRef = useRef({ x: 0, y: 0 });
-  const rafRef = useRef<number | null>(null);
+  // Mouse in un ref: niente re-render per frame, lo legge BgLanding nel suo rAF
+  const mouseRef = useRef<MousePosition>({ x: 0, y: 0 });
 
   useEffect(() => {
     setWindowDimensions({
@@ -33,15 +28,9 @@ export default function Landing({
     });
   }, []);
 
-  const handleMouseMove = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
     mouseRef.current = { x: event.clientX, y: event.clientY };
-    if (rafRef.current === null) {
-      rafRef.current = requestAnimationFrame(() => {
-        setMousePosition({ ...mouseRef.current });
-        rafRef.current = null;
-      });
-    }
-  }, []);
+  };
 
   return (
     <>
@@ -121,10 +110,7 @@ export default function Landing({
           </div>
         </div>
       </div>
-      <BgLanding
-        mousePosition={mousePosition}
-        windowDimensions={windowDimensions}
-      />
+      <BgLanding mouseRef={mouseRef} windowDimensions={windowDimensions} />
     </>
   );
 }
