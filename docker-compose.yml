@@ -6,6 +6,8 @@ services:
       args:
         - POCKETBASE_URL
         - KDRIVE_API_TOKEN
+        - KDRIVE_DRIVE_ID
+        - BLOG_ROOT_DIR_ID
     environment:
       - PORT=${PORT:-3000}
     ports:

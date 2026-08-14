@@ -4,7 +4,7 @@
 
 - `yarn dev` - Start development server
 - `yarn build` - Production build
-- `yarn lint` - Run ESLint via Next.js
+- `yarn lint` - Run ESLint (`eslint .`)
 - No test framework configured
 
 ## Tech Stack

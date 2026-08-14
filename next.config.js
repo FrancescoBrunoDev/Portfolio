@@ -1,11 +1,23 @@
 /** @type {import('next').NextConfig} */
+const pocketBaseUrl = new URL(
+  process.env.POCKETBASE_URL || "https://pb-pf.francesco-bruno.com/",
+);
+
 const nextConfig = {
   output: "standalone", // Required for Docker build
   // trailingSlash: true, // Disabled: conflicts with intercepting routes in Next.js 16
   images: {
-    remotePatterns: [new URL("https://pb-pf.francesco-bruno.com/api/files/**")],
+    remotePatterns: [
+      {
+        protocol: pocketBaseUrl.protocol.replace(":", ""),
+        hostname: pocketBaseUrl.hostname,
+        pathname: "/api/files/**",
+      },
+    ],
   },
-  allowedDevOrigins: ["172.17.0.2"],
+  allowedDevOrigins: process.env.ALLOWED_DEV_ORIGINS
+    ? process.env.ALLOWED_DEV_ORIGINS.split(",")
+    : [],
   async redirects() {
     return [
       {
