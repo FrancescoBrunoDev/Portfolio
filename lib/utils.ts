@@ -93,9 +93,18 @@ export type MarkdownResult = {
   data?: MarkdownData;
 } | null;
 
-/** "en-My Post.md" -> "en" */
+/** "en_My Post.md" -> "en" (also handles bare "en.md") */
 function langPrefix(name: string): string {
-  return name.split("-")[0];
+  const base = name.replace(/\.md$/, "");
+  const separator = base.indexOf("_");
+  return separator === -1 ? base : base.slice(0, separator);
+}
+
+/** "en_My Post.md" -> "My Post" */
+function titleFromName(name: string): string {
+  const base = name.replace(/\.md$/, "");
+  const separator = base.indexOf("_");
+  return separator === -1 ? base : base.slice(separator + 1);
 }
 
 /**
@@ -134,8 +143,7 @@ export const getAllBlogMetadata = cache(
       const allLangs = [...new Set(mdFiles.map((f) => langPrefix(f.name)))];
 
       // Use the first available file to extract the title (strip lang prefix + extension)
-      const title =
-        mdFiles[0]?.name.slice(mdFiles[0].name.indexOf("-") + 1).replace(/\.[^.]+$/, "") ?? slug;
+      const title = mdFiles[0] ? titleFromName(mdFiles[0].name) : slug;
 
       metadataMap.set(slug, { title, lang: allLangs });
     }
@@ -258,17 +266,18 @@ export const getMarkdown = cache(
       const allLangs = [...new Set(mdFiles.map((f) => langPrefix(f.name)))];
 
       // 5. Find the file matching the requested language.
-      //    Naming convention: "{lang}-{title}.md" (e.g. "en-My Post.md")
-      const matchingFile = mdFiles.find((f) => f.name.startsWith(`${lang}-`));
+      //    Naming convention: "{lang}_{title}.md" (e.g. "en_My Post.md"),
+      //    with a few bare "{lang}.md" files.
+      const matchingFile = mdFiles.find(
+        (f) => f.name === `${lang}.md` || f.name.startsWith(`${lang}_`),
+      );
 
       if (!matchingFile) {
         return { result: "file not found" };
       }
 
-      // 6. Extract the human-readable title: strip lang prefix + separator and .md extension
-      const title = matchingFile.name
-        .slice(matchingFile.name.indexOf("-") + 1)
-        .replace(/\.[^.]+$/, "");
+      // 6. Extract the human-readable title (strip lang prefix + separator + extension)
+      const title = titleFromName(matchingFile.name);
 
       if (getMd) {
         // 7a. Download and return the actual markdown content

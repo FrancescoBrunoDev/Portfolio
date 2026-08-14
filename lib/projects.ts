@@ -12,16 +12,16 @@ export async function getProjects(): Promise<{
   dev: Project[];
   other: Project[];
 }> {
-  const [dev, other] = await Promise.all([
-    pb.collection("projects").getFullList<Project>({
-      sort: "-priority",
-      filter: "hidden=false && type='website'",
-    }),
-    pb.collection("projects").getFullList<Project>({
-      sort: "-priority",
-      filter: "hidden=false && type!='website'",
-    }),
-  ]);
+  // Sequential: concurrent getFullList calls to the same collection are
+  // auto-cancelled by the PocketBase SDK, so do not use Promise.all here.
+  const dev = await pb.collection("projects").getFullList<Project>({
+    sort: "-priority",
+    filter: "hidden=false && type='website'",
+  });
+  const other = await pb.collection("projects").getFullList<Project>({
+    sort: "-priority",
+    filter: "hidden=false && type!='website'",
+  });
 
   return { dev, other };
 }
