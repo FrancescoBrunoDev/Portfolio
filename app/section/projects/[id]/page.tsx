@@ -3,7 +3,7 @@ import Frame from "@/components/projects/project/frame";
 import parse from "html-react-parser";
 import DOMPurify from "isomorphic-dompurify";
 import { Fingerprint } from "lucide-react";
-import pb from "@/lib/pocketbase";
+import pb, { getFileUrl } from "@/lib/pocketbase";
 import { getMacroType } from "@/lib/projects";
 import type { Metadata, ResolvingMetadata } from "next";
 
@@ -35,7 +35,7 @@ export default async function Project({ params }: Props) {
     .collection("projects")
     .getOne((await params).id, { requestKey: null });
   const macroType = await getMacroType({ type: project.type });
-  const videoUrl = pb.files.getURL(project, project.videoFile);
+  const videoUrl = getFileUrl(project, project.videoFile);
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden">

@@ -1,10 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Fingerprint } from "lucide-react";
-import pb from "@/lib/pocketbase";
+import { getFileUrl } from "@/lib/pocketbase";
 
 export default function ProjectItem({ project }: { project: Project }) {
-  const imageUrl = pb.files.getURL(project, project.imageFile || "");
+  const imageUrl = getFileUrl(project, project.imageFile || "");
   return (
     <Link
       href={`/section/projects/${project.id}`}
